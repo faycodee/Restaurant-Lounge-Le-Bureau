@@ -47,6 +47,8 @@ const App = () => {
     gsap.fromTo(
       ".cursor-outline",
       { rotate: `${cursorr.rotate}` },
+
+
       
       {
         rotate: `-${cursorr.rotate}deg`,
