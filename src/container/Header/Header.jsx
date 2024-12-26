@@ -47,7 +47,6 @@ const Header = () => (
   //     </h1>
   //   </section>
   // </div>
-
   <div className="bg-primary-black app__wrapper section__padding font-CormorantUpright text-primary-golden" id="home">
     <div className="flex-1 w-full flex items-start justify-center flex-col">
       <SubHeading title="Chase the new flavour" />
