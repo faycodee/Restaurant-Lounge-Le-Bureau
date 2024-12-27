@@ -60,3 +60,16 @@ a {
 }
 
 
+::-webkit-scrollbar {
+  width: 13px;
+  background-color: black;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(206, 206, 206, 0.664);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(221, 221, 221);
+}
