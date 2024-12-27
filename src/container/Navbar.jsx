@@ -10,13 +10,12 @@ const Navbar = () => {
   
 
   return (
-    <nav className="z-nav fixed w-full flex justify-between items-center
-     text-primary-white h-[50px] bg-transparent backdrop-blur-2xl sm:px-8 sm:py-4 p-4">
+    <nav className="z-nav fixed w-full flex justify-between items-center text-primary-white bg-transparent backdrop-blur-2xl sm:px-8 sm:py-4 p-4">
       <div className="flex justify-start items-center">
         <img
           src={images.gericht}
           alt="app logo"
-          className="h-auto w-[20px] sm:w-[90px] 2xl:w-52"
+          className="h-auto w-24 sm:w-40 2xl:w-52"
         />
       </div>
       <ul className="lg:flex hidden justify-center items-center flex-1 duration-300 gap-2">
@@ -37,10 +36,16 @@ const Navbar = () => {
         </li>
       </ul>
 
-      
+      {/*=========== Login Button ============*/}
 
       <div className="sm:flex hidden justify-end items-center">
-    
+        {/* <a
+          href="#login"
+          className="my-0 mx-1 no-underline hover:text-primary-gray"
+        >
+          Log In / Register
+        </a> */}
+        {/* <div className="line" /> */}
         <a
           href="/"
           className="my-0 mx-1 no-underline duration-150 hover:text-primary-gray"
