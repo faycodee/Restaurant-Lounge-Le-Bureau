@@ -33,11 +33,14 @@ const Header = () => {
     textAnimation.from(".text", {
       y: 100,
       stagger: {
-        each: 0.9*0.1,
+        each: 0.9 * 0.1,
       },
     });
   }, []);
   const [curIndex, setCurIndex] = useState(1);
+  const [curHeaderText, setHeaderText] = useState(
+    "Savor the flavors of tradition with every bite – where fresh ingredients meet culinary artistry."
+  );
   const [hasClicked, setHasClicked] = useState(false);
   // had ghatkon flawl ela ma y telecharja lvideo
   const [isLoading, setIsLoading] = useState(true);
@@ -49,9 +52,40 @@ const Header = () => {
   const handleMiniVdClick = () => {
     setHasClicked(true);
     setCurIndex(nextIndex);
+    handelHeaderText(curIndex)
   };
   const handelVidLoad = () => {
     setLoadedVideos((prev) => prev + 1);
+  };
+  const handelHeaderText = (curIndex) => {
+    switch (curIndex) {
+      case 1:
+        setHeaderText(
+          "Savor the flavors of tradition with every bite – where fresh ingredients meet culinary artistry."
+        );
+        break;
+      case 2:
+        setHeaderText(
+          "Your ultimate destination for delicious dishes, warm ambiance, and unforgettable dining experiences."
+        );
+        break;
+      case 3:
+        setHeaderText(
+          "From farm to table, taste the difference in every handcrafted meal we serve."
+        );
+        break;
+      case 4:
+        setHeaderText(
+          "Craving something special? Let us treat your taste buds to an extraordinary culinary journey."
+        );
+        break;
+
+      default:
+        setHeaderText(
+          "Savor the flavors of tradition with every bite – where fresh ingredients meet culinary artistry."
+        );
+        break;
+    }
   };
   return (
     <div
@@ -95,10 +129,15 @@ const Header = () => {
         onLoadedData={handelVidLoad}
         id="next-video"
       ></video>
-      <h1 className="headtext__cormorant_header font-bold  sticky z-10 top-[180px] left-7 ">FAYREST</h1>
-      <div style={style.wrapper} >
-        <div style={style.words} className="mb-4 absolute z-10 top-[330px] left-7">
-          {"The Key To Fine Dining "
+      <h1 className="headtext__cormorant_header font-bold  sticky z-10 top-[180px] left-7 ">
+        FAYREST
+      </h1>
+      <div style={style.wrapper}>
+        <div
+          style={style.words}
+          className="mb-4 absolute z-10 top-[330px] left-7"
+        >
+          {`${curHeaderText}`
             .split("")
             .map((i) =>
               i == " " ? (
@@ -108,7 +147,6 @@ const Header = () => {
               )
             )}
         </div>
-     
       </div>
       {/* <div className="flex-1 w-full flex items-start justify-center flex-col">
       <SubHeading title="Chase the new flavour" />
