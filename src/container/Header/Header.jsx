@@ -6,26 +6,35 @@ import "./Header.css";
 import { useState, useEffect, useRef } from "react";
 const style = {
   wrapper: {
-   height: '30vh',
-   width: '90vw',
-   display: 'flex',
-   flexDirection: 'column',
-   justifyContent: 'center',
-   alignItems: 'center',
-   backgroundColor: 'black',
+    height: "30vh",
+    width: "90vw",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "black",
   },
-  words:{
-   display: 'flex',
-   flexDirection: 'row',
-   overflow: 'hidden'
+  words: {
+    display: "flex",
+    flexDirection: "row",
+    overflow: "hidden",
   },
-  letter:{
+  letter: {
     fontSize: 32,
-    color: 'white',
-    fontWeight: 'bold'
-   }
- }
+    color: "white",
+    fontWeight: "bold",
+  },
+};
 const Header = () => {
+  useEffect(() => {
+    let textAnimation = gsap.timeline();
+    textAnimation.from('.text', {
+     y: 100,
+     stagger: { 
+      each: 0.07 
+     }
+    });
+   }, []);
   const [curIndex, setCurIndex] = useState(1);
   const [hasClicked, setHasClicked] = useState(false);
   // had ghatkon flawl ela ma y telecharja lvideo
@@ -54,7 +63,6 @@ const Header = () => {
           className="origin-center   scale-50 opacity-0  overflow-hidden
         transition-all duration-500  ease-in hover:scale-100 hover:opacity-100 "
         >
-          
           <video
             ref={nextVidRef}
             src={getSrc(nextIndex)}
@@ -95,8 +103,28 @@ const Header = () => {
         The Key To Fine Dining
       </h1>
       <div style={style.wrapper}>
-        <div style={style.words}></div>
-        <div style={style.words}></div>
+        <div style={style.words}>
+          {"Hello World!"
+            .split("")
+            .map((i) =>
+              i == " " ? (
+                <Letter space={true} letter={i} />
+              ) : (
+                <Letter space={false} letter={i} />
+              )
+            )}
+        </div>
+        <div style={style.words}>
+          {"No Worries"
+            .split("")
+            .map((i) =>
+              i == " " ? (
+                <Letter space={true} letter={i} />
+              ) : (
+                <Letter space={false} letter={i} />
+              )
+            )}
+        </div>
       </div>
       {/* <div className="flex-1 w-full flex items-start justify-center flex-col">
       <SubHeading title="Chase the new flavour" />
@@ -104,17 +132,18 @@ const Header = () => {
       <p className="p__opensans mb-4">Sit tellus lobortis sed senectus vivamus molestie. Condimentum volutpat morbi facilisis quam scelerisque sapien. Et, penatibus aliquam amet tellus </p>
       <button type="button" className="custom__button">Explore Menu</button>
       </div> */}
-      </div>
+    </div>
   );
 };
 
-const Letter = ({space, letter}) => {
-  return(
-   space == true ?
+const Letter = ({ space, letter }) => {
+  return space == true ? (
     <div className="text">&nbsp;</div>
-    :
-    <div className="text" style={style.letter}>{letter}</div>
-  )
- }
+  ) : (
+    <div className="text" style={style.letter}>
+      {letter}
+    </div>
+  );
+};
 
 export default Header;
