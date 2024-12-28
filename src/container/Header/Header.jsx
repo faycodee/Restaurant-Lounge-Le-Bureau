@@ -22,14 +22,10 @@ const Header = () => {
     setLoadedVideos((prev) => prev + 1);
   };
   return (
-    <div
-      className="relative w-[100vw] h-dvh  overflow-x-hidden bg-black 
-      app__wrapper section__padding font-CormorantUpright text-primary-golden"
-      id="home"
-    >
+   
       <div
         id="video-frame"
-        className="relative z-10 h-dvh w-screen overflow-hidden rounded-xl "
+        className="relative z-10 h-[100vh] w-[100vw]  overflow-hidden rounded-xl "
       >
         {" "}
         <div className="mask-clip-path absolute-center absolute z-50 size-64 cursor-pointer overflow-auto rounded-lg">
@@ -66,21 +62,23 @@ const Header = () => {
         loop
         autoPlay
         muted
-        className=" absolute left-0 top-0  size-full  object-cover object-center "
+        className=" absolute left-0 top-0  size-full  object-cover  rounded-2xl "
 
         id="next-video"
         >
 
         </video>
-      </div>
-
-      {/* <div className="flex-1 w-full flex items-start justify-center flex-col">
+          {/* <div className="flex-1 w-full flex items-start justify-center flex-col">
       <SubHeading title="Chase the new flavour" />
       <h1 className="headtext__cormorant font-bold mb-4">The Key To Fine Dining</h1>
       <p className="p__opensans mb-4">Sit tellus lobortis sed senectus vivamus molestie. Condimentum volutpat morbi facilisis quam scelerisque sapien. Et, penatibus aliquam amet tellus </p>
       <button type="button" className="custom__button">Explore Menu</button>
     </div> */}
-    </div>
+      </div>
+
+    
+
+
   );
 };
 
