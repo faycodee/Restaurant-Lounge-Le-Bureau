@@ -25,7 +25,7 @@ const Header = () => {
    
       <div
         id="video-frame"
-        className="relative z-10 h-[100vh] w-[100vw]  overflow-hidden rounded-xl "
+        className="relative z-10 h-[100vh] w-[100vw]  overflow-hidden  "
       >
         {" "}
         <div className="mask-clip-path absolute-center absolute z-50 size-64 cursor-pointer overflow-auto rounded-lg">
@@ -53,7 +53,7 @@ const Header = () => {
        id="next-video"
        className=" absolute absolute-center invisible size-64  object-cover object-center "
        onLoadedData={handelVidLoad}
-        >
+       >
           
         </video>
         <video 
@@ -62,12 +62,17 @@ const Header = () => {
         loop
         autoPlay
         muted
-        className=" absolute left-0 top-0  size-full  object-cover  rounded-2xl "
+        className=" absolute left-0 top-0  size-full  object-cover  "
+        onLoadedData={handelVidLoad}
 
         id="next-video"
         >
 
         </video>
+
+
+
+        <h1></h1>
           {/* <div className="flex-1 w-full flex items-start justify-center flex-col">
       <SubHeading title="Chase the new flavour" />
       <h1 className="headtext__cormorant font-bold mb-4">The Key To Fine Dining</h1>
