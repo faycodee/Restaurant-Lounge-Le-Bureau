@@ -4,6 +4,27 @@ import { SubHeading } from "../../components";
 import { images } from "../../constants";
 import "./Header.css";
 import { useState, useEffect, useRef } from "react";
+const style = {
+  wrapper: {
+   height: '30vh',
+   width: '90vw',
+   display: 'flex',
+   flexDirection: 'column',
+   justifyContent: 'center',
+   alignItems: 'center',
+   backgroundColor: 'black',
+  },
+  words:{
+   display: 'flex',
+   flexDirection: 'row',
+   overflow: 'hidden'
+  },
+  letter:{
+    fontSize: 32,
+    color: 'white',
+    fontWeight: 'bold'
+   }
+ }
 const Header = () => {
   const [curIndex, setCurIndex] = useState(1);
   const [hasClicked, setHasClicked] = useState(false);
@@ -22,69 +43,78 @@ const Header = () => {
     setLoadedVideos((prev) => prev + 1);
   };
   return (
-   
-      <div
-        id="video-frame"
-        className="relative z-10 h-[100vh] w-[100vw]  overflow-hidden  "
-      >
-        {" "}
-        <div className="mask-clip-path absolute-center absolute z-50 size-64 cursor-pointer overflow-auto rounded-lg">
-          <div
-            onClick={handleMiniVdClick}
-            className="origin-center   scale-50 opacity-0  overflow-hidden
+    <div
+      id="video-frame"
+      className="relative z-10 h-[100vh] w-[100vw]  overflow-hidden  "
+    >
+      {" "}
+      <div className="mask-clip-path absolute-center absolute z-50 size-64 cursor-pointer overflow-auto rounded-lg">
+        <div
+          onClick={handleMiniVdClick}
+          className="origin-center   scale-50 opacity-0  overflow-hidden
         transition-all duration-500  ease-in hover:scale-100 hover:opacity-100 "
-          >
-            <video
-              ref={nextVidRef}
-              src={getSrc(nextIndex)}
-              loop
-              muted
-              id="current-video"
-              className="size-64 origin-center scale-150 object-cover object-center "
-              onLoadedData={handelVidLoad}
-            ></video>
-          </div>
-        </div>
-        <video 
-       ref={nextVidRef}
-       src={getSrc(curIndex)}
-       loop
-       muted
-       id="next-video"
-       className=" absolute absolute-center invisible size-64  object-cover object-center "
-       onLoadedData={handelVidLoad}
-       >
+        >
           
-        </video>
-        <video 
+          <video
+            ref={nextVidRef}
+            src={getSrc(nextIndex)}
+            loop
+            muted
+            id="current-video"
+            className="size-64 origin-center scale-150 object-cover object-center "
+            onLoadedData={handelVidLoad}
+          ></video>
+        </div>
+      </div>
+      <video
         ref={nextVidRef}
-        src={getSrc(curIndex==totalVideos-1 ? 1:curIndex)}
+        src={getSrc(curIndex)}
+        loop
+        muted
+        id="next-video"
+        className=" absolute absolute-center invisible size-64  object-cover object-center "
+        onLoadedData={handelVidLoad}
+      ></video>
+      <video
+        ref={nextVidRef}
+        src={getSrc(curIndex == totalVideos - 1 ? 1 : curIndex)}
         loop
         autoPlay
         muted
         className=" absolute left-0 top-0  size-full  object-cover  "
         onLoadedData={handelVidLoad}
-
         id="next-video"
-        >
-
-        </video>
-
-
-
-        <h1></h1>
-          {/* <div className="flex-1 w-full flex items-start justify-center flex-col">
+      ></video>
+      <h1
+        className="headtext__cormorant font-bold mb-4 absolute z-10 top-[180px] left-7 "
+        style={{
+          color: "white",
+          textShadow: "2px 2px 4px #000000",
+        }}
+      >
+        The Key To Fine Dining
+      </h1>
+      <div style={style.wrapper}>
+        <div style={style.words}></div>
+        <div style={style.words}></div>
+      </div>
+      {/* <div className="flex-1 w-full flex items-start justify-center flex-col">
       <SubHeading title="Chase the new flavour" />
-      <h1 className="headtext__cormorant font-bold mb-4">The Key To Fine Dining</h1>
+      
       <p className="p__opensans mb-4">Sit tellus lobortis sed senectus vivamus molestie. Condimentum volutpat morbi facilisis quam scelerisque sapien. Et, penatibus aliquam amet tellus </p>
       <button type="button" className="custom__button">Explore Menu</button>
-    </div> */}
+      </div> */}
       </div>
-
-    
-
-
   );
 };
+
+const Letter = ({space, letter}) => {
+  return(
+   space == true ?
+    <div className="text">&nbsp;</div>
+    :
+    <div className="text" style={style.letter}>{letter}</div>
+  )
+ }
 
 export default Header;
