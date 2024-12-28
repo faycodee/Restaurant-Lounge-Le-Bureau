@@ -6,12 +6,12 @@ import { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
 const style = {
   wrapper: {
-    height: "50vh",
+    height: "30vh",
     width: "90vw",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "bottom",
-    alignItems: "left",
+    justifyContent: "center",
+    alignItems: "center",
     backgroundColor: "black",
   },
 
@@ -21,10 +21,9 @@ const style = {
     overflow: "hidden",
   },
   letter: {
-    color: "white",
-    textShadow: "2px 2px 4px #000000",
-    fontSize: 72,
-    color: "white",
+    color: "rgb(255, 254, 240)",
+    // textShadow: "2px 2px 4px #000000",
+    fontSize: 20,
     fontWeight: "bold",
   },
 };
@@ -34,7 +33,7 @@ const Header = () => {
     textAnimation.from(".text", {
       y: 100,
       stagger: {
-        each: 0.07,
+        each: 0.9*0.1,
       },
     });
   }, []);
@@ -96,9 +95,9 @@ const Header = () => {
         onLoadedData={handelVidLoad}
         id="next-video"
       ></video>
-      <h1 ></h1>
+      <h1 className="headtext__cormorant_header font-bold  sticky z-10 top-[180px] left-7 ">FAYREST</h1>
       <div style={style.wrapper} >
-        <div style={style.words} className="mb-4 absolute z-10  top-[180px] left-7 ">
+        <div style={style.words} className="mb-4 absolute z-10 top-[330px] left-7">
           {"The Key To Fine Dining "
             .split("")
             .map((i) =>
@@ -109,17 +108,7 @@ const Header = () => {
               )
             )}
         </div>
-        <div style={style.words}>
-          {"No Worries"
-            .split("")
-            .map((i) =>
-              i == " " ? (
-                <Letter space={true} letter={i} />
-              ) : (
-                <Letter space={false} letter={i} />
-              )
-            )}
-        </div>
+     
       </div>
       {/* <div className="flex-1 w-full flex items-start justify-center flex-col">
       <SubHeading title="Chase the new flavour" />
@@ -135,7 +124,7 @@ const Letter = ({ space, letter }) => {
   return space == true ? (
     <div className="text">&nbsp;</div>
   ) : (
-    <div className="text " style={style.letter} >
+    <div className="text " style={style.letter}>
       {letter}
     </div>
   );

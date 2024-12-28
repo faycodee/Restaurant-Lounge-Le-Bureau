@@ -105,6 +105,16 @@
   letter-spacing: 0.04em;
   text-transform: capitalize;
 }
+.headtext__cormorant_header {
+  font-family: var(--font-base);
+  color: var(--color-golden);
+  
+  font-size: 11vw;
+  margin-left: 2vw;
+  line-height: 65px;
+  letter-spacing: 0.04em;
+  text-transform: capitalize;
+}
 
 .spoon__img {
   width: 45px;
