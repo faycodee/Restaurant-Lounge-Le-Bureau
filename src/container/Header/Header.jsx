@@ -7,7 +7,7 @@ import gsap from "gsap";
 const style = {
   wrapper: {
     height: "30vh",
-    width: "90vw",
+    width: "50vw",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
@@ -39,7 +39,7 @@ const Header = () => {
   }, []);
   const [curIndex, setCurIndex] = useState(1);
   const [curHeaderText, setHeaderText] = useState(
-    "Savor the flavors of tradition with every bite – where fresh ingredients meet culinary artistry."
+    "Fresh flavors, every bite."
   );
   const [hasClicked, setHasClicked] = useState(false);
   // had ghatkon flawl ela ma y telecharja lvideo
@@ -52,7 +52,7 @@ const Header = () => {
   const handleMiniVdClick = () => {
     setHasClicked(true);
     setCurIndex(nextIndex);
-    handelHeaderText(curIndex)
+    handelHeaderText(curIndex);
   };
   const handelVidLoad = () => {
     setLoadedVideos((prev) => prev + 1);
@@ -61,28 +61,28 @@ const Header = () => {
     switch (curIndex) {
       case 1:
         setHeaderText(
-          "Savor the flavors of tradition with every bite – where fresh ingredients meet culinary artistry."
+          "Fresh flavors, every bite."
         );
         break;
       case 2:
         setHeaderText(
-          "Your ultimate destination for delicious dishes, warm ambiance, and unforgettable dining experiences."
+          "Where taste meets tradition."
         );
         break;
       case 3:
         setHeaderText(
-          "From farm to table, taste the difference in every handcrafted meal we serve."
+          "Your table, our passion."
         );
         break;
       case 4:
         setHeaderText(
-          "Craving something special? Let us treat your taste buds to an extraordinary culinary journey."
+          "Savor the extraordinary."
         );
         break;
 
       default:
         setHeaderText(
-          "Savor the flavors of tradition with every bite – where fresh ingredients meet culinary artistry."
+          "Fresh flavors, every bite."
         );
         break;
     }
@@ -135,7 +135,7 @@ const Header = () => {
       <div style={style.wrapper}>
         <div
           style={style.words}
-          className="mb-4 absolute z-10 top-[330px] left-7"
+          className="mb-4 absolute z-10 top-[330px] left-7 "
         >
           {`${curHeaderText}`
             .split("")
