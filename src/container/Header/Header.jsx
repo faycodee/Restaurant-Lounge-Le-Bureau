@@ -123,7 +123,7 @@ const Header = () => {
         onLoadedData={handelVidLoad}
         id="next-video"
       ></video>
-      <h1 id="textt" className="headtext__cormorant_header font-bold opacity-0  sticky z-10 top-[180px] left-7 ">
+      <h1 id="textt" className="headtext__cormorant_header font-bold opacity-0  sticky z-10 top-[180px] left-7 max-md:text-[100px]">
         FAYREST
       </h1>
       <div style={style.wrapper}>
@@ -142,12 +142,7 @@ const Header = () => {
             )}
         </div>
       </div>
-      {/* <div className="flex-1 w-full flex items-start justify-center flex-col">
-      <SubHeading title="Chase the new flavour" />
-      
-      <p className="p__opensans mb-4">Sit tellus lobortis sed senectus vivamus molestie. Condimentum volutpat morbi facilisis quam scelerisque sapien. Et, penatibus aliquam amet tellus </p>
-      <button type="button" className="custom__button">Explore Menu</button>
-      </div> */}
+     
     </div>
   );
 };
