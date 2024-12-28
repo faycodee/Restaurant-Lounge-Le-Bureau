@@ -3,8 +3,10 @@ import { SubHeading } from "../../components";
 import { images } from "../../constants";
 import "./Header.css";
 import { useState, useEffect, useRef } from "react";
+import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 const style = {
+
   wrapper: {
     height: "30vh",
     width: "50vw",
@@ -28,19 +30,12 @@ const style = {
   },
 };
 const Header = () => {
-  useEffect(() => {
-    let textAnimation = gsap.timeline();
-    textAnimation.from(".text", {
-      y: 100,
-      stagger: {
-        each: 0.9 * 0.1,
-      },
-    });
-  }, []);
+   useGSAP(() => {
+      gsap.to("#textt",{ duration:5, ease: "power1.inOut", opacity: 1, y: 0 })
+   }, []);
+  
   const [curIndex, setCurIndex] = useState(1);
-  const [curHeaderText, setHeaderText] = useState(
-    "Fresh flavors, every bite."
-  );
+  const [curHeaderText, setHeaderText] = useState("Fresh flavors, every bite.");
   const [hasClicked, setHasClicked] = useState(false);
   // had ghatkon flawl ela ma y telecharja lvideo
   const [isLoading, setIsLoading] = useState(true);
@@ -49,6 +44,15 @@ const Header = () => {
   const nextVidRef = useRef(null);
   const nextIndex = (curIndex % totalVideos) + 1;
   const getSrc = (i) => `./videos/${i}.mp4`;
+  useEffect(() => {
+    let textAnimation = gsap.timeline();
+    textAnimation.from(".text", {
+      y: 100,
+      stagger: {
+        each: 0.9 * 0.1,
+      },
+    });
+  }, [curIndex]);
   const handleMiniVdClick = () => {
     setHasClicked(true);
     setCurIndex(nextIndex);
@@ -60,30 +64,20 @@ const Header = () => {
   const handelHeaderText = (curIndex) => {
     switch (curIndex) {
       case 1:
-        setHeaderText(
-          "Fresh flavors, every bite."
-        );
+        setHeaderText("Fresh flavors, every bite.");
         break;
       case 2:
-        setHeaderText(
-          "Where taste meets tradition."
-        );
+        setHeaderText("Where taste meets tradition.");
         break;
       case 3:
-        setHeaderText(
-          "Your table, our passion."
-        );
+        setHeaderText("Your table, our passion.");
         break;
       case 4:
-        setHeaderText(
-          "Savor the extraordinary."
-        );
+        setHeaderText("Savor the extraordinary.");
         break;
 
       default:
-        setHeaderText(
-          "Fresh flavors, every bite."
-        );
+        setHeaderText("Fresh flavors, every bite.");
         break;
     }
   };
@@ -129,7 +123,7 @@ const Header = () => {
         onLoadedData={handelVidLoad}
         id="next-video"
       ></video>
-      <h1 className="headtext__cormorant_header font-bold  sticky z-10 top-[180px] left-7 ">
+      <h1 id="textt" className="headtext__cormorant_header font-bold opacity-0  sticky z-10 top-[180px] left-7 ">
         FAYREST
       </h1>
       <div style={style.wrapper}>
