@@ -31,7 +31,7 @@ const style = {
 };
 const Header = () => {
    useGSAP(() => {
-      gsap.fromTo("#textt",{  opacity: 0, y: 20 },{ duration:5, ease: "power1.inOut", opacity: 1, y: 0 })
+      gsap.fromTo("#textt",{  opacity: 0, y: 20 },{ duration:2.5, ease: "power1.inOut", opacity: 1, y: 0 })
    }, []);
   
   const [curIndex, setCurIndex] = useState(1);
