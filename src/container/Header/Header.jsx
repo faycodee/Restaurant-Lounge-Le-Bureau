@@ -49,9 +49,9 @@ const Header = () => {
           ease: "power1.inOut",
         });
         gsap.to("#next-video-bg", {
-          transformOrigin: "center center",
+          
           opacity: 0,
-          duration: 1.5,
+          duration: 11.5,
           ease: "power1.inOut",
         });
         gsap.from(".text", {
@@ -112,7 +112,7 @@ const Header = () => {
           {/* </div> */}
         </div>
       )}
-      <div style={{backgroundImage:"url(./wel.jpg)"}} className="relative  h-[100vh] w-[100vw] overflow-hidden">
+      <div style={{backgroundImage:"url(./wel2.jpg)"}} className="relative  h-[100vh] w-[100vw] overflow-hidden">
          <div
         id="video-frame"
         className="relative z-10 h-[100vh] w-[100vw] overflow-hidden bg-black"
