@@ -66,7 +66,7 @@ const Header = () => {
   );
   useGSAP(() => {
     gsap.set("#video-frame", {
-      clipPath: "polygon(14% 9%, 97% 0, 94% 100%, 0% 100%)",
+      clipPath: "polygon(50% 0, 50% 0, 50% 100%, 50% 100%)",
       borderRadius: "0 0 20% 20%",
     });
     gsap.from("#video-frame", {
@@ -112,7 +112,7 @@ const Header = () => {
           {/* </div> */}
         </div>
       )}
-      <div style={{backgroundColor:"balck"}}>
+      <div style={{backgroundImage:"url(./wel.jpg)"}} className="relative  h-[100vh] w-[100vw] overflow-hidden">
          <div
         id="video-frame"
         className="relative z-10 h-[100vh] w-[100vw] overflow-hidden bg-black"
