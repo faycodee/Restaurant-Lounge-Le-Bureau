@@ -6,7 +6,6 @@ import { useState, useEffect, useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 const style = {
-
   wrapper: {
     height: "30vh",
     width: "50vw",
@@ -30,10 +29,14 @@ const style = {
   },
 };
 const Header = () => {
-   useGSAP(() => {
-      gsap.fromTo("#textt",{  opacity: 0, y: 20 },{ duration:2.5, ease: "power1.inOut", opacity: 1, y: 0 })
-   }, []);
-  
+  useGSAP(() => {
+    gsap.fromTo(
+      "#textt",
+      { opacity: 0, y: 20 },
+      { duration: 2.5, ease: "power1.inOut", opacity: 1, y: 0 }
+    );
+  }, []);
+
   const [curIndex, setCurIndex] = useState(1);
   const [curHeaderText, setHeaderText] = useState("Fresh flavors, every bite.");
   const [hasClicked, setHasClicked] = useState(false);
@@ -44,6 +47,33 @@ const Header = () => {
   const nextVidRef = useRef(null);
   const nextIndex = (curIndex % totalVideos) + 1;
   const getSrc = (i) => `./videos/${i}.mp4`;
+  useGSAP(
+    () => {
+      if (hasClicked) {
+    
+        gsap.set("#next-video", { visibility: "visible" });
+
+        gsap.to("#next-video", {
+          transformOrigin: "center center",
+          scale: 1,
+          width: "100%",
+          height: "100%",
+          duration: 1,
+          ease: "power1.inOut",
+          onStart: () => nextVidRef.current.play(),
+        });
+
+        gsap.from("#current-video", {
+          transformOrigin: "center center",
+          scale: 0,
+          duration: 1.5,
+          ease: "power1.inOut",
+        });
+      }
+    },
+    { dependencies: [curIndex], revertOnUpdate: true }
+  );
+
   useEffect(() => {
     let textAnimation = gsap.timeline();
     textAnimation.from(".text", {
@@ -119,11 +149,14 @@ const Header = () => {
         loop
         autoPlay
         muted
-        className=" absolute left-0 top-0  size-full  object-cover  "
+        className=" absolute left-0 top-0  size-full  object-cover object-center "
         onLoadedData={handelVidLoad}
-        id="next-video"
+     
       ></video>
-      <h1 id="textt" className="headtext__cormorant_header font-bold  sticky z-10 top-[180px] left-7 max-md:text-[100px]">
+      <h1
+        id="textt"
+        className="headtext__cormorant_header font-bold  sticky z-10 top-[180px] left-7 max-md:text-[100px]"
+      >
         FAYREST
       </h1>
       <div style={style.wrapper}>
@@ -142,7 +175,6 @@ const Header = () => {
             )}
         </div>
       </div>
-     
     </div>
   );
 };
