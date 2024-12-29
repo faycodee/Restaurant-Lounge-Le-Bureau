@@ -5,7 +5,7 @@ import "./Header.css";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(ScrollTrigger);
 const totalVideos = 4;
 
 const Header = () => {
@@ -20,8 +20,8 @@ const Header = () => {
 
   const getSrc = (i) => `./videos/${i}.mp4`;
   useEffect(() => {
-    if (loadedVideos==totalVideos-1) {
-      setIsLoading(false)
+    if (loadedVideos == totalVideos - 1) {
+      setIsLoading(false);
     }
   }, [loadedVideos]);
   useGSAP(
@@ -48,6 +48,12 @@ const Header = () => {
           duration: 1.5,
           ease: "power1.inOut",
         });
+        gsap.to("#next-video-bg", {
+          transformOrigin: "center center",
+          opacity: 0,
+          duration: 1.5,
+          ease: "power1.inOut",
+        });
         gsap.from(".text", {
           y: 100,
           stagger: {
@@ -60,8 +66,8 @@ const Header = () => {
   );
   useGSAP(() => {
     gsap.set("#video-frame", {
-      clipPath: "polygon(32% 31%, 92% 7%, 84% 67%, 36% 61%)",
-      borderRadius: "0 0 40% 10%",
+      clipPath: "polygon(14% 9%, 97% 0, 94% 100%, 0% 100%)",
+      borderRadius: "0 0 20% 20%",
     });
     gsap.from("#video-frame", {
       clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
@@ -106,7 +112,8 @@ const Header = () => {
           {/* </div> */}
         </div>
       )}
-      <div
+      <div style={{backgroundColor:"balck"}}>
+         <div
         id="video-frame"
         className="relative z-10 h-[100vh] w-[100vw] overflow-hidden bg-black"
       >
@@ -116,7 +123,6 @@ const Header = () => {
             className="origin-center scale-50 opacity-0 overflow-hidden transition-all duration-500 ease-in hover:scale-100 hover:opacity-100"
           >
             <video
-             
               ref={nextVidRef}
               src={getSrc(nextIndex)}
               loop
@@ -141,7 +147,7 @@ const Header = () => {
           loop
           autoPlay
           muted
-         id="next-video-bg"
+          id="next-video-bg"
           onLoadedData={handelVidLoad}
           className="absolute left-0 top-0 size-full object-cover object-center"
         />
@@ -159,6 +165,8 @@ const Header = () => {
           </div>
         </div>
       </div>
+      </div>
+     
     </>
   );
 };
