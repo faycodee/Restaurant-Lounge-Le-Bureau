@@ -1,58 +1,38 @@
-import React from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { SubHeading } from "../../components";
 import { images } from "../../constants";
 import "./Header.css";
-import { useState, useEffect, useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-const style = {
-  wrapper: {
-    height: "30vh",
-    width: "50vw",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "black",
-  },
+import { ScrollTrigger } from "gsap/all";
+gsap.registerPlugin(ScrollTrigger)
+const totalVideos = 4;
 
-  words: {
-    display: "flex",
-    flexDirection: "row",
-    overflow: "hidden",
-  },
-  letter: {
-    color: "rgb(255, 254, 240)",
-    // textShadow: "2px 2px 4px #000000",
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-};
 const Header = () => {
-  useGSAP(() => {
-    gsap.fromTo(
-      "#textt",
-      { opacity: 0, y: 20 },
-      { duration: 2.5, ease: "power1.inOut", opacity: 1, y: 0 }
-    );
-  }, []);
-
   const [curIndex, setCurIndex] = useState(1);
   const [curHeaderText, setHeaderText] = useState("Fresh flavors, every bite.");
   const [hasClicked, setHasClicked] = useState(false);
-  // had ghatkon flawl ela ma y telecharja lvideo
   const [isLoading, setIsLoading] = useState(true);
   const [loadedVideos, setLoadedVideos] = useState(0);
-  const totalVideos = 4;
+
   const nextVidRef = useRef(null);
   const nextIndex = (curIndex % totalVideos) + 1;
+
   const getSrc = (i) => `./videos/${i}.mp4`;
+  useEffect(() => {
+    if (loadedVideos==totalVideos-1) {
+      setIsLoading(false)
+    }
+  }, [loadedVideos]);
   useGSAP(
     () => {
       if (hasClicked) {
-    
+        gsap.fromTo(
+          "#textt",
+          { opacity: 0, y: 20 },
+          { duration: 2.5, ease: "power1.inOut", opacity: 1, y: 0 }
+        );
         gsap.set("#next-video", { visibility: "visible" });
-
         gsap.to("#next-video", {
           transformOrigin: "center center",
           scale: 1,
@@ -62,131 +42,136 @@ const Header = () => {
           ease: "power1.inOut",
           onStart: () => nextVidRef.current.play(),
         });
-
         gsap.from("#current-video", {
           transformOrigin: "center center",
           scale: 0,
           duration: 1.5,
           ease: "power1.inOut",
         });
+        gsap.from(".text", {
+          y: 100,
+          stagger: {
+            each: 0.09,
+          },
+        });
       }
     },
     { dependencies: [curIndex], revertOnUpdate: true }
   );
-
-  useEffect(() => {
-    let textAnimation = gsap.timeline();
-    textAnimation.from(".text", {
-      y: 100,
-      stagger: {
-        each: 0.9 * 0.1,
+  useGSAP(() => {
+    gsap.set("#video-frame", {
+      clipPath: "polygon(32% 31%, 92% 7%, 84% 67%, 36% 61%)",
+      borderRadius: "0 0 40% 10%",
+    });
+    gsap.from("#video-frame", {
+      clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+      borderRadius: "0 0 0 0",
+      ease: "power1.inOut",
+      scrollTrigger: {
+        trigger: "#video-frame",
+        start: "center center",
+        end: "bottom center",
+        scrub: true,
       },
     });
-  }, [curIndex]);
-  const handleMiniVdClick = () => {
-    setHasClicked(true);
-    setCurIndex(nextIndex);
-    handelHeaderText(curIndex);
-  };
+  });
   const handelVidLoad = () => {
     setLoadedVideos((prev) => prev + 1);
   };
-  const handelHeaderText = (curIndex) => {
-    switch (curIndex) {
-      case 1:
-        setHeaderText("Fresh flavors, every bite.");
-        break;
-      case 2:
-        setHeaderText("Where taste meets tradition.");
-        break;
-      case 3:
-        setHeaderText("Your table, our passion.");
-        break;
-      case 4:
-        setHeaderText("Savor the extraordinary.");
-        break;
+  const handleMiniVdClick = useCallback(() => {
+    setHasClicked(true);
+    setCurIndex(nextIndex);
+    setHeaderText(getHeaderText(nextIndex));
+  }, [nextIndex]);
 
-      default:
-        setHeaderText("Fresh flavors, every bite.");
-        break;
-    }
+  const getHeaderText = (index) => {
+    const texts = [
+      "Fresh flavors, every bite.",
+      "Where taste meets tradition.",
+      "Your table, our passion.",
+      "Savor the extraordinary.",
+    ];
+    return texts[index - 1] || texts[0];
   };
+
+  return (
+    <>
+      {isLoading && (
+        <div
+          style={{ backgroundColor: "#DCCA87" }}
+          className="flex-center absolute z-[100] h-dvh w-screen overflow-hidden "
+        >
+          {/* <div className="three-body"> */}
+          <img src="./food2.gif" alt="" className="w-[260px]" />
+          {/* </div> */}
+        </div>
+      )}
+      <div
+        id="video-frame"
+        className="relative z-10 h-[100vh] w-[100vw] overflow-hidden bg-black"
+      >
+        <div className="mask-clip-path absolute-center absolute z-50 size-64 cursor-pointer overflow-auto rounded-lg">
+          <div
+            onClick={handleMiniVdClick}
+            className="origin-center scale-50 opacity-0 overflow-hidden transition-all duration-500 ease-in hover:scale-100 hover:opacity-100"
+          >
+            <video
+             
+              ref={nextVidRef}
+              src={getSrc(nextIndex)}
+              loop
+              muted
+              id="current-video"
+              onLoadedData={handelVidLoad}
+              className="size-64 origin-center scale-150 object-cover object-center"
+            />
+          </div>
+        </div>
+        <video
+          ref={nextVidRef}
+          src={getSrc(curIndex)}
+          loop
+          muted
+          onLoadedData={handelVidLoad}
+          id="next-video"
+          className="absolute-center invisible absolute size-64 z-20 object-cover object-center"
+        />
+        <video
+          src={getSrc(curIndex === totalVideos ? 1 : curIndex)}
+          loop
+          autoPlay
+          muted
+         id="next-video-bg"
+          onLoadedData={handelVidLoad}
+          className="absolute left-0 top-0 size-full object-cover object-center"
+        />
+        <h1
+          id="textt"
+          className="headtext__cormorant_header font-bold sticky z-40 top-[180px] left-7 max-md:text-[100px]"
+        >
+          FAYREST
+        </h1>
+        <div className="wrapper ">
+          <div className="words mb-4 absolute top-[330px] h-[60px] w-full overflow-hidden left-7 z-40 flex">
+            {curHeaderText.split("").map((letter, index) => (
+              <Letter key={index} letter={letter} />
+            ))}
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+const Letter = React.memo(({ letter }) => {
   return (
     <div
-      id="video-frame"
-      className="relative z-10 h-[100vh] w-[100vw]  overflow-hidden  "
+      className="text"
+      style={{ color: "rgb(255, 254, 240)", fontSize: 20, fontWeight: "bold" }}
     >
-      {" "}
-      <div className="mask-clip-path absolute-center absolute z-50 size-64 cursor-pointer overflow-auto rounded-lg">
-        <div
-          onClick={handleMiniVdClick}
-          className="origin-center   scale-50 opacity-0  overflow-hidden
-        transition-all duration-500  ease-in hover:scale-100 hover:opacity-100 "
-        >
-          <video
-            ref={nextVidRef}
-            src={getSrc(nextIndex)}
-            loop
-            muted
-            id="current-video"
-            className="size-64 origin-center scale-150 object-cover object-center "
-            onLoadedData={handelVidLoad}
-          ></video>
-        </div>
-      </div>
-      <video
-        ref={nextVidRef}
-        src={getSrc(curIndex)}
-        loop
-        muted
-        id="next-video"
-        className=" absolute absolute-center invisible size-64  object-cover object-center "
-        onLoadedData={handelVidLoad}
-      ></video>
-      <video
-        ref={nextVidRef}
-        src={getSrc(curIndex == totalVideos - 1 ? 1 : curIndex)}
-        loop
-        autoPlay
-        muted
-        className=" absolute left-0 top-0  size-full  object-cover object-center "
-        onLoadedData={handelVidLoad}
-     
-      ></video>
-      <h1
-        id="textt"
-        className="headtext__cormorant_header font-bold  sticky z-10 top-[180px] left-7 max-md:text-[100px]"
-      >
-        FAYREST
-      </h1>
-      <div style={style.wrapper}>
-        <div
-          style={style.words}
-          className="mb-4 absolute z-10 top-[330px] left-7 "
-        >
-          {`${curHeaderText}`
-            .split("")
-            .map((i) =>
-              i == " " ? (
-                <Letter space={true} letter={i} />
-              ) : (
-                <Letter space={false} letter={i} />
-              )
-            )}
-        </div>
-      </div>
+      {letter === " " ? "\u00A0" : letter}
     </div>
   );
-};
-
-const Letter = ({ space, letter }) => {
-  return space == true ? (
-    <div className="text">&nbsp;</div>
-  ) : (
-    <div className="text " style={style.letter}>
-      {letter}
-    </div>
-  );
-};
+});
 
 export default Header;
