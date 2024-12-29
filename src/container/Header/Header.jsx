@@ -31,7 +31,7 @@ const style = {
 };
 const Header = () => {
    useGSAP(() => {
-      gsap.to("#textt",{ duration:5, ease: "power1.inOut", opacity: 1, y: 0 })
+      gsap.fromTo("#textt",{  opacity: 0, y: 20 },{ duration:5, ease: "power1.inOut", opacity: 1, y: 0 })
    }, []);
   
   const [curIndex, setCurIndex] = useState(1);
@@ -123,7 +123,7 @@ const Header = () => {
         onLoadedData={handelVidLoad}
         id="next-video"
       ></video>
-      <h1 id="textt" className="headtext__cormorant_header font-bold opacity-0  sticky z-10 top-[180px] left-7 max-md:text-[100px]">
+      <h1 id="textt" className="headtext__cormorant_header font-bold  sticky z-10 top-[180px] left-7 max-md:text-[100px]">
         FAYREST
       </h1>
       <div style={style.wrapper}>
