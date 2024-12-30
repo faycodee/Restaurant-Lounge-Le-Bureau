@@ -19,7 +19,7 @@ const Header = () => {
 
   const getSrc = (i) => `./videos/${i}.mp4`;
   useEffect(() => {
-    if (loadedVideos == totalVideos -3) {
+    if (loadedVideos == totalVideos - 3) {
       setIsLoading(false);
     }
   }, [loadedVideos]);
@@ -48,7 +48,6 @@ const Header = () => {
           ease: "power1.inOut",
         });
         gsap.to("#next-video-bg", {
-          
           opacity: 0,
           duration: 11.5,
           ease: "power1.inOut",
@@ -111,61 +110,63 @@ const Header = () => {
           {/* </div> */}
         </div>
       )}
-      <div style={{backgroundImage:"url(./wel2.jpg)"}} className="relative  h-[100vh] w-[100vw] overflow-hidden">
-         <div
-        id="video-frame"
-        className="relative z-10 h-[100vh] w-[100vw] overflow-hidden bg-black"
+      <div
+        style={{ backgroundImage: "url(./wel2.jpg)" }}
+        className="relative  h-[100vh] w-[100vw] overflow-hidden"
       >
-        <div className="mask-clip-path absolute-center absolute z-50 size-64 cursor-pointer overflow-auto rounded-lg">
-          <div
-            onClick={handleMiniVdClick}
-            className="origin-center scale-50 opacity-0 overflow-hidden transition-all duration-500 ease-in hover:scale-100 hover:opacity-100"
-          >
-            <video
-              ref={nextVidRef}
-              src={getSrc(nextIndex)}
-              loop
-              muted
-              id="current-video"
-              onLoadedData={handelVidLoad}
-              className="size-64 origin-center scale-150 object-cover object-center"
-            />
-          </div>
-        </div>
-        <video
-          ref={nextVidRef}
-          src={getSrc(curIndex)}
-          loop
-          muted
-          onLoadedData={handelVidLoad}
-          id="next-video"
-          className="absolute-center invisible absolute size-64 z-20 object-cover object-center"
-        />
-        <video
-          src={getSrc(curIndex === totalVideos ? 1 : curIndex)}
-          loop
-          autoPlay
-          muted
-          id="next-video-bg"
-          onLoadedData={handelVidLoad}
-          className="absolute left-0 top-0 size-full object-cover object-center"
-        />
-        <h1
-          id="textt"
-          className="headtext__cormorant_header font-bold sticky z-40 top-[180px] left-7 max-md:text-[100px]"
+        <div
+          id="video-frame"
+          className="relative z-10 h-[100vh] w-[100vw] overflow-hidden bg-black"
         >
-          FAYREST
-        </h1>
-        <div className="wrapper ">
-          <div className="words mb-4 absolute top-[330px] h-[60px] w-full overflow-hidden left-7 z-40 flex">
-            {curHeaderText.split("").map((letter, index) => (
-              <Letter key={index} letter={letter} />
-            ))}
+          <div className="mask-clip-path absolute-center absolute z-50 size-64 cursor-pointer overflow-auto rounded-lg">
+            <div
+              onClick={handleMiniVdClick}
+              className="origin-center scale-50 opacity-0 overflow-hidden transition-all duration-500 ease-in hover:scale-100 hover:opacity-100"
+            >
+              <video
+                ref={nextVidRef}
+                src={getSrc(nextIndex)}
+                loop
+                muted
+                id="current-video"
+                onLoadedData={handelVidLoad}
+                className="size-64 origin-center scale-150 object-cover object-center"
+              />
+            </div>
+          </div>
+          <video
+            ref={nextVidRef}
+            src={getSrc(curIndex)}
+            loop
+            muted
+            onLoadedData={handelVidLoad}
+            id="next-video"
+            className="absolute-center invisible absolute size-64 z-20 object-cover object-center"
+          />
+          <video
+            src={getSrc(curIndex === totalVideos ? 1 : curIndex)}
+            loop
+            autoPlay
+            muted
+            id="next-video-bg"
+            onLoadedData={handelVidLoad}
+            className="absolute left-0 top-0 size-full object-cover object-center"
+          />
+          <h1
+            id="textt"
+            className="headtext__cormorant_header font-bold sticky z-40 top-[180px] left-7 max-md:text-[100px]"
+          >
+            FAYREST
+          </h1>
+          <div className="wrapper ">
+            <div className="words mb-4 absolute top-[330px] h-[60px] w-full overflow-hidden left-7 z-40 flex">
+              {curHeaderText.split("").map((letter, index) => (
+                <Letter key={index} letter={letter} />
+              ))}
+            </div>
           </div>
         </div>
       </div>
-      </div>
-     
     </>
   );
 };
