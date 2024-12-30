@@ -6,8 +6,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 gsap.registerPlugin(ScrollTrigger);
-const totalVideos = 4;
-
+const totalVideos = 6;
 const Header = () => {
   const [curIndex, setCurIndex] = useState(1);
   const [curHeaderText, setHeaderText] = useState("Fresh flavors, every bite.");
@@ -20,7 +19,7 @@ const Header = () => {
 
   const getSrc = (i) => `./videos/${i}.mp4`;
   useEffect(() => {
-    if (loadedVideos == totalVideos - 1) {
+    if (loadedVideos == totalVideos -3) {
       setIsLoading(false);
     }
   }, [loadedVideos]);
@@ -170,7 +169,6 @@ const Header = () => {
     </>
   );
 };
-
 const Letter = React.memo(({ letter }) => {
   return (
     <div
