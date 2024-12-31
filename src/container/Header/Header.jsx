@@ -111,7 +111,7 @@ const Header = () => {
         </div>
       )}
       <div
-        style={{ backgroundImage: "url(./wel2.jpg)" }}
+        style={{ backgroundImage: "url(./wel2.jpg)" ,backgroundPosition:""}}
         className="relative  h-[100vh] w-[100vw] overflow-hidden"
       >
         <div
