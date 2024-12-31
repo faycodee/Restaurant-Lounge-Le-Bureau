@@ -154,7 +154,7 @@ const Header = () => {
           />
           <h1
             id="textt"
-            className="headtext__cormorant_header font-bold sticky z-40 top-[180px] left-7 max-md:text-[100px]"
+            className="headtext__cormorant_header font-bold sticky z-40 top-[200px] left-7 max-md:text-[100px]"
           >
             FAYREST
           </h1>
