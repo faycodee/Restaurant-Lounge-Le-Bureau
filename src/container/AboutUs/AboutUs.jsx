@@ -2,14 +2,14 @@ import React, { Suspense } from "react";
 
 import { images } from "../../constants";
 import "./AboutUs.css";
-import Model from "../../../public/Cha9or";
 import { Canvas } from "@react-three/fiber";
+import Cha9or from "../../3d/Cha9or";
 const AboutUs = () => (
   <div className="relative app__bg flex__center section__padding" id="about">
     <div className="dasMesser">
       <Canvas>
         <Suspense>
-          <Model />
+          <Cha9or />
         </Suspense>
       </Canvas>
     </div>

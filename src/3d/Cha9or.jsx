@@ -10,7 +10,7 @@ Title: PUNISHER Meat Cleaver
 import React from 'react'
 import { useGLTF } from '@react-three/drei'
 
-export default function Model(props) {
+export  default function Cha9or(props) {
   const { nodes, materials } = useGLTF('/cha9or.gltf')
   return (
     <group {...props} dispose={null}>
