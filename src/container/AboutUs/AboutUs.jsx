@@ -5,8 +5,11 @@ import "./AboutUs.css";
 
 const AboutUs = () => (
   <div className="relative app__bg flex__center section__padding" id="about">
+    <div className="dasMesser">
+      
+    </div>
     <div className="w-full z-2 flex__center flex-col lg:flex-row">
-      <div className=" flex-one flex justify-end items-end flex-col text-right">
+      <div className=" flex-one flex justify-end items-end flex-col text-left">
         <h1 className="headtext__cormorant">About Us</h1>
         <img src={images.spoon} alt="about_spoon" className="spoon__img" />
         <p className="p__opensans mx-0 my-6 text-primary-gray">
@@ -18,7 +21,6 @@ const AboutUs = () => (
           Know More
         </button>
       </div>
-
     </div>
   </div>
 );
