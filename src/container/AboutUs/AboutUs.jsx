@@ -1,12 +1,17 @@
-import React from "react";
+import React, { Suspense } from "react";
 
 import { images } from "../../constants";
 import "./AboutUs.css";
-
+import Model from "../../../public/Cha9or";
+import { Canvas } from "@react-three/fiber";
 const AboutUs = () => (
   <div className="relative app__bg flex__center section__padding" id="about">
     <div className="dasMesser">
-      
+      <Canvas>
+        <Suspense>
+          <Model />
+        </Suspense>
+      </Canvas>
     </div>
     <div className="w-full z-2 flex__center flex-col lg:flex-row">
       <div className=" flex-one flex justify-end items-end flex-col text-left">
