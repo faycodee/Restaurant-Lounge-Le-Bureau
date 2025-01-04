@@ -10,9 +10,6 @@ const AboutUs = () => (
       <Canvas>
         <Suspense>
           <Cha9or />
-
-
-          
         </Suspense>
       </Canvas>
     </div>
