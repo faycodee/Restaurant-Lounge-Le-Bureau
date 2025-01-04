@@ -9,6 +9,8 @@ const AboutUs = () => (
     <div className="dasMesser">
       <Canvas>
         <Suspense>
+
+          
           <Cha9or />
         </Suspense>
       </Canvas>
