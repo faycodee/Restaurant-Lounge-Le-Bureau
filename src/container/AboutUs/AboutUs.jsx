@@ -8,14 +8,8 @@ const AboutUs = () => (
   <div className="relative app__bg flex__center section__padding" id="about">
     <div className="dasMesser">
       <Canvas>
-        <Suspense>
-
-
-
-
-
-          
-          <Cha9or />
+        <Suspense> 
+          {/* <Cha9or /> */}
         </Suspense>
       </Canvas>
     </div>
