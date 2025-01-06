@@ -3,26 +3,25 @@ import React, { Suspense } from "react";
 import { images } from "../../constants";
 import "./AboutUs.css";
 
-import Model from "../../assets/3D/Cleaver";
+// import Model from "../../assets/3D/Cleaver";
 
-import { Canvas } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
+// import { Canvas } from '@react-three/fiber';
+// import { OrbitControls } from '@react-three/drei';
 
 const AboutUs = () => (
   <div className="relative app__bg flex__center section__padding" id="about">
-    <div className="dasMesser">
+    {/* <div className="dasMesser">
     <Canvas>
-        {/* Optional lighting */}
+     
         <ambientLight intensity={0.5} />
         <directionalLight position={[0, 5, 5]} intensity={1} />
         
-        {/* 3D Model */}
+       
         <Model />
         
-        {/* Controls for rotation and zoom */}
         <OrbitControls />
       </Canvas>
-    </div>
+    </div> */}
     <div className="w-full z-2 flex__center flex-col lg:flex-row">
       <div className=" flex-one flex justify-end items-end flex-col text-left">
         <h1 className="headtext__cormorant">About Us</h1>
