@@ -3,13 +3,13 @@ import React, { Suspense } from "react";
 import { images } from "../../constants";
 import "./AboutUs.css";
 import { Canvas } from "@react-three/fiber";
-import Messer from "../../assets/3d/Cha9or";
+import  {Model} from "../../assets/3D/Scene"
 const AboutUs = () => (
   <div className="relative app__bg flex__center section__padding" id="about">
     <div className="dasMesser">
       <Canvas>
         <Suspense> 
-          <Messer />
+          <Model />
         </Suspense>
       </Canvas>
     </div>
