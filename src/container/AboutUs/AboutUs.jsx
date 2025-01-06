@@ -9,7 +9,7 @@ const AboutUs = () => (
     <div className="dasMesser">
       <Canvas>
         <Suspense> 
-          {/* <Cha9or /> */}
+          <Cha9or />
         </Suspense>
       </Canvas>
     </div>
