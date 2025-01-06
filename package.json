@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@gsap/react": "^2.1.1",
+    "@mediapipe/tasks-vision": "^0.10.20",
     "@react-three/drei": "^9.120.5",
     "@react-three/fiber": "^8.17.10",
     "@reduxjs/toolkit": "^2.5.0",
@@ -17,13 +18,14 @@
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.1.1",
     "react-scripts": "5.0.1",
+    "three": "^0.172.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test"
   },
   "eslintConfig": {
     "extends": [
@@ -46,6 +48,7 @@
   "devDependencies": {
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.49",
+    "react-app-rewired": "^2.2.1",
     "tailwindcss": "^3.4.17"
   }
 }
