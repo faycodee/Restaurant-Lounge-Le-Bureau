@@ -13,6 +13,17 @@ const AboutUs = () => (
     {/* <div className="dasMesser">
     <Canvas>
      
+
+
+
+
+
+
+
+
+
+
+    
         <ambientLight intensity={0.5} />
         <directionalLight position={[0, 5, 5]} intensity={1} />
         
