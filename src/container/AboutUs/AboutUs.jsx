@@ -23,6 +23,17 @@ const AboutUs = () => (
         
        
         <Model />
+
+
+
+
+
+
+        
+
+
+
+
         
         <OrbitControls />
       </Canvas>
