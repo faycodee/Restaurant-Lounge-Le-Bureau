@@ -16,10 +16,10 @@ const FindUs = () => (
       </div>
       <button type="button" className="custom__button mt-8">Visit Us</button>
     </div>
-
     <div className="app__wrapper_img">
-      <img src={images.findus} alt="finus_img" className='md:w-5/6' />
+      {/* <img src={images.findus} alt="finus_img" className='md:w-5/6' /> */}
     </div>
+   
   </div>
 );
 

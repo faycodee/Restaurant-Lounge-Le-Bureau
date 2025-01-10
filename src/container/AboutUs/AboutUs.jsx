@@ -12,36 +12,19 @@ const AboutUs = () => (
   <div className="relative app__bg flex__center section__padding" id="about">
     {/* <div className="dasMesser">
     <Canvas>
-     
-
-
-
-
-
         <ambientLight intensity={0.5} />
         <directionalLight position={[0, 5, 5]} intensity={1} />
         
        
         <Model />
 
-
-
-
-
-
-        
-
-
-
-
-        
-        <OrbitControls />
+   <OrbitControls />
       </Canvas>
     </div> */}
-    <div className="w-full z-2 flex__center flex-col lg:flex-row">
-      <div className=" flex-one flex justify-end items-end flex-col text-left">
+    <div className="w-full z-2  flex-row lg:flex-row">
+      <div className="">
         <h1 className="headtext__cormorant">About Us</h1>
-        <img src={images.spoon} alt="about_spoon" className="spoon__img" />
+      
         <p className="p__opensans mx-0 my-6 text-primary-gray">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quis pharetra
           adipiscing ultrices vulputate posuere tristique. In sed odio nec
@@ -51,6 +34,9 @@ const AboutUs = () => (
           Know More
         </button>
       </div>
+      <div className="app__wrapper_img">
+          <img src={images.findus} alt="finus_img" className="md:w-5/6" />
+        </div>
     </div>
   </div>
 );
