@@ -35,7 +35,7 @@ const AboutUs = () => (
         </button>
       </div>
       <div className="app__wrapper_img">
-          <img src={images.findus} alt="finus_img" className="md:w-5/6" />
+          <img src={images.aboutBild} alt="finus_img" className="md:w-5/6" />
         </div>
     </div>
   </div>
