@@ -18,7 +18,7 @@ const Header = () => {
   const nextVidRef = useRef(null);
   const nextIndex = (curIndex % totalVideos) + 1;
   const [fiveSecend, setfiveSecend] = useState(true);
-  setTimeout(() => setfiveSecend(false), 10000);
+  setTimeout(() => setfiveSecend(false), 5000);
   const getSrc = (i) => `./videos/${i}.mp4`;
   useEffect(() => {
     if (loadedVideos == totalVideos - 3) {
@@ -102,7 +102,7 @@ const Header = () => {
 
   return (
     <>
-      {fiveSecend && fiveSecend && (
+      {fiveSecend  && (
         <div
           style={{ backgroundColor: "#DCCA87" }}
           className="flex-center absolute z-[100] h-dvh w-screen overflow-hidden "
