@@ -102,7 +102,7 @@ const Header = () => {
 
   return (
     <>
-      {fiveSecend  && (
+      {fiveSecend && (
         <div
           style={{ backgroundColor: "#DCCA87" }}
           className="flex-center absolute z-[100] h-dvh w-screen overflow-hidden "
