@@ -7,7 +7,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 import { document } from "postcss";
 gsap.registerPlugin(ScrollTrigger);
-const totalVideos = 6;
+const totalVideos = 5;
 const Header = () => {
   const [curIndex, setCurIndex] = useState(1);
   const [curHeaderText, setHeaderText] = useState("Fresh flavors, every bite.");
@@ -21,7 +21,7 @@ const Header = () => {
   setTimeout(() => setfiveSecend(false), 5000);
   const getSrc = (i) => `./videos/${i}.mp4`;
   useEffect(() => {
-    if (loadedVideos == totalVideos - 3) {
+    if (loadedVideos == totalVideos - 2) {
       setIsLoading(false);
     }
   }, [loadedVideos]);
