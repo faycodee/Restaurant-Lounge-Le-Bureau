@@ -21,7 +21,7 @@ const AboutUs = () => (
    <OrbitControls />
       </Canvas>
     </div> */}
-    <div className="w-full z-2  flex-row lg:flex-row">
+    <div className="w-full z-2  flex max-md:flex-col items-around">
       <div className="">
         <h1 className="headtext__cormorant">About Us</h1>
       
@@ -34,7 +34,7 @@ const AboutUs = () => (
           Know More
         </button>
       </div>
-      <div className="app__wrapper_img">
+      <div className="ml-11 max-md:ml-0 max-md:mt-20">
           <img src={images.aboutBild} alt="finus_img" className="md:w-5/6" />
         </div>
     </div>
