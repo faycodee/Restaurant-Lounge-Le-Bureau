@@ -5,6 +5,7 @@ import "./Header.css";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
+import { document } from "postcss";
 gsap.registerPlugin(ScrollTrigger);
 const totalVideos = 6;
 const Header = () => {
@@ -16,7 +17,8 @@ const Header = () => {
 
   const nextVidRef = useRef(null);
   const nextIndex = (curIndex % totalVideos) + 1;
-
+  const [fiveSecend, setfiveSecend] = useState(true);
+  setTimeout(() => setfiveSecend(false), 10000);
   const getSrc = (i) => `./videos/${i}.mp4`;
   useEffect(() => {
     if (loadedVideos == totalVideos - 3) {
@@ -100,7 +102,7 @@ const Header = () => {
 
   return (
     <>
-      {isLoading && (
+      {fiveSecend && fiveSecend && (
         <div
           style={{ backgroundColor: "#DCCA87" }}
           className="flex-center absolute z-[100] h-dvh w-screen overflow-hidden "
@@ -111,7 +113,7 @@ const Header = () => {
         </div>
       )}
       <div
-        style={{ backgroundImage: "url(./wel2.jpg)" ,backgroundPosition:""}}
+        style={{ backgroundImage: "url(./wel2.jpg)", backgroundPosition: "" }}
         className="relative  h-[100vh] w-[100vw] overflow-hidden"
       >
         <div
