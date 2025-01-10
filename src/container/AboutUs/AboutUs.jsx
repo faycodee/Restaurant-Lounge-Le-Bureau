@@ -13,7 +13,7 @@ gsap.registerPlugin(ScrollTrigger);
 const AboutUs = () => {
   useGSAP(() => {
     gsap.from("#aboutBild", {
-      opacity: 0.3,
+      opacity: 0,
       y: 20,
       duration: 2,
       ease: "back.inOut",
@@ -54,12 +54,12 @@ const AboutUs = () => {
     );
     gsap.fromTo(
       ".aboutBtn",
-      { opacity: 0, scale: .9 },
+      { opacity: 0, scale: 0.9 },
       {
         ease: "power1.inOut",
         opacity: 1,
         scale: 1,
-        duration:1,
+        duration: 1,
 
         scrollTrigger: {
           trigger: "#aboutBild",
