@@ -95,7 +95,7 @@ const Header = () => {
       "Fresh flavors, every bite.",
       "Where taste meets tradition.",
       "Your table, our passion.",
-      
+
       "Savor the extraordinary.",
     ];
     return texts[index - 1] || texts[0];
@@ -103,7 +103,7 @@ const Header = () => {
 
   return (
     <>
-      {fiveSecend && (
+      {isLoading ? (
         <div
           style={{ backgroundColor: "#DCCA87" }}
           className="flex-center absolute z-[100] h-dvh w-screen overflow-hidden "
@@ -112,6 +112,8 @@ const Header = () => {
           <img src="./food2.gif" alt="" className="w-[260px]" />
           {/* </div> */}
         </div>
+      ) : (
+        ""
       )}
       <div
         style={{ backgroundImage: "url(./wel2.jpg)", backgroundPosition: "" }}
