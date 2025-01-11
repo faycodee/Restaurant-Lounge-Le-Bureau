@@ -95,6 +95,7 @@ const Header = () => {
       "Fresh flavors, every bite.",
       "Where taste meets tradition.",
       "Your table, our passion.",
+      
       "Savor the extraordinary.",
     ];
     return texts[index - 1] || texts[0];
