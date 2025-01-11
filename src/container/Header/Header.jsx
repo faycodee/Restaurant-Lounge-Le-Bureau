@@ -17,14 +17,14 @@ const Header = () => {
 
   const nextVidRef = useRef(null);
   const nextIndex = (curIndex % totalVideos) + 1;
-  const [fiveSecend, setfiveSecend] = useState(true);
-  setTimeout(() => setfiveSecend(false), 5000);
+  const [fiveSecend, setfiveSecend] = useState(false);
+  setTimeout(() => setfiveSecend(true), 5000);
   const getSrc = (i) => `./videos/${i}.mp4`;
   useEffect(() => {
-    if (loadedVideos == totalVideos - 2) {
+    if (loadedVideos == totalVideos - 2 && fiveSecend) {
       setIsLoading(false);
     }
-  }, [loadedVideos]);
+  }, [loadedVideos ,fiveSecend]);
   useGSAP(
     () => {
       if (hasClicked) {
