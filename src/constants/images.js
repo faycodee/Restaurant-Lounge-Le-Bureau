@@ -20,8 +20,10 @@ import sign from "../assets/sign.png";
 import quote from "../assets/quote.png";
 import gericht from "../assets/gericht.png";
 import aboutBild from "../assets/AboutBild.png";
+import MenuWelco from "../assets/MenuWelco.png";
 
 export default {
+  MenuWelco ,
   aboutBild,
   bg,
   chef,

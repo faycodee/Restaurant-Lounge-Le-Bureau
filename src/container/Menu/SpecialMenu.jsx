@@ -16,7 +16,7 @@ const SpecialMenu = () => {
         end: "+=800 center ",
         scrub: 0.5,
         pin: true,
-        pinSpacing: true,
+        // pinSpacing: true,
       },
     });
     clipAnimation.to(".mask-clip-path", {
@@ -49,8 +49,21 @@ const SpecialMenu = () => {
             ></video>
           </div>
         </div>
-        <div className="h-[100vh] bg-black "></div>
+        <div
+          className="h-[80vh] bg-slate-200 "
+          style={{ backgroundImage: `url(${images.MenuWelco})` }}
+        >
+          FAYREST MENU
+        </div>
 
+        {/* <div className="mt-4">
+        <button type="button" className="custom__button">
+          View More
+        </button>
+      </div> */}
+      </div>
+      <div className="h-[150vh] bg-black ">
+        -----------------------
         {/* <div className="mt-4">
         <button type="button" className="custom__button">
           View More
