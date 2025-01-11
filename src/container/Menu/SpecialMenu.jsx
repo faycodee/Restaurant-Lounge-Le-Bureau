@@ -50,10 +50,12 @@ const SpecialMenu = () => {
           </div>
         </div>
         <div
-          className="h-[80vh] bg-slate-200 "
-          style={{ backgroundImage: `url(${images.MenuWelco})` }}
+          className="h-[80vh] bg-balck w-full flex justify-center  items-start"
+          // style={{ backgroundImage: `url()`,  }}
         >
-          FAYREST MENU
+          <div className="w-[300px]">
+            <img src={images.MenuWelco} alt="" />
+          </div>
         </div>
 
         {/* <div className="mt-4">
