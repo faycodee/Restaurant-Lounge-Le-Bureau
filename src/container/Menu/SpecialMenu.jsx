@@ -3,23 +3,63 @@ import React from "react";
 import { SubHeading, MenuItem } from "../../components";
 import { data, images } from "../../constants";
 import "./SpecialMenu.css";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/all";
+gsap.registerPlugin(ScrollTrigger);
+const SpecialMenu = () => {
+  useGSAP(() => {
+    const clipAnimation = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#clip",
+        start: "center center",
+        end: "+=800 center ",
+        scrub: 0.5,
+        pin: true,
+        pinSpacing: true,
+      },
+    });
+    clipAnimation.to(".mask-clip-path", {
+      width: "100vw",
+      height: "100vh",
+      borderRadius: 0,
+    });
+  }, []);
+  return (
+    <>
+      <div
+        className="flex-col bg-black flex__center pt-8 px-9  min-h-screen w-screen"
+        id="menu"
+      >
+        <div className="mb-8 m-auto flex flex-col justify-center items-center">
+          <SubHeading title="Menu that fits your palatte" />
+          <h1 className="headtext__cormorant">
+            Menu tailored to your taste.&apos;
+          </h1>
+        </div>
+        <div id="clip" className="h-dvh w-screen">
+          <div className="mask-clip-path about-video ">
+            <video
+              src="./videos/a1.mp4"
+              muted
+              autoPlay
+              loop
+              className="absolute left-0 top-0 z-50 size-full object-cover"
+              alt="Video"
+            ></video>
+          </div>
+        </div>
+        <div className="h-[100vh] bg-black "></div>
 
-const SpecialMenu = () => (
-  <div className="flex-col bg-black flex__center section__padding" id="menu">
-    <div className="mb-8 m-auto flex flex-col justify-center items-center">
-      <SubHeading title="Menu that fits your palatte" />
-      <h1 className="headtext__cormorant">
-        Menu tailored to your taste.&apos;
-      </h1>
-    </div>
-
-    <div className="mt-4">
-      <button type="button" className="custom__button">
-        View More
-      </button>
-    </div>
-  </div>
-);
+        {/* <div className="mt-4">
+        <button type="button" className="custom__button">
+          View More
+        </button>
+      </div> */}
+      </div>
+    </>
+  );
+};
 
 export default SpecialMenu;
 {
