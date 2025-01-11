@@ -24,7 +24,7 @@ const Header = () => {
     if (loadedVideos == totalVideos - 2 && fiveSecend) {
       setIsLoading(false);
     }
-  }, [loadedVideos ,fiveSecend]);
+  }, [loadedVideos, fiveSecend]);
   useGSAP(
     () => {
       if (hasClicked) {
