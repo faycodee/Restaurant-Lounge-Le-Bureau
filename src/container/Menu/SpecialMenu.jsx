@@ -53,8 +53,8 @@ const SpecialMenu = () => {
           className="h-[80vh] bg-balck w-full flex justify-center  items-start"
           // style={{ backgroundImage: `url()`,  }}
         >
-          <div className="w-[300px]">
-            <img src={images.MenuWelco} alt="" />
+          <div className="">
+            <img src={images.MenuWelco2} alt="" />
           </div>
         </div>
 

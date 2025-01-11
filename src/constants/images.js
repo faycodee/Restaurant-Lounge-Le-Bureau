@@ -21,9 +21,11 @@ import quote from "../assets/quote.png";
 import gericht from "../assets/gericht.png";
 import aboutBild from "../assets/AboutBild.png";
 import MenuWelco from "../assets/MenuWelco.png";
+import MenuWelco2 from "../assets/MenuWelco2.png";
 
 export default {
   MenuWelco ,
+  MenuWelco2 ,
   aboutBild,
   bg,
   chef,

@@ -15,7 +15,7 @@ const AboutUs = () => {
     gsap.from("#aboutBild", {
       opacity: 0,
       y: 20,
-      duration: 3,
+      duration: 2,
       ease: "back.inOut",
       scrollTrigger: {
         trigger: "#aboutBild",
@@ -28,7 +28,7 @@ const AboutUs = () => {
       ease: "power1.inOut",
       opacity: 0,
       y: 10,
-      duration: 3.5,
+      duration: 1.5,
       scrollTrigger: {
         trigger: "#aboutBild",
         start: "center 70%",
@@ -43,7 +43,7 @@ const AboutUs = () => {
         ease: "power1.inOut",
         opacity: 1,
         y: 0,
-        duration: 5,
+        duration: 3,
         stagger: 0.1,
         scrollTrigger: {
           trigger: "#aboutBild",
@@ -60,7 +60,7 @@ const AboutUs = () => {
         ease: "power1.inOut",
         opacity: 1,
         scale: 1,
-        duration: 5,
+        duration: 3,
 
         scrollTrigger: {
           trigger: "#aboutBild",
