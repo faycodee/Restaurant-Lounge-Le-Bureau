@@ -16,7 +16,7 @@ const SpecialMenu = () => {
         end: "+=800 center ",
         scrub: 0.5,
         pin: true,
-        // pinSpacing: true,
+        pinSpacing: true,
       },
     });
     clipAnimation.to(".mask-clip-path", {
