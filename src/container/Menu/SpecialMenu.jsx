@@ -220,67 +220,71 @@ const SpecialMenu = () => {
             ></video>
           </div>
         </div>
-        <div
-          className="h-[80vh] bg-balck w-full flex justify-center  items-start"
-          // style={{ backgroundImage: `url()`,  }}
-        >
-          <div className="">
-            <img src={images.MenuWelco2} alt="" />
-          </div>
-        </div>
-
-        {/* <div className="mt-4">
-        <button type="button" className="custom__button">
-          View More
-        </button>
-      </div> */}
       </div>
-      <div className="h-[150vh] bg-slate-400 ">{}</div>
+      <div className="h-[150vh] bg-slate-400 ">
+        {" "}
+        <section className="flex justify-center">
+          <ul
+            style={{ textDecoration: "none" }}
+            className="flex w-[150px] justify-around mt-10 "
+          >
+            <li>55</li>
+            <li>55</li>
+            <li>55</li>
+          </ul>{" "}
+          <div class="wrapper">
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+          </div>
+        </section>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+          {data.menuItems.map((item, index) => (
+            <Menu key={index} item={item} />
+          ))}
+        </div>
+      </div>
     </>
   );
 };
 
-export default SpecialMenu;
+const Menu = ({ item }) => {
+  return (
+    <div className="group relative bg-white shadow-lg rounded-lg overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+      {/* Image */}
+      <img
+        src={item.image}
+        alt={item.name}
+        className="w-full h-48 object-cover"
+      />
+      {/* Content */}
+      <div className="p-4">
+        <h2 className="text-xl font-bold text-gray-800">{item.name}</h2>
+        <p className="text-sm text-gray-600 mt-2">{item.description}</p>
+        <div className="mt-4 flex items-center justify-between">
+          <span className="text-lg font-semibold text-green-600">
+            ${item.price.toFixed(2)}
+          </span>
+          <button className="py-1 px-4 bg-green-500 text-white rounded-full text-sm font-medium transition hover:bg-green-600">
+            Order Now
+          </button>
+        </div>
+      </div>
+      {/* Availability Badge */}
+      {item.available && (
+        <span className="absolute top-2 right-2 bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded-full">
+          Available
+        </span>
+      )}
+    </div>
+  );
+};
 {
-  /* <div className="app__specialMenu-menu w-full mt-8 mx-0 flex justify-center items-center flex-col lg:items-start lg:flex-row">
-      <div className="app__specialMenu-menu_food  flex__center flex-one w-full flex-col">
-        <p className="app__specialMenu-menu_heading font-CormorantUpright font-semibold text-4xl leading-9 tracking-wider text-primary-white md:text-5xl">
-          Meals
-        </p>
-        <div className="app__specialMenu_menu_items flex flex-col mx-0 my-8 w-full">
-          {data.food.map((food, index) => (
-            <MenuItem
-              key={food.title + index}
-              title={food.title}
-              price={food.price}
-              tags={food.tags}
-            />
-          ))}
-        </div>
-      </div>
-
-      <div className="app__specialMenu-menu_img w-full mt-4 mb-12 mx-0 lg:w-[410px] lg:mx-8 lg:my-0 2xl:w-[650px]">
-        <img
-          src={images.menu2}
-          alt="menu__img"
-          className="m-auto w-5/6 h-auto 2xl:h-[920px]"
-        />
-      </div>
-
-      <div className="app__specialMenu-menu_drinks  flex__center flex-one w-full flex-col">
-        <p className="app__specialMenu-menu_heading font-CormorantUpright font-semibold text-4xl leading-9 tracking-wider text-primary-white md:text-5xl">
-          Drinks
-        </p>
-        <div className="app__specialMenu_menu_items flex flex-col mx-0 my-8 w-full">
-          {data.drinks.map((cocktail, index) => (
-            <MenuItem
-              key={cocktail.title + index}
-              title={cocktail.title}
-              price={cocktail.price}
-              tags={cocktail.tags}
-            />
-          ))}
-        </div>
-      </div>
-    </div> */
+  /* <div className="mt-4">
+        <button type="button" className="custom__button">
+          View More
+        </button>
+      </div> */
 }
+export default SpecialMenu;
