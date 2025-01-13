@@ -224,19 +224,10 @@ const SpecialMenu = () => {
       <div className="h-[150vh] bg-slate-400 ">
         {" "}
         <section className="flex justify-center">
-          <ul
-            style={{ textDecoration: "none" }}
-            className="flex w-[150px] justify-around mt-10 "
-          >
-            <li>55</li>
-            <li>55</li>
-            <li>55</li>
-          </ul>{" "}
           <div class="wrapper">
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
+            <div class="card">Steak</div>
+            <div class="card">Pizza</div>
+            <div class="card">Salad</div>
           </div>
         </section>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
