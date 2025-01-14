@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { SubHeading, MenuItem } from "../../components";
 import { data, images } from "../../constants";
@@ -8,6 +8,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 gsap.registerPlugin(ScrollTrigger);
 const SpecialMenu = () => {
+  // const [categoryy, setCategory] = useState("Steak");
   useGSAP(() => {
     const clipAnimation = gsap.timeline({
       scrollTrigger: {
@@ -25,6 +26,9 @@ const SpecialMenu = () => {
       borderRadius: 0,
     });
   }, []);
+  useEffect(() => {
+    const [categoryy, setCategory] = useState("Steak");
+  }, [categoryy]);
   const [data, setData] = useState({
     menuItems: [
       // Steak Category
@@ -33,7 +37,7 @@ const SpecialMenu = () => {
         category: "Steak",
         description:
           "Tender ribeye steak grilled to perfection, served with mashed potatoes and vegetables.",
-        image: "ribeye-steak.jpg",
+        image: "./essen/s1.jpg",
         price: 24.99,
         available: true,
       },
@@ -42,7 +46,7 @@ const SpecialMenu = () => {
         category: "Steak",
         description:
           "A juicy, buttery filet mignon served with a side of garlic butter and roasted vegetables.",
-        image: "filet-mignon.jpg",
+        image: "./essen/s2.jpg",
         price: 29.99,
         available: true,
       },
@@ -51,7 +55,7 @@ const SpecialMenu = () => {
         category: "Steak",
         description:
           "A classic T-bone steak with a perfect balance of tenderloin and strip steak, grilled to your liking.",
-        image: "t-bone-steak.jpg",
+        image: "./essen/s3.jpg",
         price: 27.99,
         available: true,
       },
@@ -60,7 +64,7 @@ const SpecialMenu = () => {
         category: "Steak",
         description:
           "A flavorful New York strip steak, seasoned and grilled to perfection, served with sautéed spinach.",
-        image: "new-york-strip.jpg",
+        image: "./essen/s4.jpg",
         price: 23.99,
         available: true,
       },
@@ -69,7 +73,7 @@ const SpecialMenu = () => {
         category: "Steak",
         description:
           "A lean, flavorful sirloin steak grilled to your desired temperature, served with garlic mashed potatoes.",
-        image: "sirloin-steak.jpg",
+        image: "./essen/s5.jpg",
         price: 21.99,
         available: true,
       },
@@ -78,7 +82,7 @@ const SpecialMenu = () => {
         category: "Steak",
         description:
           "Grilled steak served with crispy French fries and a side of garlic butter sauce.",
-        image: "steak-frites.jpg",
+        image: "./essen/s6.jpg",
         price: 22.99,
         available: true,
       },
@@ -89,7 +93,7 @@ const SpecialMenu = () => {
         category: "Pizza",
         description:
           "Classic pizza topped with savory pepperoni and melted mozzarella cheese.",
-        image: "pepperoni-pizza.jpg",
+        image: "./essen/p1.jpg",
         price: 11.99,
         available: true,
       },
@@ -98,7 +102,7 @@ const SpecialMenu = () => {
         category: "Pizza",
         description:
           "A delicious blend of ham, pineapple, and mozzarella cheese on a tangy tomato sauce base.",
-        image: "hawaiian-pizza.jpg",
+        image: "./essen/p2.jpg",
         price: 12.99,
         available: true,
       },
@@ -107,7 +111,7 @@ const SpecialMenu = () => {
         category: "Pizza",
         description:
           "A medley of fresh vegetables like bell peppers, onions, mushrooms, and olives on a thin crust.",
-        image: "vegetarian-pizza.jpg",
+        image: "./essen/p3.jpg",
         price: 13.99,
         available: true,
       },
@@ -116,7 +120,7 @@ const SpecialMenu = () => {
         category: "Pizza",
         description:
           "Grilled chicken, red onions, and mozzarella cheese topped with smoky BBQ sauce.",
-        image: "bbq-chicken-pizza.jpg",
+        image: "./essen/p4.jpg",
         price: 14.99,
         available: true,
       },
@@ -125,7 +129,7 @@ const SpecialMenu = () => {
         category: "Pizza",
         description:
           "A classic pizza with fresh mozzarella, tomato sauce, and fresh basil leaves.",
-        image: "margarita-pizza.jpg",
+        image: "./essen/p5.jpg",
         price: 12.49,
         available: true,
       },
@@ -134,7 +138,7 @@ const SpecialMenu = () => {
         category: "Pizza",
         description:
           "A hearty pizza topped with pepperoni, sausage, bacon, and ham on a cheesy base.",
-        image: "meat-lovers-pizza.jpg",
+        image: "./essen/p6.jpg",
         price: 15.99,
         available: true,
       },
@@ -145,7 +149,7 @@ const SpecialMenu = () => {
         category: "Salad",
         description:
           "Crisp lettuce, cucumbers, tomatoes, olives, and feta cheese, dressed in olive oil and lemon.",
-        image: "greek-salad.jpg",
+        image: "./essen/sa1.jpg",
         price: 9.99,
         available: true,
       },
@@ -154,7 +158,7 @@ const SpecialMenu = () => {
         category: "Salad",
         description:
           "Fresh mozzarella, ripe tomatoes, basil leaves, and balsamic glaze.",
-        image: "caprese-salad.jpg",
+        image: "./essen/sa2.jpg",
         price: 11.49,
         available: true,
       },
@@ -163,7 +167,7 @@ const SpecialMenu = () => {
         category: "Salad",
         description:
           "Grilled chicken on a bed of romaine lettuce, with Caesar dressing, croutons, and parmesan.",
-        image: "chicken-caesar-salad.jpg",
+        image: "./essen/sa3.jpg",
         price: 12.99,
         available: true,
       },
@@ -172,7 +176,7 @@ const SpecialMenu = () => {
         category: "Salad",
         description:
           "Mixed greens with grilled chicken, bacon, avocado, blue cheese, and a boiled egg.",
-        image: "cobb-salad.jpg",
+        image: "./essen/sa6.jpg",
         price: 13.49,
         available: true,
       },
@@ -181,7 +185,7 @@ const SpecialMenu = () => {
         category: "Salad",
         description:
           "Fresh spinach leaves, strawberries, almonds, and feta cheese, served with balsamic vinaigrette.",
-        image: "spinach-strawberry-salad.jpg",
+        image: "./essen/sa4.jpg",
         price: 10.99,
         available: true,
       },
@@ -190,7 +194,7 @@ const SpecialMenu = () => {
         category: "Salad",
         description:
           "Grilled chicken with mixed greens, carrots, sesame seeds, and Asian sesame dressing.",
-        image: "asian-sesame-chicken-salad.jpg",
+        image: "./essen/sa5.jpg",
         price: 12.49,
         available: true,
       },
@@ -225,15 +229,23 @@ const SpecialMenu = () => {
         {" "}
         <section className="flex justify-center">
           <div className="wrapper ">
-            <div className="card ultra" >Steak</div>
-            <div className="card">Pizza</div>
-            <div className="card">Salad</div>
+            <div className="card " onClick={() => setCategory("Steak")}>
+              Steak
+            </div>
+            <div className="card" onClick={() => setCategory("Pizza")}>
+              Pizza
+            </div>
+            <div className="card" onClick={() => setCategory("Salad")}>
+              Salad
+            </div>
           </div>
         </section>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
-          {data.menuItems.map((item, index) => (
-            <Menu key={index} item={item} />
-          ))}
+          {data.menuItems
+            .filter((e) => e.category == categoryy)
+            .map((item, index) => (
+              <Menu key={index} item={item} />
+            ))}
         </div>
       </div>
     </>
