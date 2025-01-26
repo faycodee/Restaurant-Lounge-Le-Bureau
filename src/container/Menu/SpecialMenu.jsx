@@ -8,7 +8,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 gsap.registerPlugin(ScrollTrigger);
 const SpecialMenu = () => {
-  // const [categoryy, setCategory] = useState("Steak");
+  const [categoryy, setCategory] = useState("Steak");
   useGSAP(() => {
     const clipAnimation = gsap.timeline({
       scrollTrigger: {
@@ -26,9 +26,7 @@ const SpecialMenu = () => {
       borderRadius: 0,
     });
   }, []);
-  useEffect(() => {
-    const [categoryy, setCategory] = useState("Steak");
-  }, [categoryy]);
+  const [loadedImgs, setLoadedImgs] = useState(0);
   const [data, setData] = useState({
     menuItems: [
       // Steak Category
@@ -200,6 +198,9 @@ const SpecialMenu = () => {
       },
     ],
   });
+  const handelLoadedImgs = () => {
+    setLoadedImgs((prev) => prev + 1);
+  };
   return (
     <>
       <div
@@ -252,16 +253,16 @@ const SpecialMenu = () => {
   );
 };
 
-const Menu = ({ item }) => {
+const Menu = ({ item, handelLoadedImgs }) => {
   return (
     <div className="group relative bg-white shadow-lg rounded-lg overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
-      {/* Image */}
       <img
         src={item.image}
         alt={item.name}
         className="w-full h-48 object-cover"
+        onLoadedData={handelLoadedImgs}
       />
-      {/* Content */}
+
       <div className="p-4">
         <h2 className="text-xl font-bold text-gray-800">{item.name}</h2>
         <p className="text-sm text-gray-600 mt-2">{item.description}</p>
@@ -274,7 +275,7 @@ const Menu = ({ item }) => {
           </button>
         </div>
       </div>
-      {/* Availability Badge */}
+
       {item.available && (
         <span className="absolute top-2 right-2 bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded-full">
           Available
