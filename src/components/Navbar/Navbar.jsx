@@ -40,7 +40,7 @@ const Navbar = () => {
           src={images.gericht}
           alt="app logo"
           className="h-auto w-[50px] max-md:w-[50px] 2xl:w-52"
-          
+
         />
       </div>
       <ul className="lg:flex hidden justify-center items-center flex-1 duration-300 gap-2">
@@ -54,7 +54,7 @@ const Navbar = () => {
           <a href="#menu">Menu</a>
         </li>
         <li className="text-primary-white my-0 mx-1 duration-150 cursor-pointer hover:text-primary-gray ">
-          <a href="#awards">Awards</a>
+          <a href="#awards">Dinner show</a>
         </li>
         <li className="text-primary-white my-0 mx-1 duration-150 cursor-pointer hover:text-primary-gray ">
           <a href="#contact">Contact</a>
