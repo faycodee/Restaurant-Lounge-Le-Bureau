@@ -45,6 +45,8 @@ const Navbar = () => {
       <ul className="lg:flex hidden justify-center items-center flex-1 duration-300 gap-2">
         <li className="text-primary-white my-0 mx-1 duration-150 cursor-pointer hover:text-primary-gray ">
           <a href="#home">Home</a>
+
+          
         </li>
         <li className="text-primary-white my-0 mx-1 duration-150 cursor-pointer hover:text-primary-gray ">
           <a href="#about">About</a>
