@@ -52,9 +52,15 @@ const Navbar = () => {
           <a href="#about">About</a>
         </li>
         <li className="text-primary-white my-0 mx-1 duration-150 cursor-pointer hover:text-primary-gray ">
+          
           <a href="#menu">Menu</a>
         </li>
         <li className="text-primary-white my-0 mx-1 duration-150 cursor-pointer hover:text-primary-gray ">
+
+
+
+
+          
           <a href="#awards">Dinner show</a>
         </li>
         <li className="text-primary-white my-0 mx-1 duration-150 cursor-pointer hover:text-primary-gray ">
