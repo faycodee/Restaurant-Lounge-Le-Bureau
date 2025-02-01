@@ -60,6 +60,23 @@ const Navbar = () => {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
           
           <a href="#awards">Dinner show</a>
         </li>
