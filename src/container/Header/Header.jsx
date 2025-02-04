@@ -7,10 +7,36 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 import { document } from "postcss";
 gsap.registerPlugin(ScrollTrigger);
-const totalVideos = 5;
+const totalVideos = 4;
 const Header = () => {
+  const buttonRef = useRef(null);
+
+  const handleMouseEnter = () => {
+    gsap.to(buttonRef.current, {
+      backgroundColor: "#000",
+      color: "#fff",
+      scale: 0.9,
+      rotationX: 3,
+      skewX: 5,
+      duration: 0.3,
+      ease: "power2.out",
+    });
+  };
+
+  const handleMouseLeave = () => {
+    gsap.to(buttonRef.current, {
+      backgroundColor: "#fff", // Light background
+      color: "#333", // Dark text color
+      scale: 1, // Reset scale
+      rotation: 0, // Reset rotation
+      skewX: 0, // Reset skew
+      duration: 0.3,
+      ease: "power2.out",
+    });
+  };
+
   const [curIndex, setCurIndex] = useState(1);
-  const [curHeaderText, setHeaderText] = useState("Fresh flavors, every bite.");
+  const [curHeaderText, setHeaderText] = useState("Welcome to our restaurant!");
   const [hasClicked, setHasClicked] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [loadedVideos, setLoadedVideos] = useState(0);
@@ -60,6 +86,11 @@ const Header = () => {
             each: 0.09,
           },
         });
+        gsap.fromTo(
+          "#btnn",
+          { opacity: 0, y: 0 },
+          { duration: 3, delay: 1, ease: "power1.inOut", opacity: 1 }
+        );
       }
     },
     { dependencies: [curIndex], revertOnUpdate: true }
@@ -92,11 +123,10 @@ const Header = () => {
 
   const getHeaderText = (index) => {
     const texts = [
-      "Fresh flavors, every bite.",
-      "Where taste meets tradition.",
-      "Your table, our passion.",
-
-      "Savor the extraordinary.",
+      "Welcome to our restaurant!",
+      "Refreshing drinks served here!",
+      "Our chefs create perfection!",
+      "Our dishes taste amazing!"
     ];
     return texts[index - 1] || texts[0];
   };
@@ -157,17 +187,46 @@ const Header = () => {
             onLoadedData={handelVidLoad}
             className="absolute left-0 top-0 size-full object-cover object-center"
           />
+          <div className="absolute-center absolute " style={{ zIndex: 40 }}>
+            <img src="mause.gif" width="200px" />
+          </div>
+
           <h1
             id="textt"
             className="headtext__cormorant_header font-bold sticky z-40 top-[200px] left-7 max-md:text-[100px]"
           >
-            FAYREST
+            Lounge Le Bureau
           </h1>
-          <div className="wrapper ">
+
+          <div className="wrapper  ">
             <div className="words mb-4 absolute top-[330px] h-[60px] w-full overflow-hidden left-7 z-40 flex">
               {curHeaderText.split("").map((letter, index) => (
                 <Letter key={index} letter={letter} />
               ))}
+
+              <button
+                id="btnn"
+                ref={buttonRef}
+                className="ml-8"
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+                style={{
+                  backgroundColor: "#fff",
+                  zIndex: 1000,
+                  position: "relative",
+                  color: "#333",
+                  height: "30px",
+                  border: "2px solid #333",
+                  padding: "0px 7px",
+                  fontSize: "10px",
+                  cursor: "pointer",
+                  borderRadius: "5px",
+                  fontFamily: "cursive",
+                  transition: "all 0.3s ease", // Smooth transition for non-GSAP properties
+                }}
+              >
+                Book Table
+              </button>
             </div>
           </div>
         </div>
@@ -178,8 +237,12 @@ const Header = () => {
 const Letter = React.memo(({ letter }) => {
   return (
     <div
-      className="text"
-      style={{ color: "rgb(255, 254, 240)", fontSize: 20, fontWeight: "bold" }}
+      className="text "
+      style={{
+        color: "rgb(255, 254, 240)",
+        fontSize: 20,
+        fontFamily: "cursive",
+      }}
     >
       {letter === " " ? "\u00A0" : letter}
     </div>

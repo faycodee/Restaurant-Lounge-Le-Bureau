@@ -107,13 +107,16 @@
   letter-spacing: 0.04em;
   text-transform: capitalize;
 }
+
 .headtext__cormorant_header {
-  font-family: var(--font-base);
-  color: var(--color-golden);
-  font-size: 11vw;
+  /* color: var(--color-golden);
+  */
+  color: aliceblue;
+  font-size: 7vw;
   margin-left: 2vw;
   line-height: 65px;
   letter-spacing: 0.04em;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   text-transform: capitalize;
   background-color: transparent;
 }

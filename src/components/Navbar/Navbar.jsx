@@ -4,6 +4,7 @@ import { MdOutlineRestaurantMenu } from "react-icons/md";
 import { gsap } from "gsap";
 import images from "../../constants/images";
 import "./Navbar.css";
+import AudioPlayer from "./audio";
 
 const Navbar = () => {
   const buttonRef = useRef(null);
@@ -63,24 +64,7 @@ const Navbar = () => {
         </li>
       </ul>
       <div className="sm:flex hidden justify-end items-center">
-        <button
-        className="font-mono"
-          ref={buttonRef}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-          style={{
-            backgroundColor: "#fff",
-            color: "#333",
-            border: "2px solid #333",
-            padding: "7px 15px",
-            fontSize: "16px",
-            cursor: "pointer",
-            borderRadius: "5px",
-            transition: "all 0.3s ease", // Smooth transition for non-GSAP properties
-          }}
-        >
-          Book Table
-        </button>
+        <AudioPlayer />
       </div>
       {/*================ Mobile Navigation ================*/}
       <div className="flex lg:hidden">

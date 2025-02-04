@@ -368,3 +368,37 @@ a {
   filter: blur(5px);
   opacity: 0.5;
 }
+.custom-slider {
+  width: 100px;
+  height: 8px;
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: black;
+  border-radius: 5px;
+}
+
+.custom-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.custom-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.custom-slider::-ms-thumb {
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-radius: 50%;
+  cursor: pointer;
+}
