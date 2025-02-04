@@ -4,6 +4,7 @@ import gsap from "gsap";
 import { images } from "../../constants";
 import "./AboutUs.css";
 import { ScrollTrigger } from "gsap/all";
+import RestaurantChat from "../chat";
 
 // import Model from "../../assets/3D/Cleaver";
 
@@ -104,7 +105,8 @@ const AboutUs = () => {
         <div className="ml-11 max-md:ml-0 max-md:mt-20" id="aboutBild">
           <img src={images.aboutBild} alt="finus_img" className="md:w-5/6" />
         </div>
-      </div>
+      </div>{" "}
+      <RestaurantChat />
     </div>
   );
 };
