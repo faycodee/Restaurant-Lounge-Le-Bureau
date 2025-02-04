@@ -43,9 +43,9 @@ const Navbar = () => {
         />
       </div>
       <ul className="lg:flex hidden justify-center items-center flex-1 duration-300 gap-2">
-        <li className="text-primary-white my-0 mx-1 duration-150 cursor-pointer hover:text-primary-gray ">
+        {/* <li className="text-primary-white my-0 mx-1 duration-150 cursor-pointer hover:text-primary-gray ">
           <a href="#home ">Home</a>
-        </li>
+        </li> */}
         <li className="text-primary-white my-0 mx-1 duration-150 cursor-pointer hover:text-primary-gray ">
           <a href="#about">About</a>
         </li>
@@ -54,6 +54,9 @@ const Navbar = () => {
         </li>
         <li className="text-primary-white my-0 mx-1 duration-150 cursor-pointer hover:text-primary-gray ">
           <a href="#awards">Dinner show</a>
+        </li>
+        <li className="text-primary-white my-0 mx-1 duration-150 cursor-pointer hover:text-primary-gray ">
+          <a href="#awards">Gallery</a>
         </li>
         <li className="text-primary-white my-0 mx-1 duration-150 cursor-pointer hover:text-primary-gray ">
           <a href="#contact">Contact</a>
