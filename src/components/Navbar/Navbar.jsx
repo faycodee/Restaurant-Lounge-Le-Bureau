@@ -11,11 +11,11 @@ const Navbar = () => {
 
   const handleMouseEnter = () => {
     gsap.to(buttonRef.current, {
-      backgroundColor: "#000", 
-      color: "#fff", 
-      scale: 0.9, 
-      rotationX: 3, 
-      skewX: 5, 
+      backgroundColor: "#000",
+      color: "#fff",
+      scale: 0.9,
+      rotationX: 3,
+      skewX: 5,
       duration: 0.3,
       ease: "power2.out",
     });
@@ -44,40 +44,15 @@ const Navbar = () => {
       </div>
       <ul className="lg:flex hidden justify-center items-center flex-1 duration-300 gap-2">
         <li className="text-primary-white my-0 mx-1 duration-150 cursor-pointer hover:text-primary-gray ">
-          <a href="#home">Home</a>
-
-          
+          <a href="#home ">Home</a>
         </li>
         <li className="text-primary-white my-0 mx-1 duration-150 cursor-pointer hover:text-primary-gray ">
           <a href="#about">About</a>
         </li>
         <li className="text-primary-white my-0 mx-1 duration-150 cursor-pointer hover:text-primary-gray ">
-          
           <a href="#menu">Menu</a>
         </li>
         <li className="text-primary-white my-0 mx-1 duration-150 cursor-pointer hover:text-primary-gray ">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-
-          
           <a href="#awards">Dinner show</a>
         </li>
         <li className="text-primary-white my-0 mx-1 duration-150 cursor-pointer hover:text-primary-gray ">
