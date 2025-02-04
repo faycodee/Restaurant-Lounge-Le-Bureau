@@ -46,24 +46,25 @@ const Navbar = () => {
         {/* <li className="text-primary-white my-0 mx-1 duration-150 cursor-pointer hover:text-primary-gray ">
           <a href="#home ">Home</a>
         </li> */}
-        <li className="text-primary-white my-0 mx-1 duration-150 cursor-pointer hover:text-primary-gray ">
+        <li className="text-primary-white my-0 mx-1 duration-150 cursor-pointer font-mono hover:text-primary-gray ">
           <a href="#about">About</a>
         </li>
-        <li className="text-primary-white my-0 mx-1 duration-150 cursor-pointer hover:text-primary-gray ">
+        <li className="text-primary-white my-0 mx-1 duration-150 cursor-pointer font-mono hover:text-primary-gray ">
           <a href="#menu">Menu</a>
         </li>
-        <li className="text-primary-white my-0 mx-1 duration-150 cursor-pointer hover:text-primary-gray ">
-          <a href="#awards">Dinner show</a>
+        <li className="text-primary-white my-0 mx-1 duration-150 cursor-pointer font-mono hover:text-primary-gray ">
+          <a href="#awards">DinnerShow</a>
         </li>
-        <li className="text-primary-white my-0 mx-1 duration-150 cursor-pointer hover:text-primary-gray ">
+        <li className="text-primary-white my-0 mx-1 duration-150 cursor-pointer font-mono hover:text-primary-gray ">
           <a href="#awards">Gallery</a>
         </li>
-        <li className="text-primary-white my-0 mx-1 duration-150 cursor-pointer hover:text-primary-gray ">
+        <li className="text-primary-white my-0 mx-1 duration-150 cursor-pointer font-mono hover:text-primary-gray ">
           <a href="#contact">Contact</a>
         </li>
       </ul>
       <div className="sm:flex hidden justify-end items-center">
         <button
+        className="font-mono"
           ref={buttonRef}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
