@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import images from "../../constants/images";
 import "./Navbar.css";
 import AudioPlayer from "./audio";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const Navbar = () => {
   const buttonRef = useRef(null);
@@ -65,6 +66,8 @@ const Navbar = () => {
       </ul>
       <div className="sm:flex hidden justify-end items-center">
         <AudioPlayer />
+        <LanguageSwitcher />
+        
       </div>
       {/*================ Mobile Navigation ================*/}
       <div className="flex lg:hidden">
