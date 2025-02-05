@@ -4,7 +4,7 @@ import gsap from "gsap";
 import { images } from "../../constants";
 import "./AboutUs.css";
 import { ScrollTrigger } from "gsap/all";
-import RestaurantChat from "../chat";
+// import RestaurantChat from "../chat";
 
 // import Model from "../../assets/3D/Cleaver";
 
