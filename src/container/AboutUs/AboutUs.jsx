@@ -106,7 +106,7 @@ const AboutUs = () => {
           <img src={images.aboutBild} alt="finus_img" className="md:w-5/6" />
         </div>
       </div>{" "}
-      <RestaurantChat />
+      {/* <RestaurantChat /> */}
     </div>
   );
 };
