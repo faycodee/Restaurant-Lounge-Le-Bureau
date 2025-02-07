@@ -1,0 +1,17 @@
+{
+  "nav": {
+    "1": "About",
+    "2": "Menu",
+    "3": "DinnerShow",
+    "4": "Gallery",
+    "5": "Contact"
+  },
+  "header": {
+    "t1": "Welcome to our restaurant!",
+    "t2": "Refreshing drinks served here!",
+    "t3": "Our chefs create perfection!",
+    "t4": "Our dishes taste amazing!",
+    "5": "Book Table",
+    "6": "Lounge Le Bureau "
+  }
+}

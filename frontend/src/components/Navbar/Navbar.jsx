@@ -6,8 +6,9 @@ import images from "../../constants/images";
 import "./Navbar.css";
 import AudioPlayer from "./audio";
 import LanguageSwitcher from "./LanguageSwitcher";
-
+import { useTranslation } from "react-i18next";
 const Navbar = () => {
+  const [t, i18n] = useTranslation();
   const buttonRef = useRef(null);
   const [toggleMenu, setToggleMenu] = useState(false);
 
@@ -49,19 +50,19 @@ const Navbar = () => {
           <a href="#home ">Home</a>
         </li> */}
         <li className="text-primary-white my-0 mx-1 duration-150 cursor-pointer font-mono hover:text-primary-gray ">
-          <a href="#about">About</a>
+          <a href="#about">{t("nav.1")}</a>
         </li>
         <li className="text-primary-white my-0 mx-1 duration-150 cursor-pointer font-mono hover:text-primary-gray ">
-          <a href="#menu">Menu</a>
+          <a href="#menu">{t("nav.2")}</a>
         </li>
         <li className="text-primary-white my-0 mx-1 duration-150 cursor-pointer font-mono hover:text-primary-gray ">
-          <a href="#awards">DinnerShow</a>
+          <a href="#awards">{t("nav.3")}</a>
         </li>
         <li className="text-primary-white my-0 mx-1 duration-150 cursor-pointer font-mono hover:text-primary-gray ">
-          <a href="#awards">Gallery</a>
+          <a href="#awards">{t("nav.4")}</a>
         </li>
         <li className="text-primary-white my-0 mx-1 duration-150 cursor-pointer font-mono hover:text-primary-gray ">
-          <a href="#contact">Contact</a>
+          <a href="#contact">{t("nav.5")}</a>
         </li>
       </ul>
       <div className="sm:flex hidden justify-end items-center">

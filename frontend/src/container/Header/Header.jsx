@@ -5,12 +5,13 @@ import "./Header.css";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
+import { useTranslation } from "react-i18next";
 import { document } from "postcss";
 gsap.registerPlugin(ScrollTrigger);
 const totalVideos = 4;
 const Header = () => {
   const buttonRef = useRef(null);
-
+  const [t, i18n] = useTranslation();
   const handleMouseEnter = () => {
     gsap.to(buttonRef.current, {
       backgroundColor: "#000",
@@ -36,11 +37,10 @@ const Header = () => {
   };
 
   const [curIndex, setCurIndex] = useState(1);
-  const [curHeaderText, setHeaderText] = useState("Welcome to our restaurant!");
+
   const [hasClicked, setHasClicked] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [loadedVideos, setLoadedVideos] = useState(0);
-
   const nextVidRef = useRef(null);
   const nextIndex = (curIndex % totalVideos) + 1;
   const [fiveSecend, setfiveSecend] = useState(false);
@@ -51,6 +51,11 @@ const Header = () => {
       setIsLoading(false);
     }
   }, [loadedVideos, fiveSecend]);
+  const [curHeaderText, setHeaderText] = useState(t("header.t1"));
+  useEffect(() => {
+    setHeaderText(t("header.t1"));
+  }, [t("header.t1")]);
+
   useGSAP(
     () => {
       if (hasClicked) {
@@ -123,30 +128,32 @@ const Header = () => {
 
   const getHeaderText = (index) => {
     const texts = [
-      "Welcome to our restaurant!",
-      "Refreshing drinks served here!",
-      "Our chefs create perfection!",
-      "Our dishes taste amazing!"
+      t("header.t1"),
+      t("header.t2"),
+      t("header.t3"),
+      t("header.t4"),
     ];
     return texts[index - 1] || texts[0];
   };
-// {isLoading ? (
-//         <div
-//           style={{ backgroundColor: "#DCCA87" }}
-//           className="flex-center absolute z-[100] h-dvh w-screen overflow-hidden "
-//         >
-//           {/* <div className="three-body"> */}
-//           <img src="./food2.gif" alt="" className="w-[260px]" />
-//           {/* </div> */}
-//         </div>
-//       ) : (
-//         ""
-//       )}
+  // {isLoading ? (
+  //         <div
+  //           style={{ backgroundColor: "#DCCA87" }}
+  //           className="flex-center absolute z-[100] h-dvh w-screen overflow-hidden "
+  //         >
+  //           {/* <div className="three-body"> */}
+  //           <img src="./food2.gif" alt="" className="w-[260px]" />
+  //           {/* </div> */}
+  //         </div>
+  //       ) : (
+  //         ""
+  //       )}
   return (
     <>
-      
       <div
-        style={{ backgroundImage:`url(${images.welc})`, backgroundPosition: "" }}
+        style={{
+          backgroundImage: `url(${images.welc})`,
+          backgroundPosition: "",
+        }}
         className="relative  h-[100vh] w-[100vw] overflow-hidden"
       >
         <div
@@ -188,14 +195,14 @@ const Header = () => {
             className="absolute left-0 top-0 size-full object-cover object-center"
           />
           <div className="absolute-center absolute " style={{ zIndex: 40 }}>
-            <img src={images.mause}width="200px" />
+            <img src={images.mause} width="200px" />
           </div>
 
           <h1
             id="textt"
             className="headtext__cormorant_header font-bold sticky z-40 top-[200px] left-7 max-md:text-[100px]"
           >
-            Lounge Le Bureau
+            {t("header.6")}
           </h1>
 
           <div className="wrapper  ">
@@ -225,7 +232,7 @@ const Header = () => {
                   transition: "all 0.3s ease", // Smooth transition for non-GSAP properties
                 }}
               >
-                Book Table
+                {t("header.5")}
               </button>
             </div>
           </div>
