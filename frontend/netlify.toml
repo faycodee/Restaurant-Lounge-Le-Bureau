@@ -1,7 +1,8 @@
 [build]
+  base = "frontend"  
   command = "npm run build"
-  publish = "build"
-  node_version = "18.20.6"
+  publish = "frontend/build"  
+  node_version = "20.17.0"
 
 [[redirects]]
   from = "/*"
