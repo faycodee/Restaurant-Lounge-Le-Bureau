@@ -5,13 +5,15 @@ import { MdOutlineMusicOff } from "react-icons/md";
 const AudioPlayer = () => {
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [volume, setVolume] = useState(1); // Default volume is 1 (100%)
+  const [volume, setVolume] = useState(1); 
 
   const handlePlay = () => {
     if (audioRef.current && !isPlaying) {
       audioRef.current.volume = 0.1;
       audioRef.current.play();
       setIsPlaying(true);
+      console.log("handlePlay !");
+      
     }
   };
 
@@ -42,7 +44,7 @@ const AudioPlayer = () => {
         </button>
       )}
 
-      <audio ref={audioRef} src="./videos/music.mp3" loop />
+      <audio ref={audioRef} src="/videos/music.mp3" loop  />
     </div>
   );
 };
