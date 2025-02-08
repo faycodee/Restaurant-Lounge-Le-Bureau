@@ -48,19 +48,19 @@ const Navbar = () => {
       </div>
       <ul className="lg:flex hidden justify-center items-center flex-1 duration-300 gap-2">
         <li className="text-primary-white my-0 mx-1 duration-150 cursor-pointer font-mono hover:text-primary-gray">
-          <NavLink to="/about">{t("nav.1")}</NavLink>
+          <NavLink to="#about">{t("nav.1")}</NavLink>
         </li>
         <li className="text-primary-white my-0 mx-1 duration-150 cursor-pointer font-mono hover:text-primary-gray">
-          <NavLink to="/menu">{t("nav.2")}</NavLink>
+          <NavLink to="#menu">{t("nav.2")}</NavLink>
         </li>
         <li className="text-primary-white my-0 mx-1 duration-150 cursor-pointer font-mono hover:text-primary-gray">
-          <NavLink to="/dinnershow">{t("nav.3")}</NavLink>
+          <NavLink to="#dinnershow">{t("nav.3")}</NavLink>
         </li>
         <li className="text-primary-white my-0 mx-1 duration-150 cursor-pointer font-mono hover:text-primary-gray">
-          <NavLink to="/gallery">{t("nav.4")}</NavLink>
+          <NavLink to="#gallery">{t("nav.4")}</NavLink>
         </li>
         <li className="text-primary-white my-0 mx-1 duration-150 cursor-pointer font-mono hover:text-primary-gray">
-          <NavLink to="/contact">{t("nav.5")}</NavLink>
+          <NavLink to="#contact">{t("nav.5")}</NavLink>
         </li>
       </ul>
       <div className="sm:flex hidden justify-end items-center">
