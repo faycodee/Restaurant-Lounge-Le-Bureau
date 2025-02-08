@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react"; 
+import React, { useState, useRef } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { MdOutlineRestaurantMenu } from "react-icons/md";
 import { gsap } from "gsap";
@@ -38,7 +38,10 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="z-nav fixed w-full flex justify-between my-3 items-center text-primary-white h-[50px] bg-transparent backdrop-blur-2xl sm:px-8 sm:py-4 p-4">
+    <nav
+      style={{ position: "absolute", zIndex: 100 }}
+      className="z-nav fixed w-full flex justify-between my-3 items-center text-white h-[50px] bg-transparent backdrop-blur-2xl sm:px-8 sm:py-4 p-4"
+    >
       <div className="flex justify-start items-center">
         <img
           src={images.logo}
@@ -47,20 +50,45 @@ const Navbar = () => {
         />
       </div>
       <ul className="lg:flex hidden justify-center items-center flex-1 duration-300 gap-2">
-        <li className="text-primary-white my-0 mx-1 duration-150 cursor-pointer font-mono hover:text-primary-gray">
-          <NavLink to="#about">{t("nav.1")}</NavLink>
+        <li className="">
+          <NavLink
+            className="text-white my-0 mx-1 duration-150 cursor-pointer font-mono hover:text-gray-400"
+            to="#about"
+          >
+            {t("nav.1")}
+          </NavLink>
         </li>
-        <li className="text-primary-white my-0 mx-1 duration-150 cursor-pointer font-mono hover:text-primary-gray">
-          <NavLink to="#menu">{t("nav.2")}</NavLink>
+        <li className="">
+          <NavLink
+            className="text-white my-0 mx-1 duration-150 cursor-pointer font-mono hover:text-gray-400"
+            to="#menu"
+          >
+            {t("nav.2")}
+          </NavLink>
         </li>
-        <li className="text-primary-white my-0 mx-1 duration-150 cursor-pointer font-mono hover:text-primary-gray">
-          <NavLink to="#dinnershow">{t("nav.3")}</NavLink>
+        <li className="">
+          <NavLink
+            className="text-white my-0 mx-1 duration-150 cursor-pointer font-mono hover:text-gray-400"
+            to="#dinnershow"
+          >
+            {t("nav.3")}
+          </NavLink>
         </li>
-        <li className="text-primary-white my-0 mx-1 duration-150 cursor-pointer font-mono hover:text-primary-gray">
-          <NavLink to="#gallery">{t("nav.4")}</NavLink>
+        <li className="">
+          <NavLink
+            className="text-white my-0 mx-1 duration-150 cursor-pointer font-mono hover:text-gray-400"
+            to="#gallery"
+          >
+            {t("nav.4")}
+          </NavLink>
         </li>
-        <li className="text-primary-white my-0 mx-1 duration-150 cursor-pointer font-mono hover:text-primary-gray">
-          <NavLink to="#contact">{t("nav.5")}</NavLink>
+        <li className="">
+          <NavLink
+            className="text-white my-0 mx-1 duration-150 cursor-pointer font-mono hover:text-gray-400"
+            to="#contact"
+          >
+            {t("nav.5")}
+          </NavLink>
         </li>
       </ul>
       <div className="sm:flex hidden justify-end items-center">
@@ -75,33 +103,63 @@ const Navbar = () => {
           onClick={() => setToggleMenu(true)}
         />
         {toggleMenu && (
-          <div className="slide-bottom fixed top-0 left-0 w-full h-[400px] bg-primary-black duration-500 flex flex-col z-10">
+          <div className="slide-bottom fixed top-0 left-0 w-full h-[400px] bg-black duration-500 flex flex-col z-10">
             <MdOutlineRestaurantMenu
-              className="text-2xl text-primary-golden absolute top-5 right-5 cursor-pointer"
+              className="text-2xl text-golden absolute top-5 right-5 cursor-pointer"
               color="#fff"
               fontSize={27}
               onClick={() => setToggleMenu(false)}
             />
             <ul className="list-none mt-4 p-6">
-              <li className="font-CormorantUpright m-4 cursor-pointer text-primary-golden text-4xl text-center hover:text-primary-white">
-                <NavLink to="/about" onClick={() => setToggleMenu(false)}>About</NavLink>
-                <img src={images.spoon} alt="spoon underline" className="h-[10px] w-24 mx-auto" />
+              <li className="font-CormorantUpright m-4 cursor-pointer text-golden text-4xl text-center hover:text-white">
+                <NavLink to="/about" onClick={() => setToggleMenu(false)}>
+                  About
+                </NavLink>
+                <img
+                  src={images.spoon}
+                  alt="spoon underline"
+                  className="h-[10px] w-24 mx-auto"
+                />
               </li>
-              <li className="font-CormorantUpright m-4 cursor-pointer text-primary-golden text-4xl text-center hover:text-primary-white">
-                <NavLink to="/menu" onClick={() => setToggleMenu(false)}>Menu</NavLink>
-                <img src={images.spoon} alt="spoon underline" className="h-[10px] w-24 mx-auto" />
+              <li className="font-CormorantUpright m-4 cursor-pointer text-golden text-4xl text-center hover:text-white">
+                <NavLink to="/menu" onClick={() => setToggleMenu(false)}>
+                  Menu
+                </NavLink>
+                <img
+                  src={images.spoon}
+                  alt="spoon underline"
+                  className="h-[10px] w-24 mx-auto"
+                />
               </li>
-              <li className="font-CormorantUpright m-4 cursor-pointer text-primary-golden text-4xl text-center hover:text-primary-white">
-                <NavLink to="/dinnershow" onClick={() => setToggleMenu(false)}>Dinner Show</NavLink>
-                <img src={images.spoon} alt="spoon underline" className="h-[10px] w-24 mx-auto" />
+              <li className="font-CormorantUpright m-4 cursor-pointer text-golden text-4xl text-center hover:text-white">
+                <NavLink to="/dinnershow" onClick={() => setToggleMenu(false)}>
+                  Dinner Show
+                </NavLink>
+                <img
+                  src={images.spoon}
+                  alt="spoon underline"
+                  className="h-[10px] w-24 mx-auto"
+                />
               </li>
-              <li className="font-CormorantUpright m-4 cursor-pointer text-primary-golden text-4xl text-center hover:text-primary-white">
-                <NavLink to="/gallery" onClick={() => setToggleMenu(false)}>Gallery</NavLink>
-                <img src={images.spoon} alt="spoon underline" className="h-[10px] w-24 mx-auto" />
+              <li className="font-CormorantUpright m-4 cursor-pointer text-golden text-4xl text-center hover:text-white">
+                <NavLink to="/gallery" onClick={() => setToggleMenu(false)}>
+                  Gallery
+                </NavLink>
+                <img
+                  src={images.spoon}
+                  alt="spoon underline"
+                  className="h-[10px] w-24 mx-auto"
+                />
               </li>
-              <li className="font-CormorantUpright m-4 cursor-pointer text-primary-golden text-4xl text-center hover:text-primary-white">
-                <NavLink to="/contact" onClick={() => setToggleMenu(false)}>Contact</NavLink>
-                <img src={images.spoon} alt="spoon underline" className="h-[10px] w-24 mx-auto" />
+              <li className="font-CormorantUpright m-4 cursor-pointer text-golden text-4xl text-center hover:text-white">
+                <NavLink to="/contact" onClick={() => setToggleMenu(false)}>
+                  Contact
+                </NavLink>
+                <img
+                  src={images.spoon}
+                  alt="spoon underline"
+                  className="h-[10px] w-24 mx-auto"
+                />
               </li>
             </ul>
           </div>
