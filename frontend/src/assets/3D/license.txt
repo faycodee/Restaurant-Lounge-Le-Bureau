@@ -1,0 +1,11 @@
+Model Information:
+* title:	Cleaver - Butcher's Best Friend
+* source:	https://sketchfab.com/3d-models/cleaver-butchers-best-friend-8b3a394b1e6741e187e15b8dc5075b54
+* author:	3dsofsan (https://sketchfab.com/3dsofsan)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Cleaver - Butcher's Best Friend" (https://sketchfab.com/3d-models/cleaver-butchers-best-friend-8b3a394b1e6741e187e15b8dc5075b54) by 3dsofsan (https://sketchfab.com/3dsofsan) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
