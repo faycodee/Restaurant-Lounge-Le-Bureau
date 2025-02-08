@@ -2,10 +2,10 @@ import React, { useState, useRef } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { MdOutlineRestaurantMenu } from "react-icons/md";
 import { gsap } from "gsap";
-// import images from "../../constants/images";
-// import "./Navbar.css";
-// import AudioPlayer from "./audio";
-// import LanguageSwitcher from "./LanguageSwitcher";
+import images from "../../constants/images";
+import "./Navbar.css";
+import AudioPlayer from "./audio";
+import LanguageSwitcher from "./LanguageSwitcher";
 import { useTranslation } from "react-i18next";
 const Navbar = () => {
   const [t, i18n] = useTranslation();
@@ -39,11 +39,11 @@ const Navbar = () => {
   return (
     <nav className="z-nav fixed w-full flex justify-between my-3 items-center text-primary-white h-[50px] bg-transparent backdrop-blur-2xl sm:px-8 sm:py-4 p-4">
       <div className="flex justify-start items-center">
-        {/* <img
+        <img
           src={images.logo}
           alt="app logo"
           className="h-auto w-[50px] max-md:w-[50px] 2xl:w-52"
-        /> */}
+        />
       </div>
       <ul className="lg:flex hidden justify-center items-center flex-1 duration-300 gap-2">
         {/* <li className="text-primary-white my-0 mx-1 duration-150 cursor-pointer hover:text-primary-gray ">
@@ -66,8 +66,8 @@ const Navbar = () => {
         </li>
       </ul>
       <div className="sm:flex hidden justify-end items-center">
-        {/* <AudioPlayer /> */}
-        {/* <LanguageSwitcher /> */}
+        <AudioPlayer />
+        <LanguageSwitcher />
         
       </div>
       {/*================ Mobile Navigation ================*/}
