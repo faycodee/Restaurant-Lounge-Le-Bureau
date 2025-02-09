@@ -3,12 +3,14 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 // import './i18n';
 import "./App.css";
 import { Home, Navbar ,About } from "./components";
+import DarkLightToggle from "./components/darkLight";
 
 const App = () => (
   <BrowserRouter>
-    <div>
       <Navbar />
+    <div>
       <div>
+      <DarkLightToggle />
         <Home/>
         <About/>
         {/* <Route path="#home" component={} /> */}

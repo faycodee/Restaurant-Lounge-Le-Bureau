@@ -15,37 +15,62 @@ export default function OverviewSection() {
     gsap.fromTo(
       introRef.current,
       { opacity: 0, y: 10 },
-      { opacity: 1, y: 0, duration: 5, ease: "power1.out" }
+      {
+        opacity: 1,
+        y: 0,
+        duration: 2,
+        delay: 1,
+        scrollTrigger: {
+          trigger: para.current,
+          start: "top 80%",
+          end: "bottom 30%",
+          scrub: true,
+          // toggleActions: "play none none reverse",
+        },
+        ease: "power1.out",
+      }
     );
     gsap.fromTo(
       para.current,
       { opacity: 0, y: -5 },
-      { opacity: 1, y: 0, duration: 5, ease: "power1.inOut" }
-    );
-
-    gsap.fromTo(
-      introRef.current.querySelector("h1"),
       {
-        scale: 1,
-        opacity: 0,
-        color: "white", // initial color
-      },
-      {
-        scale: 1.2,
-        opacity: 4,
-        color: "#FF4500",
-        duration: 5,
-        delay: 2,
-        ease: "power1.out",
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power1.inOut",
         scrollTrigger: {
-          trigger: introRef.current,
+          trigger: para.current,
           start: "top 80%",
           end: "bottom 30%",
           scrub: true,
-          toggleActions: "play none none reverse",
+          // toggleActions: "play none none reverse",
         },
       }
     );
+
+    // gsap.fromTo(
+    //   introRef.current.querySelector("h1"),
+    //   {
+    //     scale: 1,
+    //     opacity: 0,
+    //     color: "white", // initial color
+    //   },
+    //   {
+    //     scale: 1.2,
+    //     opacity: 4,
+    //     color: "#FF4500",
+    //     duration: 5,
+    //     delay: 2,
+    //     ease: "power1.out",
+    //     scrollTrigger: {
+    //       trigger: introRef.current,
+    //       start: "top 80%",
+    //       end: "bottom 30%",
+    //       scrub: true,
+    //       toggleActions: "play none none reverse",
+    //     },
+    //   }
+    // );
 
     cardRefs.current.forEach((card, index) => {
       gsap.fromTo(
@@ -69,7 +94,7 @@ export default function OverviewSection() {
 
   return (
     <section className="py-16 px-8 bg-backgroundLight  h-[100vh]">
-      <div ref={introRef} className="text-center mb-12">
+      <div ref={introRef} className="text-center mb-12 text-primary">
         <h1 className="text-[90px] font-bold mb-[80px]"> {t("about.1")}</h1>
         <p ref={para} className="text-sm text-gray-600 max-w-3xl mx-auto">
           {t("about.2")}
@@ -90,9 +115,7 @@ export default function OverviewSection() {
             <div className="text-4xl mb-4">
               <img src={item.icon} />
             </div>
-            <p className="font-thin text-[9px] text-paragraph">
-              {item.title}
-            </p>
+            <p className="font-thin text-[9px] text-paragraph">{item.title}</p>
           </div>
         ))}
       </div>

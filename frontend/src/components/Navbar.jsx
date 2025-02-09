@@ -4,6 +4,7 @@ import { MdOutlineRestaurantMenu } from "react-icons/md";
 import { gsap } from "gsap";
 import images from "../constants/images";
 import AudioPlayer from "./audio";
+
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
@@ -94,6 +95,7 @@ const Navbar = () => {
       <div className="sm:flex hidden justify-end items-center">
         <AudioPlayer />
         <LanguageSwitcher />
+     
       </div>
 
       <div className="flex lg:hidden">
