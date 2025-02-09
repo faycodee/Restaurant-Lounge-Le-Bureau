@@ -68,7 +68,7 @@ export default function OverviewSection() {
   }, []);
 
   return (
-    <section className="py-16 px-8 bg-gray-50 h-[100vh]">
+    <section className="py-16 px-8 bg-backgroundLight  h-[100vh]">
       <div ref={introRef} className="text-center mb-12">
         <h1 className="text-[90px] font-bold mb-[80px]"> {t("about.1")}</h1>
         <p ref={para} className="text-sm text-gray-600 max-w-3xl mx-auto">
