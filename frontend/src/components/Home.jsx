@@ -198,6 +198,7 @@ const Home = () => {
 
           <h1
             id="textt"
+            // style={{color:"#ffcb6a"}}
             className="headtext__cormorant_header font-bold sticky z-40 top-[200px] left-7 max-md:text-[100px]"
           >
             {t("header.6")}
@@ -244,7 +245,7 @@ const Letter = React.memo(({ letter }) => {
     <div
       className="text "
       style={{
-        color: "rgb(255, 254, 240)",
+        color: "#E0E0E0",
         fontSize: 20,
         fontFamily: "cursive",
       }}

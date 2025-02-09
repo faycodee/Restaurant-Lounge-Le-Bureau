@@ -8,13 +8,19 @@ gsap.registerPlugin(ScrollTrigger);
 export default function OverviewSection() {
   const introRef = useRef(null);
   const cardRefs = useRef([]);
+  const para = useRef(null);
   const [t, i18n] = useTranslation();
 
   useEffect(() => {
     gsap.fromTo(
       introRef.current,
-      { opacity: 0, y: 30 },
+      { opacity: 0, y: 10 },
       { opacity: 1, y: 0, duration: 5, ease: "power1.out" }
+    );
+    gsap.fromTo(
+      para.current,
+      { opacity: 0, y: -5 },
+      { opacity: 1, y: 0, duration: 5, ease: "power1.inOut" }
     );
 
     gsap.fromTo(
@@ -27,7 +33,7 @@ export default function OverviewSection() {
       {
         scale: 1.2,
         opacity: 4,
-        color: "#ffe23d", // color change when scrolling
+        color: "#FF4500",
         duration: 5,
         delay: 2,
         ease: "power1.out",
@@ -64,8 +70,8 @@ export default function OverviewSection() {
   return (
     <section className="py-16 px-8 bg-gray-50 h-[100vh]">
       <div ref={introRef} className="text-center mb-12">
-        <h1 className="text-[70px] font-bold mb-[80px]"> {t("about.1")}</h1>
-        <p className="text-sm text-gray-600 max-w-3xl mx-auto">
+        <h1 className="text-[90px] font-bold mb-[80px]"> {t("about.1")}</h1>
+        <p ref={para} className="text-sm text-gray-600 max-w-3xl mx-auto">
           {t("about.2")}
         </p>
       </div>
@@ -79,12 +85,14 @@ export default function OverviewSection() {
           <div
             key={index}
             ref={(el) => (cardRefs.current[index] = el)}
-            className="p-6 bg-gray-900 text-white rounded-2xl shadow-lg flex flex-col items-center text-center transform transition-transform duration-300 hover:scale-102"
+            className="p-6 bg-backgroundDark  text-white rounded-2xl shadow-lg flex flex-col items-center text-center transform transition-transform duration-300 hover:scale-102"
           >
             <div className="text-4xl mb-4">
               <img src={item.icon} />
             </div>
-            <h3 className="text-sm font-semibold">{item.title}</h3>
+            <p className="font-thin text-[9px] text-paragraph">
+              {item.title}
+            </p>
           </div>
         ))}
       </div>

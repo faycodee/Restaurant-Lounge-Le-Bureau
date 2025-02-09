@@ -76,6 +76,7 @@ a {
 body {
   width: 100dvw;
   overflow-x: hidden;
+  /* background-color: #ffcb6a; */
   background-color: #ffe23d;
   font-family: "General Sans", sans-serif;
 }
