@@ -1,6 +1,6 @@
-import Home from './Home';
-import Navbar from './Navbar';
-// import AboutUs from './AboutUs/AboutUs';
+import Home from "./Home";
+import Navbar from "./Navbar";
+import About from "./About";
 // import Chef from './Chef/Chef';
 // import FindUs from './Findus/FindUs';
 // import Footer from './Footer/Footer';
@@ -10,9 +10,9 @@ import Navbar from './Navbar';
 // import SpecialMenu from './Menu/SpecialMenu';
 
 export {
-  Home ,
-  Navbar
-  // AboutUs,
+  Home,
+  Navbar,
+  About,
   // Chef,
   // FindUs,
   // Footer,

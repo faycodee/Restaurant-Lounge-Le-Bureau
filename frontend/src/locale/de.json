@@ -1,17 +1,24 @@
 {
-    "nav": {
-      "1": "ÜberUns",
-      "2": "Speisekarte",
-      "3": "Abendshow",
-      "4": "Galerie",
-      "5": "Kontakt"
-    },
-    "header": {
-      "t1": "Willkommen in unserem Restaurant!",
-      "t2": "Erfrischende Getränke werden hier serviert!",
-      "t3": "Unsere Köche erschaffen Perfektion!",
-      "t4": "Unsere Gerichte schmecken fantastisch!",
-      "5": "Tisch reservieren",
-      "6": "Lounge Le Bureau"
-    }
+  "nav": {
+    "1": "ÜberUns",
+    "2": "Speisekarte",
+    "3": "Abendshow",
+    "4": "Galerie",
+    "5": "Kontakt"
+  },
+  "header": {
+    "t1": "Willkommen in unserem Restaurant!",
+    "t2": "Erfrischende Getränke werden hier serviert!",
+    "t3": "Unsere Köche erschaffen Perfektion!",
+    "t4": "Unsere Gerichte schmecken fantastisch!",
+    "5": "Tisch reservieren",
+    "6": "Lounge Le Bureau"
+  },
+  "about": {
+    "1": "Unsere Geschichte",
+    "2": "Das Restaurant Lounge Le Bureau in Fès, Marokko, bietet eine raffinierte Küche, die lokale und saisonale Zutaten in den Vordergrund stellt. Unter der Leitung eines leidenschaftlichen Küchenchefs bietet das Restaurant ein einzigartiges gastronomisches Erlebnis in einem eleganten und intimen Ambiente, mit besonderer Aufmerksamkeit für jeden Gast, um jedes Mahl unvergesslich zu machen.",
+    "3": "Wir bemühen uns, die Produkte mit viel Sorgfalt und Präzision zu respektieren.",
+    "4": "Genießen Sie die Großzügigkeit und Einfallsreichtum des Sternekochs.",
+    "5": "Entdecken Sie unser Restaurant, das eine große Auswahl an hochwertigen Weinen anbietet."
   }
+}

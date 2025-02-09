@@ -39,7 +39,7 @@ const Navbar = () => {
 
   return (
     <nav
-      style={{ position: "absolute", zIndex: 100 }}
+      style={{ position: "fixed", zIndex: 100 }}
       className="z-nav fixed w-full flex justify-between my-3 items-center text-white h-[50px] bg-transparent backdrop-blur-2xl sm:px-8 sm:py-4 p-4"
     >
       <div className="flex justify-start items-center">
@@ -52,7 +52,7 @@ const Navbar = () => {
       <ul className="lg:flex hidden justify-center items-center flex-1 duration-300 gap-2">
         <li className="">
           <NavLink
-            className="text-white my-0 mx-1 duration-150 cursor-pointer font-mono hover:text-gray-400"
+            className="text-gray-500 my-0 mx-1 duration-150 cursor-pointer font-mono hover:text-gray-200"
             to="#about"
           >
             {t("nav.1")}
@@ -60,7 +60,7 @@ const Navbar = () => {
         </li>
         <li className="">
           <NavLink
-            className="text-white my-0 mx-1 duration-150 cursor-pointer font-mono hover:text-gray-400"
+            className="text-gray-500 my-0 mx-1 duration-150 cursor-pointer font-mono hover:text-gray-200"
             to="#menu"
           >
             {t("nav.2")}
@@ -68,7 +68,7 @@ const Navbar = () => {
         </li>
         <li className="">
           <NavLink
-            className="text-white my-0 mx-1 duration-150 cursor-pointer font-mono hover:text-gray-400"
+            className="text-gray-500 my-0 mx-1 duration-150 cursor-pointer font-mono hover:text-gray-200"
             to="#dinnershow"
           >
             {t("nav.3")}
@@ -76,7 +76,7 @@ const Navbar = () => {
         </li>
         <li className="">
           <NavLink
-            className="text-white my-0 mx-1 duration-150 cursor-pointer font-mono hover:text-gray-400"
+            className="text-gray-500 my-0 mx-1 duration-150 cursor-pointer font-mono hover:text-gray-200"
             to="#gallery"
           >
             {t("nav.4")}
@@ -84,7 +84,7 @@ const Navbar = () => {
         </li>
         <li className="">
           <NavLink
-            className="text-white my-0 mx-1 duration-150 cursor-pointer font-mono hover:text-gray-400"
+            className="text-gray-500 my-0 mx-1 duration-150 cursor-pointer font-mono hover:text-gray-200"
             to="#contact"
           >
             {t("nav.5")}
