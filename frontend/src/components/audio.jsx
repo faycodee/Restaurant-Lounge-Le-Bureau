@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { MdOutlineMusicNote } from "react-icons/md";
 import { MdOutlineMusicOff } from "react-icons/md";
-
+import images from "../constants/images";
 const AudioPlayer = () => {
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -44,7 +44,7 @@ const AudioPlayer = () => {
         </button>
       )}
 
-      <audio ref={audioRef} src="/videos/music.mp3" loop  />
+      <audio ref={audioRef} src={images.musi} loop  />
     </div>
   );
 };

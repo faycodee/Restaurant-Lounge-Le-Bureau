@@ -16,8 +16,10 @@ import aboutBild from "../assets/AboutBild.png";
 import icon1 from "../assets/icons/icon1.png";
 import icon2 from "../assets/icons/icon2.png";
 import icon3 from "../assets/icons/icon3.png";
+import musi from "../assets/music.mp3";
 
 export default {
+  musi,
   icon1,
   icon2,
   icon3,
