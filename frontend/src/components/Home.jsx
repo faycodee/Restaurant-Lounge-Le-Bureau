@@ -7,12 +7,70 @@ import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 
 gsap.registerPlugin(ScrollTrigger);
-const totalVideos = 4;
+
+const totalVideos = 3;
+
 const Home = () => {
   const Mode = useSelector((state) => state.lightdark.mode);
-
   const buttonRef = useRef(null);
   const [t, i18n] = useTranslation();
+  const nextVidRef = useRef(null);
+
+  // Preloaded videos state
+  const [preloadedVideos, setPreloadedVideos] = useState({});
+  const [curIndex, setCurIndex] = useState(1);
+  const [hasClicked, setHasClicked] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [curHeaderText, setHeaderText] = useState(t("header.t1"));
+
+  // Refs and calculations
+  const nextIndex = (curIndex % totalVideos) + 1;
+  
+  // Video source helper
+  const getSrc = (i) => `./videos/${i}.mp4`;
+
+  // Preload videos on component mount
+  useEffect(() => {
+    const preloadVideos = async () => {
+      const videoPromises = Array.from({ length: totalVideos }, (_, i) => {
+        const index = i + 1;
+        return new Promise((resolve) => {
+          const video = document.createElement('video');
+          video.src = getSrc(index);
+          video.preload = 'auto';
+          video.oncanplaythrough = () => {
+            setPreloadedVideos(prev => ({
+              ...prev,
+              [index]: video
+            }));
+            resolve();
+          };
+        });
+      });
+      await Promise.all(videoPromises);
+    };
+
+    preloadVideos();
+  }, []);
+
+  // Loading state management
+  useEffect(() => {
+    const loadingTimeout = setTimeout(() => {
+      if (Object.keys(preloadedVideos).length >= totalVideos - 1) {
+        setIsLoading(false);
+        document.body.style.overflow = 'auto';
+      }
+    }, 2000);
+
+    return () => clearTimeout(loadingTimeout);
+  }, [preloadedVideos]);
+
+  // Header text update
+  useEffect(() => {
+    setHeaderText(t("header.t1"));
+  }, [t("header.t1")]);
+
+  // Mouse interaction animations
   const handleMouseEnter = () => {
     gsap.to(buttonRef.current, {
       backgroundColor: "transparent",
@@ -27,36 +85,35 @@ const Home = () => {
 
   const handleMouseLeave = () => {
     gsap.to(buttonRef.current, {
-      backgroundColor: "#FF6347", // Light background
-      color: "#fff", // Dark text color
-      scale: 1, // Reset scale
-      rotation: 0, // Reset rotation
-      skewX: 0, // Reset skew
+      backgroundColor: "#FF6347",
+      color: "#fff",
+      scale: 1,
+      rotation: 0,
+      skewX: 0,
       duration: 0.3,
       ease: "power2.out",
     });
   };
 
-  const [curIndex, setCurIndex] = useState(1);
+  // Video change handler
+  const handleMiniVdClick = useCallback(() => {
+    setHasClicked(true);
+    setCurIndex(nextIndex);
+    setHeaderText(getHeaderText(nextIndex));
+  }, [nextIndex]);
 
-  const [hasClicked, setHasClicked] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [loadedVideos, setLoadedVideos] = useState(0);
-  const nextVidRef = useRef(null);
-  const nextIndex = (curIndex % totalVideos) + 1;
-  const [fiveSecend, setfiveSecend] = useState(false);
-  setTimeout(() => setfiveSecend(true), 2000);
-  const getSrc = (i) => `./videos/${i}.mp4`;
-  useEffect(() => {
-    if (loadedVideos == totalVideos - 2 && fiveSecend) {
-      setIsLoading(false);
-    }
-  }, [loadedVideos, fiveSecend]);
-  const [curHeaderText, setHeaderText] = useState(t("header.t1"));
-  useEffect(() => {
-    setHeaderText(t("header.t1"));
-  }, [t("header.t1")]);
+  // Get header text based on index
+  const getHeaderText = (index) => {
+    const texts = [
+      t("header.t1"),
+      t("header.t2"),
+      t("header.t3"),
+      t("header.t4"),
+    ];
+    return texts[index - 1] || texts[0];
+  };
 
+  // GSAP Animations
   useGSAP(
     () => {
       if (hasClicked) {
@@ -101,6 +158,8 @@ const Home = () => {
     },
     { dependencies: [curIndex], revertOnUpdate: true }
   );
+
+  // Scroll trigger animation
   useGSAP(() => {
     gsap.set("#video-frame", {
       clipPath: "polygon(50% 0, 50% 0, 50% 100%, 50% 100%)",
@@ -118,45 +177,37 @@ const Home = () => {
       },
     });
   });
-  const handelVidLoad = () => {
-    setLoadedVideos((prev) => prev + 1);
-  };
-  const handleMiniVdClick = useCallback(() => {
-    setHasClicked(true);
-    setCurIndex(nextIndex);
-    setHeaderText(getHeaderText(nextIndex));
-  }, [nextIndex]);
 
-  const getHeaderText = (index) => {
-    const texts = [
-      t("header.t1"),
-      t("header.t2"),
-      t("header.t3"),
-      t("header.t4"),
-    ];
-    return texts[index - 1] || texts[0];
-  };
-  // {isLoading ? (
-  //         <div
-  //           style={{ backgroundColor: "#DCCA87" }}
-  //           className="flex-center absolute z-[100] h-dvh w-screen overflow-hidden "
-  //         >
-  //           {/* <div className="three-body"> */}
-  //           <img src="./food2.gif" alt="" className="w-[260px]" />
-  //           {/* </div> */}
-  //         </div>
-  //       ) : (
-  //         ""
-  //       )}
+  // Memoized Letter component
+  const Letter = React.memo(({ letter }) => (
+    <div
+      className="text font-mono"
+      style={{
+        color: "#E0E0E0",
+        fontSize: 20,
+      }}
+    >
+      {letter === " " ? "\u00A0" : letter}
+    </div>
+  ));
+
   return (
     <>
-
+      {isLoading && (
+        <div
+          style={{ backgroundColor: "#1B1D21" }}
+          className="flex-center absolute z-[100] h-dvh w-screen overflow-hidden"
+        >
+          <img src={images.loader} alt="" className="w-[360px]" />
+        </div>
+      )}
       <div
         style={{
-          backgroundImage: `url(${Mode==="light"?images.welc:images.darkwelc})`,
-          backgroundPosition: "",
+          backgroundImage: `url(${
+            Mode === "light" ? images.welc : images.darkwelc
+          })`,
         }}
-        className="relative  h-[100vh] w-[100vw] overflow-hidden"
+        className="relative h-[100vh] w-[100vw] overflow-hidden"
       >
         <div
           id="video-frame"
@@ -173,7 +224,6 @@ const Home = () => {
                 loop
                 muted
                 id="current-video"
-                onLoadedData={handelVidLoad}
                 className="size-64 origin-center scale-150 object-cover object-center"
               />
             </div>
@@ -183,7 +233,6 @@ const Home = () => {
             src={getSrc(curIndex)}
             loop
             muted
-            onLoadedData={handelVidLoad}
             id="next-video"
             className="absolute-center invisible absolute size-64 z-20 object-cover object-center"
           />
@@ -193,22 +242,20 @@ const Home = () => {
             autoPlay
             muted
             id="next-video-bg"
-            onLoadedData={handelVidLoad}
             className="absolute left-0 top-0 size-full object-cover object-center"
           />
           <div className="absolute-center absolute " style={{ zIndex: 40 }}>
-            <img src={images.mause} width="200px" />
+            <img src={images.mause} width="200px" alt="Mouse" />
           </div>
 
           <h1
             id="textt"
-            // style={{color:"#ffcb6a"}}
             className="headtext__cormorant_header font-bold sticky z-40 top-[200px] left-7 max-md:text-[100px]"
           >
             {t("header.6")}
           </h1>
 
-          <div className="wrapper  ">
+          <div className="wrapper">
             <div className="words mb-4 absolute top-[330px] h-[60px] w-full overflow-hidden left-7 z-40 flex">
               {curHeaderText.split("").map((letter, index) => (
                 <Letter key={index} letter={letter} />
@@ -232,7 +279,7 @@ const Home = () => {
                   cursor: "pointer",
                   borderRadius: "5px",
                   fontFamily: "cursive",
-                  transition: "all 0.3s ease", // Smooth transition for non-GSAP properties
+                  transition: "all 0.3s ease",
                 }}
               >
                 {t("header.5")}
@@ -244,19 +291,5 @@ const Home = () => {
     </>
   );
 };
-const Letter = React.memo(({ letter }) => {
-  return (
-    <div
-      className="text  font-mono"
-      style={{
-        color: "#E0E0E0",
-        fontSize: 20,
-        // fontFamily: "cursive",
-      }}
-    >
-      {letter === " " ? "\u00A0" : letter}
-    </div>
-  );
-});
 
 export default Home;

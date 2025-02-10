@@ -53,7 +53,8 @@ const Navbar = () => {
       <ul className="lg:flex hidden justify-center items-center flex-1 duration-300 gap-2">
         <li className="">
           <NavLink
-            className="text-gray-300 my-0 mx-1 duration-150 cursor-pointer p-1 font-mono hover:outline-dashed  outline-slate-700"
+            className="text-gray-300 my-0 mx-1 duration-150 cursor-pointer p-1 font-mono hover:outline-dashed  outline-slate-700 
+            hover:text-slate-700"
             to="#about"
           >
             {t("nav.1")}
@@ -61,7 +62,8 @@ const Navbar = () => {
         </li>
         <li className="">
           <NavLink
-            className="text-gray-300 my-0 mx-1 duration-150 cursor-pointer p-1 font-mono hover:outline-dashed  outline-slate-700"
+            className="text-gray-300 my-0 mx-1 duration-150 cursor-pointer p-1 font-mono hover:outline-dashed  outline-slate-700 
+            hover:text-slate-700"
             to="#menu"
           >
             {t("nav.2")}
@@ -69,7 +71,8 @@ const Navbar = () => {
         </li>
         <li className="">
           <NavLink
-            className="text-gray-300 my-0 mx-1 duration-150 cursor-pointer p-1 font-mono hover:outline-dashed  outline-slate-700"
+            className="text-gray-300 my-0 mx-1 duration-150 cursor-pointer p-1 font-mono hover:outline-dashed  outline-slate-700 
+            hover:text-slate-700"
             to="#dinnershow"
           >
             {t("nav.3")}
@@ -77,7 +80,8 @@ const Navbar = () => {
         </li>
         <li className="">
           <NavLink
-            className="text-gray-300 my-0 mx-1 duration-150 cursor-pointer p-1 font-mono hover:outline-dashed  outline-slate-700"
+            className="text-gray-300 my-0 mx-1 duration-150 cursor-pointer p-1 font-mono hover:outline-dashed  outline-slate-700 
+            hover:text-slate-700"
             to="#gallery"
           >
             {t("nav.4")}
@@ -85,7 +89,8 @@ const Navbar = () => {
         </li>
         <li className="">
           <NavLink
-            className="text-gray-300 my-0 mx-1 duration-150 cursor-pointer p-1 font-mono hover:outline-dashed  outline-slate-700"
+            className="text-gray-300 my-0 mx-1 duration-150 cursor-pointer p-1 font-mono hover:outline-dashed  outline-slate-700 
+            hover:text-slate-700"
             to="#contact"
           >
             {t("nav.5")}
