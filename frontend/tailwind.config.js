@@ -11,8 +11,6 @@ export default {
         background: "#F5F5F5", // Light background
         backgroundCard: "#f5f5f5af", // Light background
         accentBright: "#FF6347", // Bright accent
-
-
         // Dark Mode with same hues but adjusted contrast
         darkPrimary: "#FF5733", // Slightly less vibrant for readability
         darkParagraph: "#CFCFCF", // Softer light text for dark backgrounds
@@ -22,6 +20,9 @@ export default {
         darkAccentBright: "#FF7155", // Gentle bright accent for dark mode
 
       },
+      rotate: {
+        '-3': '-3deg',
+      }
     },
   },
   plugins: [],

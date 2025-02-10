@@ -60,7 +60,7 @@ a {
 }
 
 ::-webkit-scrollbar-thumb {
-  color: ;
+
   background-color: rgba(206, 206, 206, 0.664);
   border-radius: 6px;
 }
@@ -72,8 +72,6 @@ a {
 body {
   width: 100dvw;
   overflow-x: hidden;
-  /* background-color: #ffcb6a; */
-  background-color: #ffe23d;
   font-family: "General Sans", sans-serif;
 }
 

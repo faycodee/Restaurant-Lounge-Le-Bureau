@@ -4,6 +4,8 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import "./App.css";
 import { Home, Navbar ,About } from "./components";
 import DarkLightToggle from "./components/darkLight";
+import MarqueeComponent from "./components/Marquee";
+import CustomCursor from "./components/cursor";
 
 const App = () => (
   <BrowserRouter>
@@ -11,7 +13,9 @@ const App = () => (
     <div>
       <div>
       <DarkLightToggle />
+      <CustomCursor />
         <Home/>
+        <MarqueeComponent/>
         <About/>
         {/* <Route path="#home" component={} /> */}
         {/* <Route path="#section2" component={Section2} />

@@ -21,8 +21,10 @@ import dicon1 from "../assets/icons/darkicon1.png";
 import dicon2 from "../assets/icons/darkicon2.png";
 import dicon3 from "../assets/icons/darkicon3.png";
 import musi from "../assets/music.mp3";
+import paper from "../assets/bg/paper.png";
 
 export default {
+  paper ,
   musi,
   icon1,
   icon2,
