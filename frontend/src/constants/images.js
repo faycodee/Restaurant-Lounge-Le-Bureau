@@ -1,5 +1,6 @@
 import bg from "../assets/bg/bg.png";
 import welc from "../assets/bg/wel2.jpg";
+import darkwelc from "../assets/bg/darkwel2.jpg";
 import chef from "../assets/chef.png";
 import knife from "../assets/icons/knife.png";
 import menu from "../assets/menu.png";
@@ -33,6 +34,7 @@ export default {
   spoon,
   welcome,
   mause,
+  darkwelc,
   laurels,
   welc,
   sign,

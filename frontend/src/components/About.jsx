@@ -3,6 +3,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useTranslation } from "react-i18next";
 import images from "../constants/images";
+import { useSelector } from "react-redux";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function OverviewSection() {
@@ -10,6 +11,16 @@ export default function OverviewSection() {
   const cardRefs = useRef([]);
   const para = useRef(null);
   const [t, i18n] = useTranslation();
+  const isDarkMode = useSelector((state) => state.lightdark.mode);
+
+  useEffect(() => {
+    if (isDarkMode === "light") {
+      document.documentElement.classList.remove("dark");
+    }
+    if (isDarkMode === "dark") {
+      document.documentElement.classList.add("dark");
+    }
+  }, [isDarkMode]);
 
   useEffect(() => {
     gsap.fromTo(
@@ -48,30 +59,6 @@ export default function OverviewSection() {
       }
     );
 
-    // gsap.fromTo(
-    //   introRef.current.querySelector("h1"),
-    //   {
-    //     scale: 1,
-    //     opacity: 0,
-    //     color: "white", // initial color
-    //   },
-    //   {
-    //     scale: 1.2,
-    //     opacity: 4,
-    //     color: "#FF4500",
-    //     duration: 5,
-    //     delay: 2,
-    //     ease: "power1.out",
-    //     scrollTrigger: {
-    //       trigger: introRef.current,
-    //       start: "top 80%",
-    //       end: "bottom 30%",
-    //       scrub: true,
-    //       toggleActions: "play none none reverse",
-    //     },
-    //   }
-    // );
-
     cardRefs.current.forEach((card, index) => {
       gsap.fromTo(
         card,
@@ -93,10 +80,16 @@ export default function OverviewSection() {
   }, []);
 
   return (
-    <section className="py-16 px-8 bg-backgroundLight  h-[100vh]">
-      <div ref={introRef} className="text-center mb-12 text-primary">
+    <section className="py-16 px-8 bg-background dark:bg-darkBackground y  h-[100vh]">
+      <div
+        ref={introRef}
+        className="text-center mb-12 text-primary dark:text-darkPrimary"
+      >
         <h1 className="text-[90px] font-bold mb-[80px]"> {t("about.1")}</h1>
-        <p ref={para} className="text-sm text-gray-600 max-w-3xl mx-auto">
+        <p
+          ref={para}
+          className="text-sm text-gray-600 dark:text-gray-300 max-w-3xl mx-auto"
+        >
           {t("about.2")}
         </p>
       </div>
@@ -110,12 +103,14 @@ export default function OverviewSection() {
           <div
             key={index}
             ref={(el) => (cardRefs.current[index] = el)}
-            className="p-6 bg-backgroundDark  text-white rounded-2xl shadow-lg flex flex-col items-center text-center transform transition-transform duration-300 hover:scale-102"
+            className="p-6 bg-darkBackground  dark:bg-backgroundCard text-white rounded-2xl shadow-lg flex flex-col items-center text-center transform transition-transform duration-300 hover:scale-102"
           >
             <div className="text-4xl mb-4">
               <img src={item.icon} />
             </div>
-            <p className="font-thin text-[9px] text-paragraph">{item.title}</p>
+            <p className="font-thin text-[9px] text-paragraph dark:text-darkBackground">
+              {item.title}
+            </p>
           </div>
         ))}
       </div>

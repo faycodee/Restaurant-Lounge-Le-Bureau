@@ -33,7 +33,7 @@ const AudioPlayer = () => {
   };
 
   return (
-    <div className="sm:flex hidden justify-end items-center  px-4 py-2  text-white rounded-full hover:bg-gray-800 transition-all duration-200">
+    <div className="sm:flex hidden justify-end items-center  px-4 py-2  text-white bg-gray-600 rounded-full hover:bg-gray-800 transition-all duration-200">
       {isPlaying ? (
         <button onClick={handlePause} className="text-white text-[20px]">
           <MdOutlineMusicNote />

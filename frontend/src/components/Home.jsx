@@ -4,9 +4,13 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+
 gsap.registerPlugin(ScrollTrigger);
 const totalVideos = 4;
 const Home = () => {
+  const Mode = useSelector((state) => state.lightdark.mode);
+
   const buttonRef = useRef(null);
   const [t, i18n] = useTranslation();
   const handleMouseEnter = () => {
@@ -149,7 +153,7 @@ const Home = () => {
 
       <div
         style={{
-          backgroundImage: `url(${images.welc})`,
+          backgroundImage: `url(${Mode==="light"?images.welc:images.darkwelc})`,
           backgroundPosition: "",
         }}
         className="relative  h-[100vh] w-[100vw] overflow-hidden"

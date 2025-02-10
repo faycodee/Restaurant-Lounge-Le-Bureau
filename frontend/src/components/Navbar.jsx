@@ -53,7 +53,7 @@ const Navbar = () => {
       <ul className="lg:flex hidden justify-center items-center flex-1 duration-300 gap-2">
         <li className="">
           <NavLink
-            className="text-gray-500 my-0 mx-1 duration-150 cursor-pointer font-mono hover:text-gray-200"
+            className="text-gray-300 my-0 mx-1 duration-150 cursor-pointer p-1 font-mono hover:outline-dashed  outline-slate-700"
             to="#about"
           >
             {t("nav.1")}
@@ -61,7 +61,7 @@ const Navbar = () => {
         </li>
         <li className="">
           <NavLink
-            className="text-gray-500 my-0 mx-1 duration-150 cursor-pointer font-mono hover:text-gray-200"
+            className="text-gray-300 my-0 mx-1 duration-150 cursor-pointer p-1 font-mono hover:outline-dashed  outline-slate-700"
             to="#menu"
           >
             {t("nav.2")}
@@ -69,7 +69,7 @@ const Navbar = () => {
         </li>
         <li className="">
           <NavLink
-            className="text-gray-500 my-0 mx-1 duration-150 cursor-pointer font-mono hover:text-gray-200"
+            className="text-gray-300 my-0 mx-1 duration-150 cursor-pointer p-1 font-mono hover:outline-dashed  outline-slate-700"
             to="#dinnershow"
           >
             {t("nav.3")}
@@ -77,7 +77,7 @@ const Navbar = () => {
         </li>
         <li className="">
           <NavLink
-            className="text-gray-500 my-0 mx-1 duration-150 cursor-pointer font-mono hover:text-gray-200"
+            className="text-gray-300 my-0 mx-1 duration-150 cursor-pointer p-1 font-mono hover:outline-dashed  outline-slate-700"
             to="#gallery"
           >
             {t("nav.4")}
@@ -85,7 +85,7 @@ const Navbar = () => {
         </li>
         <li className="">
           <NavLink
-            className="text-gray-500 my-0 mx-1 duration-150 cursor-pointer font-mono hover:text-gray-200"
+            className="text-gray-300 my-0 mx-1 duration-150 cursor-pointer p-1 font-mono hover:outline-dashed  outline-slate-700"
             to="#contact"
           >
             {t("nav.5")}
@@ -107,13 +107,13 @@ const Navbar = () => {
         {toggleMenu && (
           <div className="slide-bottom fixed top-0 left-0 w-full h-[400px] bg-black duration-500 flex flex-col z-10">
             <MdOutlineRestaurantMenu
-              className="text-2xl text-golden absolute top-5 right-5 cursor-pointer"
+              className="text-2xl text-golden absolute top-5 right-5 cursor-pointer p-1"
               color="#fff"
               fontSize={27}
               onClick={() => setToggleMenu(false)}
             />
             <ul className="list-none mt-4 p-6">
-              <li className="font-CormorantUpright m-4 cursor-pointer text-golden text-4xl text-center hover:text-white">
+              <li className="font-CormorantUpright m-4 cursor-pointer p-1 text-golden text-4xl text-center hover:text-white">
                 <NavLink to="/about" onClick={() => setToggleMenu(false)}>
                   About
                 </NavLink>
@@ -123,7 +123,7 @@ const Navbar = () => {
                   className="h-[10px] w-24 mx-auto"
                 />
               </li>
-              <li className="font-CormorantUpright m-4 cursor-pointer text-golden text-4xl text-center hover:text-white">
+              <li className="font-CormorantUpright m-4 cursor-pointer p-1 text-golden text-4xl text-center hover:text-white">
                 <NavLink to="/menu" onClick={() => setToggleMenu(false)}>
                   Menu
                 </NavLink>
@@ -133,7 +133,7 @@ const Navbar = () => {
                   className="h-[10px] w-24 mx-auto"
                 />
               </li>
-              <li className="font-CormorantUpright m-4 cursor-pointer text-golden text-4xl text-center hover:text-white">
+              <li className="font-CormorantUpright m-4 cursor-pointer p-1 text-golden text-4xl text-center hover:text-white">
                 <NavLink to="/dinnershow" onClick={() => setToggleMenu(false)}>
                   Dinner Show
                 </NavLink>
@@ -143,7 +143,7 @@ const Navbar = () => {
                   className="h-[10px] w-24 mx-auto"
                 />
               </li>
-              <li className="font-CormorantUpright m-4 cursor-pointer text-golden text-4xl text-center hover:text-white">
+              <li className="font-CormorantUpright m-4 cursor-pointer p-1 text-golden text-4xl text-center hover:text-white">
                 <NavLink to="/gallery" onClick={() => setToggleMenu(false)}>
                   Gallery
                 </NavLink>
@@ -153,7 +153,7 @@ const Navbar = () => {
                   className="h-[10px] w-24 mx-auto"
                 />
               </li>
-              <li className="font-CormorantUpright m-4 cursor-pointer text-golden text-4xl text-center hover:text-white">
+              <li className="font-CormorantUpright m-4 cursor-pointer p-1 text-golden text-4xl text-center hover:text-white">
                 <NavLink to="/contact" onClick={() => setToggleMenu(false)}>
                   Contact
                 </NavLink>

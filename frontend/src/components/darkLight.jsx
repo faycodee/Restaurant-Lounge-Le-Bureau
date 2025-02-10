@@ -1,34 +1,27 @@
 import React, { useEffect } from "react";
 import { FaMoon, FaSun } from "react-icons/fa";
 import { gsap } from "gsap";
-
-// const initialState = { darkMode: false };
+import { useSelector, useDispatch } from "react-redux";
+import { toggleLightDark } from "../store";
 export default function DarkLightToggle() {
-    const theme ='dark'
-//   const [state, dispatch] = useReducer(reducer, initialState);
-
-//   useEffect(() => {
-//     gsap.to("body", {
-//       backgroundColor: state.darkMode ? "#1a202c" : "#f7fafc",
-//       color: state.darkMode ? "#f7fafc" : "#1a202c",
-//       duration: 0.5,
-//     });
-//   }, [state.darkMode]);
+  const lightdark = useSelector((state) => state.lightdark);
+  const dispatch = useDispatch();
+  console.log(lightdark.mode);
 
   return (
-    <div style={{position:"fixed" ,right:50 ,top:"85vh" ,zIndex:200
-
-    }} className="flex items-center justify-center  
--7 bg-transparent">
-       <button
-        //   onClick={handleToggle}
+    <div
+      style={{ position: "fixed", right: 50, top: "85vh", zIndex: 200 }}
+      className="flex items-center justify-center  
+-7 bg-transparent"
+    >
+      <button
+        onClick={() => dispatch(toggleLightDark())}
         className="p-2 rounded-full shadow-md transition-transform transform hover:scale-110"
       >
-    
-        {theme === "dark" ? (
-            <FaMoon className="text-gray-800 w-6 h-6" />
+        {lightdark.mode === "dark" ? (
+          <FaSun className="text-yellow-400 w-6 h-6" />
         ) : (
-            <FaSun className="text-yellow-400 w-6 h-6" />
+          <FaMoon className="text-gray-800 w-6 h-6" />
         )}
       </button>
     </div>

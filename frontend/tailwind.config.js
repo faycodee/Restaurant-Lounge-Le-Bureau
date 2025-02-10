@@ -1,18 +1,26 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: "class",
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
-      // bghit l3aks dyal had  color for dark
       colors: {
-        primary: "#FF4500", // Vibrant Orange-Red for large titles
-        secondary: "#FFD700", // Gold for key highlights
-        paragraph: "#E0E0E0", // Light Gray for small paragraphs
-        subtle: "#B0B0B0", // Soft Silver for subtle text
-        backgroundDark: "#1A1A1A", // Charcoal Black for dark background cards
-        backgroundLight: "#F5F5F5", // Off-White for light background cards
-        accentBright: "#FF6347", // Tomato Red for buttons and links
-        accentSubtle: "#FFA500", // Soft Orange for gentle highlights
+        primary: "#FF4500", // Light mode vibrant orange-red
+        paragraph: "#E0E0E0", // Light paragraph text
+        subtle: "#B0B0B0", // Light subtle text
+        background: "#F5F5F5", // Light background
+        backgroundCard: "#f5f5f5af", // Light background
+        accentBright: "#FF6347", // Bright accent
+
+
+        // Dark Mode with same hues but adjusted contrast
+        darkPrimary: "#FF5733", // Slightly less vibrant for readability
+        darkParagraph: "#CFCFCF", // Softer light text for dark backgrounds
+        darkSubtle: "#A6A6A6", // Matching subtle contrast in dark mode
+        darkBackground: "#1A1A1A", // Classic dark background
+        darkBackgroundCard: "#1A1A1A", // Classic dark background
+        darkAccentBright: "#FF7155", // Gentle bright accent for dark mode
+
       },
     },
   },
