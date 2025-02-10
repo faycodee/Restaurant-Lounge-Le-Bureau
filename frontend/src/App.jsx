@@ -11,7 +11,7 @@ const App = () => (
   <BrowserRouter>
       <Navbar />
     <div>
-      <div>
+      <div className=" ">
       <DarkLightToggle />
       <CustomCursor />
         <Home/>
