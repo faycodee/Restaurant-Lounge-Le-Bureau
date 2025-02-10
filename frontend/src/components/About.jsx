@@ -11,16 +11,16 @@ export default function OverviewSection() {
   const cardRefs = useRef([]);
   const para = useRef(null);
   const [t, i18n] = useTranslation();
-  const isDarkMode = useSelector((state) => state.lightdark.mode);
+  const Mode = useSelector((state) => state.lightdark.mode);
 
   useEffect(() => {
-    if (isDarkMode === "light") {
+    if (Mode === "light") {
       document.documentElement.classList.remove("dark");
     }
-    if (isDarkMode === "dark") {
+    if (Mode === "dark") {
       document.documentElement.classList.add("dark");
     }
-  }, [isDarkMode]);
+  }, [Mode]);
 
   useEffect(() => {
     gsap.fromTo(
@@ -85,10 +85,10 @@ export default function OverviewSection() {
         ref={introRef}
         className="text-center mb-12 text-primary dark:text-darkPrimary"
       >
-        <h1 className="text-[90px] font-bold mb-[80px]"> {t("about.1")}</h1>
+        <h1 className="text-[90px] font-bold mb-[80px]" style={{ fontFamily:"Impact, Haettenschweiler"}}> {t("about.1")}</h1>
         <p
           ref={para}
-          className="text-sm text-gray-600 dark:text-gray-300 max-w-3xl mx-auto"
+          className="text-sm text-gray-600 font-mono font-bold dark:text-gray-300 max-w-3xl mx-auto"
         >
           {t("about.2")}
         </p>
@@ -96,9 +96,9 @@ export default function OverviewSection() {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {[
-          { title: t("about.3"), icon: images.icon1 },
-          { title: t("about.4"), icon: images.icon2 },
-          { title: t("about.5"), icon: images.icon3 },
+          { title: t("about.3"), icon: Mode==="light"?images.icon1:images.dicon1 },
+          { title: t("about.4"), icon: Mode==="light"?images.icon2:images.dicon2 },
+          { title: t("about.5"), icon:Mode==="light"? images.icon3:images.dicon3 },
         ].map((item, index) => (
           <div
             key={index}
@@ -108,7 +108,7 @@ export default function OverviewSection() {
             <div className="text-4xl mb-4">
               <img src={item.icon} />
             </div>
-            <p className="font-thin text-[9px] text-paragraph dark:text-darkBackground">
+            <p style={{fontFamily:"cursive"}} className=" text-[9px] text-paragraph dark:text-darkBackground">
               {item.title}
             </p>
           </div>

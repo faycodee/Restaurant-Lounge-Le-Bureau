@@ -15,7 +15,7 @@ const Home = () => {
   const [t, i18n] = useTranslation();
   const handleMouseEnter = () => {
     gsap.to(buttonRef.current, {
-      backgroundColor: "#000",
+      backgroundColor: "transparent",
       color: "#fff",
       scale: 0.9,
       rotationX: 3,
@@ -27,8 +27,8 @@ const Home = () => {
 
   const handleMouseLeave = () => {
     gsap.to(buttonRef.current, {
-      backgroundColor: "#fff", // Light background
-      color: "#333", // Dark text color
+      backgroundColor: "#FF6347", // Light background
+      color: "#fff", // Dark text color
       scale: 1, // Reset scale
       rotation: 0, // Reset rotation
       skewX: 0, // Reset skew
@@ -215,16 +215,16 @@ const Home = () => {
               ))}
 
               <button
-                id="btnn"
+                id="btnn "
                 ref={buttonRef}
                 className="ml-8"
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
                 style={{
-                  backgroundColor: "#fff",
+                  backgroundColor: "#FF6347",
                   zIndex: 1000,
                   position: "relative",
-                  color: "#333",
+                  color: "#fff",
                   height: "30px",
                   border: "2px solid #333",
                   padding: "0px 7px",
@@ -247,11 +247,11 @@ const Home = () => {
 const Letter = React.memo(({ letter }) => {
   return (
     <div
-      className="text "
+      className="text  font-mono"
       style={{
         color: "#E0E0E0",
         fontSize: 20,
-        fontFamily: "cursive",
+        // fontFamily: "cursive",
       }}
     >
       {letter === " " ? "\u00A0" : letter}

@@ -17,6 +17,9 @@ import aboutBild from "../assets/AboutBild.png";
 import icon1 from "../assets/icons/icon1.png";
 import icon2 from "../assets/icons/icon2.png";
 import icon3 from "../assets/icons/icon3.png";
+import dicon1 from "../assets/icons/darkicon1.png";
+import dicon2 from "../assets/icons/darkicon2.png";
+import dicon3 from "../assets/icons/darkicon3.png";
 import musi from "../assets/music.mp3";
 
 export default {
@@ -24,6 +27,9 @@ export default {
   icon1,
   icon2,
   icon3,
+  dicon1,
+  dicon2,
+  dicon3,
   aboutBild,
   bg,
   chef,
