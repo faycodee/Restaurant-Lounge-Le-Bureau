@@ -5,7 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const MarqueeComponent = () => {
+const MarqueeComponent = ({r}) => {
   const marqueeRef = useRef(null);
   const content = [
     "Order Now! 🍔",
@@ -34,7 +34,7 @@ const MarqueeComponent = () => {
   const duplicatedContent = [...content, ...content];
 
   return (
-    <div className="relative w-screen overflow-hidden mt-20 py-8 transform -rotate-3 bg-darkBackground dark:bg-background ">
+    <div className="relative w-screen overflow-hidden mt-20 py-8 transform  bg-darkBackground dark:bg-background " style={{rotate:r}}>
       {/* Gradient overlays for professional look */}
       <div className="absolute left-0 top-0 w-20 h-full bg-gradient-to-r from-darkBackground to-transparent z-10 dark:from-background" />
       <div className="absolute right-0 top-0 w-20 h-full bg-gradient-to-l from-darkBackground to-transparent z-10 dark:from-background" />

@@ -15,7 +15,6 @@ const Home = () => {
   const buttonRef = useRef(null);
   const [t] = useTranslation();
 
-  // State management
   const [curIndex, setCurIndex] = useState(1);
   const [hasClicked, setHasClicked] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -39,23 +38,23 @@ const Home = () => {
         const promise = new Promise((resolve) => {
           let progress = 0;
 
-          video.addEventListener('loadedmetadata', () => {
+          video.addEventListener("loadedmetadata", () => {
             progress = 20;
             updateProgress(i, progress);
           });
 
-          video.addEventListener('canplay', () => {
+          video.addEventListener("canplay", () => {
             progress = 60;
             updateProgress(i, progress);
           });
 
-          video.addEventListener('canplaythrough', () => {
+          video.addEventListener("canplaythrough", () => {
             progress = 100;
             updateProgress(i, progress);
             resolve();
           });
 
-          video.addEventListener('error', () => {
+          video.addEventListener("error", () => {
             console.error(`Error loading video ${i}`);
             resolve();
           });
@@ -78,14 +77,17 @@ const Home = () => {
   }, []);
 
   const updateProgress = (videoIndex, progress) => {
-    setLoadedVideos(prev => new Map(prev).set(videoIndex, progress));
+    setLoadedVideos((prev) => new Map(prev).set(videoIndex, progress));
   };
 
   // Calculate total loading progress
   useEffect(() => {
     if (loadedVideos.size > 0) {
-      const totalProgress = Array.from(loadedVideos.values()).reduce((sum, progress) => sum + progress, 0);
-      const averageProgress = totalProgress / (totalVideos * 100) * 100;
+      const totalProgress = Array.from(loadedVideos.values()).reduce(
+        (sum, progress) => sum + progress,
+        0
+      );
+      const averageProgress = (totalProgress / (totalVideos * 100)) * 100;
       setLoadingProgress(averageProgress);
     }
   }, [loadedVideos]);
@@ -212,7 +214,7 @@ const Home = () => {
   return (
     <>
       {isLoading && (
-        <RestaurantLoader 
+        <RestaurantLoader
           actualProgress={loadingProgress}
           onLoadingComplete={handleLoadingComplete}
         />
@@ -220,7 +222,9 @@ const Home = () => {
 
       <div
         style={{
-          backgroundImage: `url(${Mode === "light" ? images.welc : images.darkwelc})`,
+          backgroundImage: `url(${
+            Mode === "light" ? images.welc : images.darkwelc
+          })`,
           overflowX: "hidden",
         }}
         className="relative h-[100vh] w-[100vw] overflow-y-auto"

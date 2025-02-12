@@ -23,10 +23,28 @@ import dicon3 from "../assets/icons/darkicon3.png";
 import loader from "../assets/icons/loader.gif";
 import musi from "../assets/music.mp3";
 import paper from "../assets/bg/paper.png";
+import g5 from "../assets/gallery/g5.jpeg";
+import g1 from "../assets/gallery/g1.jpeg";
+import g2 from "../assets/gallery/g2.jpeg";
+import g3 from "../assets/gallery/g3.jpg";
+import g4 from "../assets/gallery/g4.jpg";
+import g6 from "../assets/gallery/g6.jpeg";
+import g7 from "../assets/gallery/g7.jpg";
+import g8 from "../assets/gallery/g8.jpeg";
+import g9 from "../assets/gallery/g9.jpeg";
 
 export default {
-  paper ,
-  loader ,
+  g1,
+  g2,
+  g3,
+  g4,
+  g5,
+  g6,
+  g7,
+  g8,
+  g9,
+  paper,
+  loader,
   musi,
   icon1,
   icon2,
