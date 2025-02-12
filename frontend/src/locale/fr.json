@@ -20,7 +20,8 @@
     "3": "Nous nous efforçons de respecter les produits avec beaucoup de rigueur et de précision.",
     "4": "Savourez la générosité et l'ingéniosité du chef étoilé.",
     "5": "Découvrez notre restaurant qui propose une large gamme de vins de qualité."
-  },"gallery": {
+  },
+  "gallery": {
     "1": "Nos Plats",
     "1t": "PETIT-DÉJEUNER AVEC LES",
     "1s": "ARÔMES DE CAFÉ",
@@ -33,8 +34,8 @@
     "3t": "EXCELLENCE",
     "3s": "CULINAIRE",
     "3d": "Découvrez notre monde de saveurs exquises",
-    "3b": "Explorez Notre Menu"
-}
-
-
+    "3b": "Explorez Notre Plats",
+    "4": "Notre Galerie Culinaire",
+    "5": "Explorez nos plats signature et créations"
+  }
 }

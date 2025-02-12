@@ -6,6 +6,9 @@
 .section__padding {
   padding: 4rem 6rem;
 }
+html {
+  scroll-behavior: smooth;
+}
 
 .flex__center {
   display: flex;

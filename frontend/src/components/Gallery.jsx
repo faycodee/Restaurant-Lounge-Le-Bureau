@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import images from "../constants/images";
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -10,7 +11,7 @@ const LuxuryGallery = () => {
   const containerRef = useRef(null);
   const sectionsRef = useRef([]);
   const [t,i18n]  = useTranslation()
-
+const navigate =useNavigate()
   const content = [
     {
       id: 1,
@@ -194,7 +195,9 @@ const LuxuryGallery = () => {
                   {item.description}
                 </p>
 
-                <button className="animate-text px-8 py-4 border-2 border-white text-white text-lg tracking-widest hover:bg-white hover:text-black transition-all duration-300"
+                <button
+              onClick={() => navigate("/gallery/moreGallery")}
+                 className="animate-text px-8 py-4 border-2 border-white text-white text-lg tracking-widest hover:bg-white hover:text-black transition-all duration-300"
                         style={{ fontFamily: 'Didot, serif' }}>
                   {item.buttonText}
                 </button>

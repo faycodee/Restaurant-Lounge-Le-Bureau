@@ -7,7 +7,7 @@ import AudioPlayer from "./audio";
 
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useTranslation } from "react-i18next";
-import { NavLink } from "react-router-dom";
+
 
 const Navbar = () => {
   const [t, i18n] = useTranslation();
@@ -52,50 +52,53 @@ const Navbar = () => {
       </div>
       <ul className="lg:flex hidden justify-center items-center flex-1 duration-300 gap-2">
         <li className="">
-          <NavLink
+          <a
             className="text-gray-300 my-0 mx-1 duration-150 cursor-pointer p-1 font-mono hover:outline-dashed  outline-slate-700 
             hover:text-slate-700"
-            to="#about"
+            href="#about"
           >
             {t("nav.1")}
-          </NavLink>
+          </a>
         </li>
+        
+       
+       
         <li className="">
-          <NavLink
+          <a
             className="text-gray-300 my-0 mx-1 duration-150 cursor-pointer p-1 font-mono hover:outline-dashed  outline-slate-700 
             hover:text-slate-700"
-            to="#menu"
-          >
-            {t("nav.2")}
-          </NavLink>
-        </li>
-        <li className="">
-          <NavLink
-            className="text-gray-300 my-0 mx-1 duration-150 cursor-pointer p-1 font-mono hover:outline-dashed  outline-slate-700 
-            hover:text-slate-700"
-            to="#dinnershow"
-          >
-            {t("nav.3")}
-          </NavLink>
-        </li>
-        <li className="">
-          <NavLink
-            className="text-gray-300 my-0 mx-1 duration-150 cursor-pointer p-1 font-mono hover:outline-dashed  outline-slate-700 
-            hover:text-slate-700"
-            to="#gallery"
+            href="#gallery"
           >
             {t("nav.4")}
-          </NavLink>
+          </a>
         </li>
         <li className="">
-          <NavLink
+          <a
             className="text-gray-300 my-0 mx-1 duration-150 cursor-pointer p-1 font-mono hover:outline-dashed  outline-slate-700 
             hover:text-slate-700"
-            to="#contact"
+            href="#menu"
+          >
+            {t("nav.2")}
+          </a>
+        </li>
+        <li className="">
+          <a
+            className="text-gray-300 my-0 mx-1 duration-150 cursor-pointer p-1 font-mono hover:outline-dashed  outline-slate-700 
+            hover:text-slate-700"
+            href="#contact"
           >
             {t("nav.5")}
-          </NavLink>
+          </a>
         </li>
+        {/* <li className="">
+          <a
+            className="text-gray-300 my-0 mx-1 duration-150 cursor-pointer p-1 font-mono hover:outline-dashed  outline-slate-700 
+            hover:text-slate-700"
+            href="#dinnershow"
+          >
+            {t("nav.3")}
+          </a>
+        </li> */}
       </ul>
       <div className="sm:flex hidden justify-end items-center">
         <AudioPlayer />
@@ -119,9 +122,9 @@ const Navbar = () => {
             />
             <ul className="list-none mt-4 p-6">
               <li className="font-CormorantUpright m-4 cursor-pointer p-1 text-golden text-4xl text-center hover:text-white">
-                <NavLink to="/about" onClick={() => setToggleMenu(false)}>
+                <a href="/about" onClick={() => setToggleMenu(false)}>
                   About
-                </NavLink>
+                </a>
                 <img
                   src={images.spoon}
                   alt="spoon underline"
@@ -129,9 +132,9 @@ const Navbar = () => {
                 />
               </li>
               <li className="font-CormorantUpright m-4 cursor-pointer p-1 text-golden text-4xl text-center hover:text-white">
-                <NavLink to="/menu" onClick={() => setToggleMenu(false)}>
+                <a href="/menu" onClick={() => setToggleMenu(false)}>
                   Menu
-                </NavLink>
+                </a>
                 <img
                   src={images.spoon}
                   alt="spoon underline"
@@ -139,9 +142,9 @@ const Navbar = () => {
                 />
               </li>
               <li className="font-CormorantUpright m-4 cursor-pointer p-1 text-golden text-4xl text-center hover:text-white">
-                <NavLink to="/dinnershow" onClick={() => setToggleMenu(false)}>
+                <a href="/dinnershow" onClick={() => setToggleMenu(false)}>
                   Dinner Show
-                </NavLink>
+                </a>
                 <img
                   src={images.spoon}
                   alt="spoon underline"
@@ -149,9 +152,9 @@ const Navbar = () => {
                 />
               </li>
               <li className="font-CormorantUpright m-4 cursor-pointer p-1 text-golden text-4xl text-center hover:text-white">
-                <NavLink to="/gallery" onClick={() => setToggleMenu(false)}>
+                <a href="/gallery" onClick={() => setToggleMenu(false)}>
                   Gallery
-                </NavLink>
+                </a>
                 <img
                   src={images.spoon}
                   alt="spoon underline"
@@ -159,9 +162,9 @@ const Navbar = () => {
                 />
               </li>
               <li className="font-CormorantUpright m-4 cursor-pointer p-1 text-golden text-4xl text-center hover:text-white">
-                <NavLink to="/contact" onClick={() => setToggleMenu(false)}>
+                <a href="/contact" onClick={() => setToggleMenu(false)}>
                   Contact
-                </NavLink>
+                </a>
                 <img
                   src={images.spoon}
                   alt="spoon underline"

@@ -55,7 +55,7 @@ const GalleryWelcome = () => {
     <>
       <div
         className="flex-col  bg-background dark:bg-darkBackground  flex__center pt-8 px-9  min-h-screen w-screen"
-        id="menu"
+        id="gallery"
       >
         <div className="mb-8 m-auto flex flex-col mt-10  justify-center items-center">
           {/* <SubHeading title="Menu that fits your palatte" /> */}
@@ -76,7 +76,7 @@ const GalleryWelcome = () => {
           </div>
         </div>
       </div>
-      <LuxuryGallery />
+   
     </>
   );
 };

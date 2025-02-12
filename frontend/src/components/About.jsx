@@ -80,7 +80,7 @@ export default function OverviewSection() {
   }, []);
 
   return (
-    <section className="py-16 px-8 bg-background dark:bg-darkBackground y  h-[100vh]">
+    <section id="about" className="py-16 px-8 bg-background dark:bg-darkBackground y  h-[100vh]">
       <div
         ref={introRef}
         className="text-center mb-12 text-primary dark:text-darkPrimary"
