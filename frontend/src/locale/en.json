@@ -22,6 +22,20 @@
     "5": "Discover our restaurant, which offers a wide selection of quality wines."
   },
   "gallery":{
-    "1":"Our Dishes"
+    "1":"Our Dishes",
+    "1t":"BREAKFAST WITH THE",
+    "1s":"AROMAS OF FRESH",
+    "1h":"COFFEE",
+    "1d":"Start your day in the heart of Venice",
+    "2t":"DINNER IN A",
+    "2s":"ROMANTIC",
+    "2h":"SETTING",
+    "2d":"Experience the magic of Venetian nights" ,
+    "3t":"CULINARY",
+    "3s":"EXCELLENCE",
+    "3d":"Discover our world of exquisite flavors",
+    "3b":"Explore Our Menu"
+
+
   }
 }

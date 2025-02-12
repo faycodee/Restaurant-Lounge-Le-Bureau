@@ -20,5 +20,21 @@
     "3": "Nous nous efforçons de respecter les produits avec beaucoup de rigueur et de précision.",
     "4": "Savourez la générosité et l'ingéniosité du chef étoilé.",
     "5": "Découvrez notre restaurant qui propose une large gamme de vins de qualité."
-  }
+  },"gallery": {
+    "1": "Nos Plats",
+    "1t": "PETIT-DÉJEUNER AVEC LES",
+    "1s": "ARÔMES DE CAFÉ",
+    "1h": "FRAIS",
+    "1d": "Commencez votre journée au cœur de Venise",
+    "2t": "DÎNER DANS UN",
+    "2s": "CADRE",
+    "2h": "ROMANTIQUE",
+    "2d": "Vivez la magie des nuits vénitiennes",
+    "3t": "EXCELLENCE",
+    "3s": "CULINAIRE",
+    "3d": "Découvrez notre monde de saveurs exquises",
+    "3b": "Explorez Notre Menu"
+}
+
+
 }

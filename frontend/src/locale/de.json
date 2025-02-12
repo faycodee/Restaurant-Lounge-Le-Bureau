@@ -20,5 +20,22 @@
     "3": "Wir bemühen uns, die Produkte mit viel Sorgfalt und Präzision zu respektieren.",
     "4": "Genießen Sie die Großzügigkeit und Einfallsreichtum des Sternekochs.",
     "5": "Entdecken Sie unser Restaurant, das eine große Auswahl an hochwertigen Weinen anbietet."
-  }
+  },
+  "gallery": {
+    "1": "Unsere Gerichte",
+    "1t": "FRÜHSTÜCK MIT DEN",
+    "1s": "AROMEN FRISCHEN",
+    "1h": "KAFFEES",
+    "1d": "Beginnen Sie Ihren Tag im Herzen von Venedig",
+    "2t": "ABENDESSEN IN EINER",
+    "2s": "ROMANTISCHEN",
+    "2h": "ATMOSPHÄRE",
+    "2d": "Erleben Sie die Magie der venezianischen Nächte",
+    "3t": "KULINARISCHE",
+    "3s": "EXZELLENZ",
+    "3d": "Entdecken Sie unsere Welt exquisiter Aromen",
+    "3b": "Entdecken Sie Unsere Speisekarte"
+}
+
+
 }

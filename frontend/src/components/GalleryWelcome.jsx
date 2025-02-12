@@ -64,7 +64,7 @@ const GalleryWelcome = () => {
           </h1>
         </div>
         <div id="clip" className="h-dvh w-screen">
-          <div className="mask-clip-path about-video ">
+          <div className="mask-clip-path about-video relative ">
             <video
               src="./videos/Place decor.mp4"
               muted
