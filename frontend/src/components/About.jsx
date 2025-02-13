@@ -85,7 +85,7 @@ export default function OverviewSection() {
         ref={introRef}
         className="text-center mb-12 text-primary dark:text-darkPrimary"
       >
-        <h1 className="text-[90px] font-bold mb-[80px]" style={{ fontFamily:"Impact, Haettenschweiler"}}> {t("about.1")}</h1>
+        <h1 className="text-[90px] text-center  text-primary dark:text-darkPrimary font-bold mb-[80px]" style={{ fontFamily:"Impact, Haettenschweiler"}}> {t("about.1")}</h1>
         <p
           ref={para}
           className="text-sm text-gray-600 font-mono font-bold dark:text-gray-300 max-w-3xl mx-auto"

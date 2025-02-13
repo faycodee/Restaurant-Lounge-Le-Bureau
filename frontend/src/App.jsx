@@ -9,12 +9,13 @@ import CustomCursor from "./components/cursor";
 import GalleryWelcome from "./components/GalleryWelcome";
 import LuxuryGallery from "./components/Gallery";
 import MoreGallery from "./components/moreGallery";
+import RestaurantMenu from "./components/Menu";
 
 const App = () => (
   <BrowserRouter>
     <CustomCursor />
     <DarkLightToggle />
-    <div>
+    <div className="bg-background dark:bg-darkBackground">
       <Routes>
         <Route
           path="/"
@@ -22,10 +23,11 @@ const App = () => (
             <>
               <Navbar />
               <Home />
-              <MarqueeComponent r={"-2deg"} />
+              <MarqueeComponent r={"-2deg"}  />
               <About />
               <GalleryWelcome />
               <LuxuryGallery />
+              <RestaurantMenu />
             </>
           }
         />
