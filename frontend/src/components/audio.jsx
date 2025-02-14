@@ -33,13 +33,15 @@ const AudioPlayer = () => {
   };
 
   return (
-    <div className="sm:flex hidden justify-end items-center  px-4 py-2  text-white bg-gray-600 rounded-full hover:bg-gray-800 transition-all duration-200">
+    <div className="sm:flex hidden justify-end items-center  px-4 py-2  text-background bg-darkBackground rounded-full
+     hover:bg-darkBackground/50 transition-all duration-200 dark:text-darkBackground dark:bg-background 
+     dark:hover:bg-background/50">
       {isPlaying ? (
-        <button onClick={handlePause} className="text-white text-[20px]">
+        <button onClick={handlePause} className=" text-background dark:text-darkBackground text-[20px]">
           <MdOutlineMusicNote />
         </button>
       ) : (
-        <button onClick={handlePlay} className="text-white text-[20px]">
+        <button onClick={handlePlay} className=" text-background dark:text-darkBackground text-[20px]">
           <MdOutlineMusicOff />
         </button>
       )}

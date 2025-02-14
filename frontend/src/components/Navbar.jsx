@@ -8,7 +8,6 @@ import AudioPlayer from "./audio";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useTranslation } from "react-i18next";
 
-
 const Navbar = () => {
   const [t, i18n] = useTranslation();
   const buttonRef = useRef(null);
@@ -53,19 +52,17 @@ const Navbar = () => {
       <ul className="lg:flex hidden justify-center items-center flex-1 duration-300 gap-2">
         <li className="">
           <a
-            className="text-gray-300 my-0 mx-1 duration-150 cursor-pointer p-1 font-mono hover:outline-dashed  outline-slate-700 
+            className="text-darkBackground dark:text-background my-0 mx-1 duration-150 cursor-pointer p-1 font-mono hover:outline-dashed  
             hover:text-slate-700"
             href="#about"
           >
             {t("nav.1")}
           </a>
         </li>
-        
-       
-       
+
         <li className="">
           <a
-            className="text-gray-300 my-0 mx-1 duration-150 cursor-pointer p-1 font-mono hover:outline-dashed  outline-slate-700 
+            className="text-darkBackground dark:text-background my-0 mx-1 duration-150 cursor-pointer p-1 font-mono hover:outline-dashed  
             hover:text-slate-700"
             href="#gallery"
           >
@@ -74,7 +71,7 @@ const Navbar = () => {
         </li>
         <li className="">
           <a
-            className="text-gray-300 my-0 mx-1 duration-150 cursor-pointer p-1 font-mono hover:outline-dashed  outline-slate-700 
+            className="text-darkBackground dark:text-background my-0 mx-1 duration-150 cursor-pointer p-1 font-mono hover:outline-dashed  
             hover:text-slate-700"
             href="#menu"
           >
@@ -83,27 +80,27 @@ const Navbar = () => {
         </li>
         <li className="">
           <a
-            className="text-gray-300 my-0 mx-1 duration-150 cursor-pointer p-1 font-mono hover:outline-dashed  outline-slate-700 
+            className="text-darkBackground dark:text-background my-0 mx-1 duration-150 cursor-pointer p-1 font-mono hover:outline-dashed  
+            hover:text-slate-700"
+            href="#book"
+          >
+            BookTable
+            {/* {t("nav.6")} */}
+          </a>
+        </li>
+        <li className="">
+          <a
+            className="text-darkBackground dark:text-background my-0 mx-1 duration-150 cursor-pointer p-1 font-mono hover:outline-dashed  
             hover:text-slate-700"
             href="#contact"
           >
             {t("nav.5")}
           </a>
         </li>
-        {/* <li className="">
-          <a
-            className="text-gray-300 my-0 mx-1 duration-150 cursor-pointer p-1 font-mono hover:outline-dashed  outline-slate-700 
-            hover:text-slate-700"
-            href="#dinnershow"
-          >
-            {t("nav.3")}
-          </a>
-        </li> */}
       </ul>
       <div className="sm:flex hidden justify-end items-center">
         <AudioPlayer />
         <LanguageSwitcher />
-     
       </div>
 
       <div className="flex lg:hidden">

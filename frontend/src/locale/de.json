@@ -38,198 +38,199 @@
     "4": "Unsere kulinarische Galerie",
     "5": "Entdecken Sie unsere Signature-Gerichte und Kreationen"
   },
+
   "menu": {
-    "title": "Speisekarte",
+    "title": "Das Bureau Restaurant",
     "sections": {
-      "salads": "Salades",
-      "hotStarters": "Entrées Chaudes",
-      "starters": "Entrées",
-      "traditional": "Plats Traditionnels",
-      "pizza": "Pizza au Feu de Bois",
-      "pasta": "Pâtes Italiennes",
-      "meatAndPoultry": "Viandes et Volailles",
-      "fish": "Poissons"
+      "salads": "Salate",
+      "hotStarters": "Warme Vorspeisen",
+      "starters": "Vorspeisen",
+      "traditional": "Traditionelle Gerichte",
+      "pizza": "Pizza aus dem Holzofen",
+      "pasta": "Italienische Pasta",
+      "meatAndPoultry": "Fleisch und Geflügel",
+      "fish": "Fisch"
     },
     "salads": {
       "richBureau": {
-        "name": "Salade Riche du Bureau",
-        "description": "Salade mesclun, avocat, crevettes, cœur de palmier, maïs, poivron grillé, charcuterie, tomate fraîche"
+        "name": "Reicher Salat des Bureau",
+        "description": "Mesclun-Salat, Avocado, Garnelen, Palmherz, Mais, Gegrillte Paprika, Aufschnitt, Frische Tomate"
       },
       "market": {
-        "name": "Salade du Marché",
-        "description": "Laitue verte, tomate fraîche, carotte râpée, haricot vert, concombre, pomme de terre, maïs, poivron, œufs durs, thon, oignon"
+        "name": "Marktsalat",
+        "description": "Grüner Salat, Frische Tomate, Geriebene Karotte, Grüne Bohnen, Gurke, Kartoffel, Mais, Paprika, Gekochte Eier, Thunfisch, Zwiebel"
       },
       "caesar": {
-        "name": "Salade César",
-        "description": "Tendance César, volaille, parmesan, tomate confite, anchois"
+        "name": "Caesar-Salat",
+        "description": "Caesar-Dressing, Geflügel, Parmesan, Kandierte Tomaten, Sardellen"
       }
     },
     "specialties": {
-      "cheeseSlate": "Ardoise de Fromages",
-      "beefCarpaccio": "Carpaccio de Bœuf",
+      "cheeseSlate": "Käseplatte",
+      "beefCarpaccio": "Rinder-Carpaccio",
       "avocadoShrimp": {
-        "name": "Avocat Sauce Cocktail aux Crevettes"
+        "name": "Avocado mit Garnelencocktail-Sauce"
       }
     },
     "hotStarters": {
-      "gratineeEggplant": "Aubergine Gratinée",
-      "seafoodGratin": "Gratin de Fruits de Mer",
-      "legumesGratin": "Gratin de Légumes",
-      "pilPilShrimp": "Crevettes Pil Pil à l'Andalouse",
-      "vegetableSoup": "Soupe de Légumes",
-      "fishSoup": "Soupe de Poisson"
+      "gratineeEggplant": "Überbackene Aubergine",
+      "seafoodGratin": "Meeresfrüchte-Gratin",
+      "legumesGratin": "Gemüse-Gratin",
+      "pilPilShrimp": "Pil Pil Garnelen nach andalusischer Art",
+      "vegetableSoup": "Gemüsesuppe",
+      "fishSoup": "Fischsuppe"
     },
     "starters": {
       "moroccanSalad": {
-        "name": "Salade Marocaine",
-        "description": "Tomate, oignon, thon"
+        "name": "Marokkanischer Salat",
+        "description": "Tomate, Zwiebel, Thunfisch"
       },
-      "aubergineSalad": "Salade d'Aubergines",
-      "brioatesAssortment": "Assortiment de Briouates",
-      "chickenPastilla": "Pastilla au Poulet",
-      "seafoodPastilla": "Pastilla aux Fruits de Mer",
-      "harira": "Soupe Marocaine Traditionnelle (Harira)"
+      "aubergineSalad": "Auberginen-Salat",
+      "brioatesAssortment": "Brioates-Auswahl",
+      "chickenPastilla": "Hähnchen-Pastilla",
+      "seafoodPastilla": "Meeresfrüchte-Pastilla",
+      "harira": "Traditionelle marokkanische Suppe (Harira)"
     },
     "pizza": {
       "margherita": {
         "name": "Margherita",
-        "description": "Sauce tomate, mozzarella, basilic"
+        "description": "Tomatensauce, Mozzarella, Basilikum"
       },
       "seafood": {
-        "name": "Fruits de Mer",
-        "description": "Sauce tomate, mozzarella, crevettes, calamar, moules, basilic, origan"
+        "name": "Meeresfrüchte",
+        "description": "Tomatensauce, Mozzarella, Garnelen, Tintenfisch, Muscheln, Basilikum, Oregano"
       },
       "fourCheeses": {
-        "name": "4 Fromages",
-        "description": "Ricotta, mozzarella, bleu, fontal, parmesan"
+        "name": "4-Käse-Pizza",
+        "description": "Ricotta, Mozzarella, Blauschimmelkäse, Fontal, Parmesan"
       },
       "bureau": {
-        "name": "Pizza Le Bureau",
-        "description": "Sauce tomate, mozzarella, viande hachée, jambon de dinde fumé, champignons de Paris, origan"
+        "name": "Pizza The Bureau",
+        "description": "Tomatensauce, Mozzarella, Hackfleisch, Geräucherter Putenschinken, Champignons, Oregano"
       },
       "custom": {
-        "name": "Pizza au Choix",
-        "description": "Composition selon la demande du client"
+        "name": "Pizza nach Wahl",
+        "description": "Zusammenstellung durch unseren Gast"
       }
     },
     "pasta": {
       "penneToscana": {
         "name": "Penne alla Toscana",
-        "description": "Jambon de dinde fumé, champignons, épinards, basilic"
+        "description": "Geräucherter Putenschinken, Champignons, Spinat, Basilikum"
       },
       "tagliatelleAlfredo": {
-        "name": "Tagliatelles Alfredo",
-        "description": "Poulet sauté, crème fraîche, origan"
+        "name": "Tagliatelle Alfredo",
+        "description": "Gebratene Hähnchenstreifen, Crème Fraîche, Oregano"
       },
       "linguineMamma": {
         "name": "Linguine della Mamma",
-        "description": "Thon, champignons, sauce tomate"
+        "description": "Thunfisch, Champignons, Tomatensauce"
       },
       "spaghettiPuttanesca": {
         "name": "Spaghetti Puttanesca",
-        "description": "Anchois salés, tomate cerise, olives noires, basilic, huile d’olive"
+        "description": "Gesalzene Sardellen, Kirschtomaten, Schwarze Oliven, Basilikum, Olivenöl"
       },
       "spaghettiDelmare": {
         "name": "Spaghetti Delmare",
-        "description": "Calamar, crevettes, moules, tomate cerise, huile d’olive, basilic"
+        "description": "Tintenfisch, Garnelen, Muscheln, Kirschtomaten, Olivenöl, Basilikum"
       }
     },
     "traditional": {
       "beefTagine": {
-        "name": "Tajine de Bœuf",
-        "description": "Aux oignons et aux amandes"
+        "name": "Rindfleisch-Tajine",
+        "description": "Mit Zwiebeln und Mandeln"
       },
       "meatballTagine": {
-        "name": "Tajine de Boulettes de Viande",
-        "description": "Sauce tomate et œuf"
+        "name": "Hackfleischbällchen-Tajine",
+        "description": "Mit Tomatensauce und Ei"
       },
       "chickenTagine": {
-        "name": "Tajine de Poulet",
-        "description": "Aux citrons confits et olives"
+        "name": "Hähnchen-Tajine",
+        "description": "Mit kandierten Zitronen und Oliven"
       },
       "moroccanTagine": {
-        "name": "Tajine de Poisson à la Marocaine",
-        "description": "Selon l’arrivage du jour"
+        "name": "Fisch-Tajine nach marokkanischer Art",
+        "description": "Je nach Tagesangebot"
       },
       "couscous": {
-        "beef": "Couscous au Bœuf",
-        "chicken": "Couscous au Poulet",
-        "vegetable": "Couscous aux Légumes",
+        "beef": "Rindfleisch-Couscous",
+        "chicken": "Hähnchen-Couscous",
+        "vegetable": "Gemüse-Couscous",
         "moroccan": {
-          "name": "Couscous à la Marocaine",
-          "description": "Semoule, oignon et raisins caramélisés, pois chiches"
+          "name": "Couscous nach marokkanischer Art",
+          "description": "Grieß, Zwiebeln und karamellisierte Rosinen, Kichererbsen"
         }
       },
       "seffa": {
-        "name": "Seffa aux Cheveux d'Ange",
-        "description": "Bœuf ou Poulet",
-        "ingredients": "Vermicelles très fins, fruits secs, raisins, amandes, dattes"
+        "name": "Seffa mit Engelshaar-Nudeln",
+        "description": "Mit Rind oder Hähnchen",
+        "ingredients": "Sehr feine Vermicelli, Trockenfrüchte, Rosinen, Mandeln, Datteln"
       }
     },
     "meatAndPoultry": {
       "beefFillet": {
-        "name": "Filet de Bœuf",
-        "description": "220G"
+        "name": "Rinderfilet",
+        "description": "220 g"
       },
       "beefSteak": {
-        "name": "Steak de Bœuf",
-        "description": "220G"
+        "name": "Rindersteak",
+        "description": "220 g"
       },
       "ossoBucco": {
         "name": "Osso Bucco",
-        "description": "Jarret de veau au four"
+        "description": "Geschmorte Kalbshaxe"
       },
       "mincedBeef": {
-        "name": "Viande Hachée de Bœuf",
-        "description": "Champignons de Paris"
+        "name": "Hackfleisch",
+        "description": "Mit Champignons de Paris"
       },
       "chickenCutlet": {
-        "name": "Escalope de Poulet Panée"
+        "name": "Panierte Hähnchenbrust"
       },
       "lemonChicken": {
-        "name": "Escalope de Poulet au Citron"
+        "name": "Hähnchenbrust mit Zitrone"
       },
       "mincedChicken": {
-        "name": "Viande Hachée de Poulet",
-        "description": "Deux champignons d’Asie"
+        "name": "Hackfleisch vom Hähnchen",
+        "description": "Mit zwei asiatischen Pilzsorten"
       },
       "moroccanSkewers": {
-        "name": "Brochettes de Poulet à la Marocaine"
+        "name": "Marokkanische Hähnchenspieße"
       },
       "cordonBleu": {
-        "name": "Cordon Bleu de Poulet",
-        "description": "Sauce à l’estragon"
+        "name": "Hähnchen-Cordon Bleu",
+        "description": "Mit Estragon-Sauce"
       },
       "accompaniments": {
-        "title": "Accompagnements",
-        "options": "Légumes ou Pâtes, Purée de Pommes de Terre, Frites Fraîches, Riz"
+        "title": "Beilagen",
+        "options": "Gemüse oder Pasta, Kartoffelpüree, Frische Pommes, Reis"
       }
     },
     "fish": {
       "dorade": {
-        "name": "Dorade Farcie au Four à Bois"
+        "name": "Dorade aus dem Holzofen"
       },
       "saintPierre": {
-        "name": "Filet de Saint Pierre à la Marocaine"
+        "name": "Filet vom Petersfisch nach marokkanischer Art"
       },
       "swordfish": {
-        "name": "Filet d’Espadon Grillé",
-        "description": "Sauce Verte à l’Huile d’Olive"
+        "name": "Gegrilltes Schwertfischfilet",
+        "description": "Mit grüner Sauce aus Olivenöl"
       },
       "salmon": {
-        "name": "Pavé de Saumon Grillé",
-        "description": "À la Marocaine"
+        "name": "Gegrilltes Lachsfilet",
+        "description": "Nach marokkanischer Art"
       }
     },
     "pricing": {
-      "salads": "À partir de 85 DH",
-      "hotStarters": "À partir de 70 DH",
-      "starters": "À partir de 70 DH",
-      "traditional": "À partir de 90 DH",
-      "pizza": "À partir de 70 DH",
-      "pasta": "À partir de 90 DH",
-      "meatAndPoultry": "À partir de 110 DH",
-      "fish": "À partir de 180 DH"
+      "salads": "Ab 85 DH",
+      "hotStarters": "Ab 70 DH",
+      "starters": "Ab 70 DH",
+      "traditional": "Ab 90 DH",
+      "pizza": "Ab 70 DH",
+      "pasta": "Ab 90 DH",
+      "meatAndPoultry": "Ab 110 DH",
+      "fish": "Ab 180 DH"
     }
   }
 }

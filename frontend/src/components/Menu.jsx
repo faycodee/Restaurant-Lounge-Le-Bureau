@@ -197,7 +197,6 @@ const RestaurantMenu = () => {
             />
           ))}
         </div>
-
         {/* Accompaniments footer */}
         <div className="mt-[70px] p-4 bg-black/40 dark:bg-white/40 rounded-lg border border-primary dark:border-darkPrimary">
           <h3 className="text-darkPrimary font-semibold mb-2">
