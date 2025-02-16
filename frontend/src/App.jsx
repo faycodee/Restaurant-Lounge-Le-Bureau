@@ -10,7 +10,8 @@ import GalleryWelcome from "./components/GalleryWelcome";
 import LuxuryGallery from "./components/Gallery";
 import MoreGallery from "./components/moreGallery";
 import RestaurantMenu from "./components/Menu";
-// import RestaurantBooking from "./components/Booknow";
+import ReservationCalendar from "./components/Booknow";
+
 
 const App = () => (
   <BrowserRouter>
@@ -29,7 +30,7 @@ const App = () => (
               <GalleryWelcome />
               <LuxuryGallery />
               <RestaurantMenu />
-              {/* <RestaurantBooking /> */}
+              <ReservationCalendar />
             </>
           }
         />

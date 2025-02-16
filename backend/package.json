@@ -1,19 +1,24 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"nodemon index.js"
+    "dev": "env-cmd -f .env nodemon server"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "bcryptjs": "^3.0.0",
     "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "env-cmd": "^10.1.0",
+    "env-json": "^0.0.1",
     "express": "^4.21.2",
-    "mongoose": "^8.10.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.10.1",
     "nodemon": "^3.1.9"
   }
 }
