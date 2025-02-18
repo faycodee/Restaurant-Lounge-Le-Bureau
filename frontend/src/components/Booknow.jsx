@@ -264,7 +264,7 @@ const ReservationCalendar = ({ currentUserId, currentUserName }) => {
   };
 
   return (
-    <div className="p-4 flex justify-center flex-col items-center">
+    <div id="book" className="p-4 flex justify-center flex-col items-center">
       <h1
         ref={introRef}
         className="text-[90px] text-center  text-primary dark:text-darkPrimary mt-[80px] font-bold mb-[80px]"
