@@ -232,5 +232,8 @@
       "meatAndPoultry": "Ab 110 DH",
       "fish": "Ab 180 DH"
     }
+  },
+  "book": {
+    "1": "Buchungskalender"
   }
 }

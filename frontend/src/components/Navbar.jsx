@@ -46,7 +46,7 @@ const Navbar = () => {
         <img
           src={images.logo}
           alt="app logo"
-          className="h-auto w-[50px] max-md:w-[50px] 2xl:w-52"
+          className="h-auto w-[50px] max-md:w-[50px] "
         />
       </div>
       <ul className="lg:flex hidden justify-center items-center flex-1 duration-300 gap-2">

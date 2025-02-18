@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route , Link } from "react-router-dom";
 // import './i18n';
 import "./App.css";
 import { Home, Navbar, About } from "./components";
@@ -12,12 +12,11 @@ import MoreGallery from "./components/moreGallery";
 import RestaurantMenu from "./components/Menu";
 import ReservationCalendar from "./components/Booknow";
 
-
 const App = () => (
   <BrowserRouter>
     <CustomCursor />
     <DarkLightToggle />
-    <div className="bg-background dark:bg-darkBackground">
+    <div className="bg-background dark:bg-darkBackground ">
       <Routes>
         <Route
           path="/"
