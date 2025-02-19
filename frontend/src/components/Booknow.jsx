@@ -5,30 +5,90 @@ import axios from "axios";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { useTranslation } from "react-i18next";
 import gsap from "gsap";
+import { v4 as uuidv4 } from "uuid";
 
-const ReservationCalendar = ({ currentUserId, currentUserName }) => {
+const Alert = ({ message, type, onClose }) => {
+  const alertColors = {
+    success: "bg-green-100 border-green-400 text-green-700",
+    error: "bg-red-100 border-red-400 text-red-700",
+    info: "bg-blue-100 border-blue-400 text-blue-700",
+  };
+
+  return (
+    <div className="fixed top-20 z-50 left-1/2 transform -translate-x-1/2">
+      <div
+        className={`border-l-4 p-4 ${alertColors[type]} rounded-lg shadow-lg min-w-64`}
+      >
+        <div className="flex justify-between items-center">
+          <span className="text-sm">{message}</span>
+          <button onClick={onClose} className="text-2xl leading-none">
+            &times;
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const ConfirmationModal = ({ onConfirm, onCancel, message }) => (
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-30">
+    <div className="bg-white p-6 rounded-lg w-96">
+      <h3 className="text-lg font-bold mb-4">Confirm Action</h3>
+      <p className="mb-6">{message}</p>
+      <div className="flex justify-end gap-2">
+        <button
+          onClick={onCancel}
+          className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+        >
+          Cancel
+        </button>
+        <button
+          onClick={onConfirm}
+          className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+        >
+          Confirm Delete
+        </button>
+      </div>
+    </div>
+  </div>
+);
+
+const ReservationCalendar = () => {
+  // const api = "http://localhost:5000/api/reservations";
+  const api = import.meta.env.VITE_API;
+
   const introRef = useRef(null);
   const [reservations, setReservations] = useState([]);
   const [selectedSlot, setSelectedSlot] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const [modalMode, setModalMode] = useState("add");
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [formData, setFormData] = useState({
     customer_name: "",
     customer_phone: "",
+    email: "",
     guests: 1,
     time: "12:00",
-    table: {
-      table_number: "",
-      capacity: "",
-    },
   });
   const [formErrors, setFormErrors] = useState({});
+  const [currentUserId, setCurrentUserId] = useState("");
+  const [alert, setAlert] = useState(null);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const localizer = momentLocalizer(moment);
-  const [t, i18n] = useTranslation();
-  
-  // هذه الدالة تُنفَّذ عند تحميل الكومبوننت، تقوم بجلب البيانات من الخادم (API) وتطبيق تأثير جافا سكربت باستخدام GSAP
+  const [t] = useTranslation();
+
   useEffect(() => {
+    const initializeUser = () => {
+      const storedUserId = localStorage.getItem("restaurantUserId");
+      if (!storedUserId) {
+        const newUserId = uuidv4();
+        localStorage.setItem("restaurantUserId", newUserId);
+        setCurrentUserId(newUserId);
+      } else {
+        setCurrentUserId(storedUserId);
+      }
+    };
+
+    initializeUser();
     fetchReservations();
     gsap.fromTo(
       introRef.current,
@@ -50,127 +110,90 @@ const ReservationCalendar = ({ currentUserId, currentUserName }) => {
     );
   }, []);
 
-  // هذه الدالة تُستخدم لجلب البيانات الخاصة بالحجوزات من الخادم
+  const showAlert = (message, type) => {
+    setAlert({ message, type });
+    setTimeout(() => setAlert(null), 5000);
+  };
+
   const fetchReservations = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/reservations");
-      const formattedData = response.data.map((reservation) => ({
-        title: formatEventTitle(reservation),
-        start: new Date(
-          `${reservation.reservation_date}T${reservation.reservation_time}`
-        ),
-        end: new Date(
-          `${reservation.reservation_date}T${reservation.reservation_time}`
-        ),
-        allDay: false,
-        resource: reservation,
-      }));
+      const response = await axios.get(api);
+      const formattedData = response.data
+        .filter((res) => res.status === "confirmed")
+        .map((reservation) => ({
+          title:
+            reservation.user_id === currentUserId
+              ? `Your Reservation (${reservation.guests} people)`
+              : `Reserved (${reservation.guests} people)`,
+          start: new Date(
+            `${reservation.reservation_date}T${reservation.reservation_time}`
+          ),
+          end: new Date(
+            `${reservation.reservation_date}T${reservation.reservation_time}`
+          ),
+          allDay: false,
+          resource: reservation,
+        }));
       setReservations(formattedData);
     } catch (error) {
       console.error("Error fetching reservations:", error);
+      showAlert("Failed to load reservations", "error");
     }
   };
 
-  // دالة لتنسيق عنوان الحدث بناءً على بيانات الحجز
-  const formatEventTitle = (reservation) => {
-    if (reservation.user_id === currentUserId) {
-      return `Reserved`;
-    }
-    return `Reserved - Table ${reservation.table.table_number}`;
-  };
-
-  // دالة للتحقق من صحة البيانات المدخلة في النموذج
   const validateForm = () => {
     const errors = {};
-    if (!formData.customer_name) errors.customer_name = "Name is required";
-    if (!formData.customer_phone) {
+    if (!formData.customer_name.trim())
+      errors.customer_name = "Name is required";
+    if (!formData.customer_phone.trim()) {
       errors.customer_phone = "Phone is required";
     } else if (!/^\d{10}$/.test(formData.customer_phone)) {
       errors.customer_phone = "Phone must be 10 digits";
     }
-    if (!formData.guests || formData.guests < 1) {
-      errors.guests = "Number of guests must be at least 1";
-    }
-    if (!formData.table.table_number) {
-      errors.table_number = "Table number is required";
-    }
-    if (!formData.table.capacity) {
-      errors.capacity = "Table capacity is required";
-    }
-    if (!formData.time) {
-      errors.time = "Time is required";
-    }
+    if (!formData.guests || formData.guests < 1)
+      errors.guests = "At least 1 guest required";
+    if (!formData.time) errors.time = "Time required";
+
     setFormErrors(errors);
     return Object.keys(errors).length === 0;
   };
 
-  // دالة لاختيار الوقت/الموعد من التقويم
   const handleSelectSlot = ({ start }) => {
-    const now = new Date();
-    if (start < now) {
-      alert("Cannot make reservations for past dates");
+    // Get today's date without time
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    // Get the selected date without time
+    const selectedDate = new Date(start);
+    selectedDate.setHours(0, 0, 0, 0);
+
+    // Compare only the dates (ignore time)
+    if (selectedDate < today) {
+      showAlert("Cannot reserve past dates", "error");
       return;
     }
 
     setSelectedSlot(start);
-    setModalMode("add");
     setFormData({
-      customer_name: currentUserName || "",
+      customer_name: "",
       customer_phone: "",
+      email: "",
       guests: 1,
       time: "12:00",
-      table: {
-        table_number: "",
-        capacity: "",
-      },
     });
     setShowModal(true);
   };
-
-  // دالة لاختيار حدث من التقويم لعرض تفاصيله أو تعديله
   const handleSelectEvent = (event) => {
     if (event.resource.user_id !== currentUserId) {
-      return; // عدم السماح بتعديل حجوزات المستخدمين الآخرين
+      showAlert("You can only view others' reservations", "info");
+      return;
     }
 
-    const eventTime = moment(event.start).format("HH:mm");
     setSelectedEvent(event);
-    setModalMode("edit");
-    setFormData({
-      customer_name: event.resource.customer_name,
-      customer_phone: event.resource.customer_phone,
-      guests: event.resource.guests,
-      time: eventTime,
-      table: {
-        table_number: event.resource.table.table_number,
-        capacity: event.resource.table.capacity,
-      },
-    });
     setShowModal(true);
   };
 
-  // دالة لمعالجة تغييرات المدخلات في النموذج
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    if (name.includes("table.")) {
-      const tableField = name.split(".")[1];
-      setFormData((prev) => ({
-        ...prev,
-        table: {
-          ...prev.table,
-          [tableField]: value,
-        },
-      }));
-    } else {
-      setFormData((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
-    }
-  };
-
-  // دالة لإضافة حجز جديد
-  const handleAddReservation = async () => {
+  const handleFormSubmit = async () => {
     if (!validateForm()) return;
 
     try {
@@ -178,102 +201,67 @@ const ReservationCalendar = ({ currentUserId, currentUserName }) => {
         user_id: currentUserId,
         customer_name: formData.customer_name,
         customer_phone: formData.customer_phone,
+        email: formData.email,
         reservation_date: moment(selectedSlot).format("YYYY-MM-DD"),
         reservation_time: formData.time,
         guests: parseInt(formData.guests),
         status: "pending",
-        table: {
-          table_number: parseInt(formData.table.table_number),
-          capacity: parseInt(formData.table.capacity),
-        },
       };
 
-      await axios.post("http://localhost:5000/api/reservations", reservationData);
-      fetchReservations();
-      setShowModal(false);
-    } catch (error) {
-      console.error("Error adding reservation:", error);
-      alert("Failed to add reservation");
-    }
-  };
-
-  // دالة لتحديث الحجز الموجود
-  const handleUpdateReservation = async () => {
-    if (!validateForm()) return;
-
-    try {
-      const reservationData = {
-        customer_name: formData.customer_name,
-        customer_phone: formData.customer_phone,
-        guests: parseInt(formData.guests),
-        reservation_time: formData.time,
-        table: {
-          table_number: parseInt(formData.table.table_number),
-          capacity: parseInt(formData.table.capacity),
-        },
-      };
-
-      await axios.put(
-        `http://localhost:5000/api/reservations/${selectedEvent.resource.id}`,
-        reservationData
+      await axios.post(api, reservationData);
+      showAlert(
+        "Reservation sent! Confirmation coming soon. Thank you!",
+        "success"
       );
       fetchReservations();
       setShowModal(false);
     } catch (error) {
-      console.error("Error updating reservation:", error);
-      alert("Failed to update reservation");
+      console.error("Reservation error:", error);
+      showAlert("Failed to create reservation", "error");
     }
   };
 
-  // دالة لحذف الحجز
-  const handleDeleteReservation = async () => {
+  const handleDelete = async () => {
     try {
-      await axios.delete(
-        `http://localhost:5000/api/reservations/${selectedEvent.resource.id}`
-      );
+      await axios.delete(`${api}/${selectedEvent.resource._id}`, {
+        data: { user_id: currentUserId },
+      });
+      showAlert("Reservation deleted successfully!", "success");
       fetchReservations();
       setShowModal(false);
+      setShowDeleteConfirm(false);
     } catch (error) {
-      console.error("Error deleting reservation:", error);
-      alert("Failed to delete reservation");
+      console.error("Delete error:", error);
+      showAlert("Failed to delete reservation", "error");
     }
   };
 
-  // دالة لتخصيص نمط الحدث بناءً على حالة الحجز
   const eventStyleGetter = (event) => {
-    let backgroundColor = "#6c757d"; // اللون الافتراضي
-
-    if (event.resource.user_id === currentUserId) {
-      if (event.resource.status === "confirmed") backgroundColor = "#28a745";
-      if (event.resource.status === "cancelled") backgroundColor = "#dc3545";
-      if (event.resource.status === "pending") backgroundColor = "#ffc107";
-    }
-
+    const isUserEvent = event.resource.user_id === currentUserId;
     return {
       style: {
-        backgroundColor,
-        color: backgroundColor === "#ffc107" ? "#000" : "#fff",
-        fontSize: "13px",
+        backgroundColor: isUserEvent ? "#4CAF50" : "#607D8B",
+        color: "#ffffff",
         borderRadius: "5px",
-        padding: "10px",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
+        padding: "8px",
+        cursor: isUserEvent ? "pointer" : "default",
+        border: isUserEvent ? "2px solid #388E3C" : "none",
       },
     };
   };
 
   return (
     <div id="book" className="p-4 flex justify-center flex-col items-center">
+      {alert && <Alert {...alert} onClose={() => setAlert(null)} />}
+
       <h1
         ref={introRef}
-        className="text-[90px] text-center  text-primary dark:text-darkPrimary mt-[80px] font-bold mb-[80px]"
-        style={{ fontFamily: "Impact, Haettenschweiler" }}
+        className="text-[90px] text-center text-primary dark:text-darkPrimary mt-[80px] font-bold mb-[80px]"
       >
-        {" "}
         {t("book.1")}
       </h1>
-      <div className="w-[80vw] ">
+
+      <div className="w-[80vw]">
         <Calendar
           localizer={localizer}
           events={reservations}
@@ -288,16 +276,13 @@ const ReservationCalendar = ({ currentUserId, currentUserName }) => {
         />
 
         {showModal && (
-          <div className="fixed inset-0 bg-black  z-20 bg-opacity-50 flex items-center justify-center">
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-20">
             <div className="bg-white p-6 rounded-lg w-96">
               <h2 className="text-xl font-bold mb-4">
-                {modalMode === "add"
-                  ? "Add Reservation"
-                  : "Manage Your Reservation"}
+                {selectedEvent ? "Reservation Details" : "New Reservation"}
               </h2>
-
               <p className="text-sm text-gray-600 mb-4">
-                Date: {moment(selectedSlot).format("MMMM D, YYYY")}
+                {moment(selectedSlot).format("MMMM D, YYYY")}
               </p>
 
               <div className="space-y-4">
@@ -308,9 +293,19 @@ const ReservationCalendar = ({ currentUserId, currentUserName }) => {
                   <input
                     type="text"
                     name="customer_name"
-                    value={formData.customer_name}
-                    onChange={handleInputChange}
+                    value={
+                      selectedEvent
+                        ? selectedEvent.resource.customer_name
+                        : formData.customer_name
+                    }
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        customer_name: e.target.value,
+                      })
+                    }
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    disabled={!!selectedEvent}
                   />
                   {formErrors.customer_name && (
                     <p className="text-red-500 text-sm">
@@ -321,15 +316,24 @@ const ReservationCalendar = ({ currentUserId, currentUserName }) => {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700">
-                    Phone Number
+                    Phone
                   </label>
                   <input
                     type="tel"
                     name="customer_phone"
-                    value={formData.customer_phone}
-                    onChange={handleInputChange}
-                    placeholder="1234567890"
+                    value={
+                      selectedEvent
+                        ? selectedEvent.resource.customer_phone
+                        : formData.customer_phone
+                    }
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        customer_phone: e.target.value,
+                      })
+                    }
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    disabled={!!selectedEvent}
                   />
                   {formErrors.customer_phone && (
                     <p className="text-red-500 text-sm">
@@ -340,14 +344,41 @@ const ReservationCalendar = ({ currentUserId, currentUserName }) => {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700">
+                    Email (optional)
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={
+                      selectedEvent
+                        ? selectedEvent.resource.email
+                        : formData.email
+                    }
+                    onChange={(e) =>
+                      setFormData({ ...formData, email: e.target.value })
+                    }
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    disabled={!!selectedEvent}
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">
                     Time
                   </label>
                   <input
                     type="time"
                     name="time"
-                    value={formData.time}
-                    onChange={handleInputChange}
+                    value={
+                      selectedEvent
+                        ? moment(selectedEvent.start).format("HH:mm")
+                        : formData.time
+                    }
+                    onChange={(e) =>
+                      setFormData({ ...formData, time: e.target.value })
+                    }
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    disabled={!!selectedEvent}
                   />
                   {formErrors.time && (
                     <p className="text-red-500 text-sm">{formErrors.time}</p>
@@ -356,93 +387,66 @@ const ReservationCalendar = ({ currentUserId, currentUserName }) => {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700">
-                    Number of Guests
+                    Guests
                   </label>
                   <input
                     type="number"
-                    name="guests"
-                    value={formData.guests}
-                    onChange={handleInputChange}
                     min="1"
+                    name="guests"
+                    value={
+                      selectedEvent
+                        ? selectedEvent.resource.guests
+                        : formData.guests
+                    }
+                    onChange={(e) =>
+                      setFormData({ ...formData, guests: e.target.value })
+                    }
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    disabled={!!selectedEvent}
                   />
                   {formErrors.guests && (
                     <p className="text-red-500 text-sm">{formErrors.guests}</p>
                   )}
                 </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    Table Number
-                  </label>
-                  <input
-                    type="number"
-                    name="table.table_number"
-                    value={formData.table.table_number}
-                    onChange={handleInputChange}
-                    min="1"
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                  />
-                  {formErrors.table_number && (
-                    <p className="text-red-500 text-sm">
-                      {formErrors.table_number}
-                    </p>
-                  )}
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    Table Capacity
-                  </label>
-                  <input
-                    type="number"
-                    name="table.capacity"
-                    value={formData.table.capacity}
-                    onChange={handleInputChange}
-                    min="1"
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                  />
-                  {formErrors.capacity && (
-                    <p className="text-red-500 text-sm">
-                      {formErrors.capacity}
-                    </p>
-                  )}
-                </div>
-
                 <div className="flex justify-end gap-2 mt-6">
-                  {modalMode === "add" ? (
-                    <button
-                      onClick={handleAddReservation}
-                      className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
-                    >
-                      Confirm Reservation
-                    </button>
-                  ) : selectedEvent?.resource?.user_id === currentUserId ? (
-                    <>
-                      <button
-                        onClick={handleUpdateReservation}
-                        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-                      >
-                        Update
-                      </button>
-                      <button
-                        onClick={handleDeleteReservation}
-                        className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-                      >
-                        Delete
-                      </button>
-                    </>
-                  ) : null}
                   <button
-                    onClick={() => setShowModal(false)}
+                    onClick={() => {
+                      setShowModal(false);
+                      setSelectedEvent(null);
+                    }}
                     className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
                   >
-                    Cancel
+                    Close
                   </button>
+                  {selectedEvent && (
+                    <button
+                      onClick={() => setShowDeleteConfirm(true)}
+                      className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                    >
+                      Delete
+                    </button>
+                  )}
+                  {!selectedEvent && (
+                    <button
+                      onClick={handleFormSubmit}
+                      className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                    >
+                      Confirm
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
           </div>
+        )}
+
+        {showDeleteConfirm && (
+          <ConfirmationModal
+            onConfirm={handleDelete}
+            onCancel={() => setShowDeleteConfirm(false)}
+            message="Are you sure you want to delete this reservation?"
+          />
         )}
       </div>
     </div>

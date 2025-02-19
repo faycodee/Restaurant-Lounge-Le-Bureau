@@ -11,6 +11,7 @@ import LuxuryGallery from "./components/Gallery";
 import MoreGallery from "./components/moreGallery";
 import RestaurantMenu from "./components/Menu";
 import ReservationCalendar from "./components/Booknow";
+import Footer from "./components/Footer";
 
 const App = () => (
   <BrowserRouter>
@@ -30,6 +31,7 @@ const App = () => (
               <LuxuryGallery />
               <RestaurantMenu />
               <ReservationCalendar />
+              <Footer />
             </>
           }
         />
