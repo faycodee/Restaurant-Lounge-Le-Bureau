@@ -54,8 +54,8 @@ const ConfirmationModal = ({ onConfirm, onCancel, message }) => (
 );
 
 const ReservationCalendar = () => {
-  // const api = "http://localhost:5000/api/reservations";
-  const api = import.meta.env.VITE_API;
+  const api = "http://localhost:5000/api/reservations";
+  // const api = import.meta.env.VITE_API;
 
   const introRef = useRef(null);
   const [reservations, setReservations] = useState([]);
@@ -251,7 +251,7 @@ const ReservationCalendar = () => {
   };
 
   return (
-    <div id="book" className="p-4 flex justify-center flex-col items-center">
+    <div id="book" className="p-4 flex justify-center flex-col items-center mb-10">
       {alert && <Alert {...alert} onClose={() => setAlert(null)} />}
 
       <h1
@@ -261,7 +261,7 @@ const ReservationCalendar = () => {
         {t("book.1")}
       </h1>
 
-      <div className="w-[80vw]">
+      <div className="w-[80vw] bg-gray-100 p-5 rounded-2xl">
         <Calendar
           localizer={localizer}
           events={reservations}
