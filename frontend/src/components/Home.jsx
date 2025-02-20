@@ -103,7 +103,7 @@ const Home = () => {
   useEffect(() => {
     setHeaderText(t("header.t1"));
     if (isLoading) {
-      // document.body.style.overflow = "hidden";
+      document.body.style.overflow = "hidden";
     }
   }, [t("header.t1"), isLoading]);
 
@@ -213,12 +213,12 @@ const Home = () => {
 
   return (
     <>
-      {/* {isLoading && (
+      {isLoading && (
         <RestaurantLoader
           actualProgress={loadingProgress}
           onLoadingComplete={handleLoadingComplete}
         />
-      )} */}
+      )}
 
       <div
         style={{

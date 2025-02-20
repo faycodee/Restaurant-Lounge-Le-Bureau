@@ -32,8 +32,12 @@ import g6 from "../assets/gallery/g6.jpeg";
 import g7 from "../assets/gallery/g7.jpg";
 import g8 from "../assets/gallery/g8.jpeg";
 import g9 from "../assets/gallery/g9.jpeg";
+import ta2 from "../assets/icons/tripadviso2.png";
+import ta1 from "../assets/icons/tripadvisor.png";
 
 export default {
+  ta1,
+  ta2,
   g1,
   g2,
   g3,

@@ -100,7 +100,7 @@ const ReservationCalendar = () => {
         delay: 1,
         scrollTrigger: {
           trigger: introRef.current,
-          start: "top 80%",
+          start: "top 40%",
           end: "bottom 30%",
           scrub: true,
           toggleActions: "play none none reverse",

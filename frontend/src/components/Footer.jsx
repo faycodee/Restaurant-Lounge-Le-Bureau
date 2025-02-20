@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Facebook,
   Instagram,
@@ -8,12 +8,13 @@ import {
   MapPin,
   Mail,
 } from "lucide-react";
+import images from "../constants/images";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-
+ const [src,setSrc]=useState(images.ta1)
   return (
-    <footer className="bg-black text-white py-12 px-8">
+    <footer id="contact" className="bg-black text-white py-12 px-8">
       <div className="max-w-7xl mx-auto">
         {/* Contact Info & Map Section */}
         <div className="grid md:grid-cols-2 gap-8 mb-16">
@@ -50,7 +51,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center gap-3">
                 <PhoneCall size={20} />
-                <p>+(212) 05 XX XX XX XX</p>
+                <p>+(212) 05 35 65 19 62</p>
               </div>
               <div className="flex items-center gap-3">
                 <Mail size={20} />
@@ -74,10 +75,12 @@ const Footer = () => {
               </a>
               <a
                 href="#"
+                onMouseEnter={()=>setSrc(images.ta2)}
+                onMouseLeave={()=>setSrc(images.ta1)}
                 className="group w-10 h-10 rounded-full border border-white flex items-center justify-center hover:bg-white transition-colors"
               >
-                <span className="text-sm font-bold group-hover:text-black">
-                  TA
+                <span className="  group-hover:text-black">
+                  <img src={src} alt="" srcset="" />
                 </span>
               </a>
             </div>
@@ -101,12 +104,12 @@ const Footer = () => {
           <div className="space-y-2">
             <h4 className="font-bold mb-4">À PROPOS</h4>
             <p>
-              <a href="#" className="hover:underline">
+              <a href="#about" className="hover:underline">
                 Notre Histoire
               </a>
             </p>
             <p>
-              <a href="#" className="hover:underline">
+              <a href="#menu" className="hover:underline">
                 Menu
               </a>
             </p>
@@ -120,7 +123,7 @@ const Footer = () => {
               </a>
             </p>
             <p>
-              <a href="#" className="hover:underline">
+              <a href="#gallery" className="hover:underline">
                 Galerie
               </a>
             </p>
@@ -129,12 +132,12 @@ const Footer = () => {
           <div className="space-y-2">
             <h4 className="font-bold mb-4">INFORMATION</h4>
             <p>
-              <a href="#" className="hover:underline">
+              <a href="#book" className="hover:underline">
                 Réservations
               </a>
             </p>
             <p>
-              <a href="#" className="hover:underline">
+              <a href="#contact" className="hover:underline">
                 Contact
               </a>
             </p>
