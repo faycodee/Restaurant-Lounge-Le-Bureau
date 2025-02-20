@@ -54,8 +54,8 @@ const ConfirmationModal = ({ onConfirm, onCancel, message }) => (
 );
 
 const ReservationCalendar = () => {
-  const api = "http://localhost:5000/api/reservations";
-  // const api = import.meta.env.VITE_API;
+  // const api = "http://localhost:5000/api/reservations";
+  const api = import.meta.env.VITE_API;
 
   const introRef = useRef(null);
   const [reservations, setReservations] = useState([]);
@@ -205,7 +205,7 @@ const ReservationCalendar = () => {
         reservation_date: moment(selectedSlot).format("YYYY-MM-DD"),
         reservation_time: formData.time,
         guests: parseInt(formData.guests),
-        status: "pending",
+        status: "confirmed",
       };
 
       await axios.post(api, reservationData);
@@ -251,7 +251,10 @@ const ReservationCalendar = () => {
   };
 
   return (
-    <div id="book" className="p-4 flex justify-center flex-col items-center mb-10">
+    <div
+      id="book"
+      className="p-4 flex justify-center flex-col items-center mb-10"
+    >
       {alert && <Alert {...alert} onClose={() => setAlert(null)} />}
 
       <h1

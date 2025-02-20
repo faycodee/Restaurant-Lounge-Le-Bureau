@@ -39,21 +39,20 @@ router.post("/", async (req, res) => {
 
     try {
       await client.messages.create({
-        contentSid: 'HXd7d5d4e29958e6b67ba00f06c6b232a1',
+        contentSid: "HXd7d5d4e29958e6b67ba00f06c6b232a1",
         contentVariables: JSON.stringify({
-          '1': req.body.customer_name,
-          '2': req.body.reservation_date,
-          '3': req.body.reservation_time,
-          '4': req.body.guests.toString(),
-          '5': req.body.customer_phone,
-          '6': req.body.email || 'N/A',
-          '7': savedReservation._id.toString() // أهم جزء: إرسال ID الحجز
-        }) ,
+          1: req.body.customer_name,
+          2: req.body.reservation_date,
+          3: req.body.reservation_time,
+          4: req.body.guests.toString(),
+          5: req.body.customer_phone,
+          6: req.body.email || "N/A",
+          7: savedReservation._id.toString(), // أهم جزء: إرسال ID الحجز
+        }),
         from: "whatsapp:+14155238886", // رقم صندوق الرمل الخاص بتويليو
         to: "whatsapp:+212608494998", // استبدل برقم واتساب المدير
       });
       // body: `⬜️ New Reservation Created ✨:\n\n 📎 name : ${req.body.customer_name} \n 📎 date :${req.body.reservation_date}\n 📎 time :${req.body.reservation_time}\n 📎 guests : ${req.body.guests} \n\n ☎️ contact : \n${req.body.customer_phone}\n${req.body.email} `,
-
     } catch (whatsappError) {
       console.error("فشل إرسال إشعار واتساب:", whatsappError);
     }
@@ -63,38 +62,36 @@ router.post("/", async (req, res) => {
     res.status(500).json({ message: "حدث خطأ أثناء إنشاء الحجز", error });
   }
 });
-router.post('/twilio-webhook', async (req, res) => {
-  const payload = req.body.ButtonPayload; // بيانات الزر المضغوط
-  
-  if (!payload) return res.sendStatus(200);
-  
-  // فصل الحالة عن ID الحجز
-  const [action, reservationId] = payload.split('_');
-  
-  try {
-    // تحديث الحجز في قاعدة البيانات
-    await Reservation.findByIdAndUpdate(
-      reservationId,
-      { status: action }
-    );
-    
-    // إرسال تأكيد للمدير (اختياري)
-    await client.messages.create({
-      body: `✅ تم تحديث الحجز ${reservationId} إلى "${action}"`,
-      from: "whatsapp:+14155238886",
-      to: req.body.From
-    });
-    
-  } catch (error) {
-    console.error('خطأ في التحديث:', error);
+router.post(
+  "https://restaurant-lounge-le-bureau.onrender.com/api/reservations/twilio-webhook",
+  async (req, res) => {
+    const payload = req.body.ButtonPayload; // بيانات الزر المضغوط
+
+    if (!payload) return res.sendStatus(200);
+
+    // فصل الحالة عن ID الحجز
+    const [action, reservationId] = payload.split("_");
+
+    try {
+      // تحديث الحجز في قاعدة البيانات
+      await Reservation.findByIdAndUpdate(reservationId, { status: action });
+
+      // إرسال تأكيد للمدير (اختياري)
+      await client.messages.create({
+        body: `✅ تم تحديث الحجز ${reservationId} إلى "${action}"`,
+        from: "whatsapp:+14155238886",
+        to: req.body.From,
+      });
+    } catch (error) {
+      console.error("خطأ في التحديث:", error);
+    }
+
+    res.sendStatus(200);
   }
-  
-  res.sendStatus(200);
-});
+);
 
 // 📌 حذف حجز مع إشعار واتساب
 router.delete("/:id", async (req, res) => {
-  
   try {
     const deletedReservation = await Reservation.findByIdAndDelete(
       req.params.id
