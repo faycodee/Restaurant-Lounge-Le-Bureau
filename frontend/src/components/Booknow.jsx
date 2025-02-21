@@ -95,47 +95,47 @@ const ReservationCalendar = () => {
     initializeUser();
     fetchReservations();
   }, []);
-  useGSAP(() => {
-    gsap.fromTo(
-      introRef.current,
-      { opacity: 0, y: 10 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 2,
-        delay: 1,
-        scrollTrigger: {
-          trigger: introRef.current,
-          start: "top 400vh",
-          end: "bottom 30vh",
-          // markers:1 ,
-          scrub: true,
-          // toggleActions: "play none none reverse",
-        },
-        ease: "power1.out",
-      }
-    );
-  }, []);
-  useGSAP(() => {
-    gsap.fromTo(
-      "#calendar",
-      { opacity: 0 },
-      {
-        opacity: 1,
+  // useGSAP(() => {
+  //   gsap.fromTo(
+  //     introRef.current,
+  //     { opacity: 0, y: 10 },
+  //     {
+  //       opacity: 1,
+  //       y: 0,
+  //       duration: 2,
+  //       delay: 1,
+  //       scrollTrigger: {
+  //         trigger: introRef.current,
+  //         start: "top 400vh",
+  //         end: "bottom 30vh",
+  //         // markers:1 ,
+  //         scrub: true,
+  //         // toggleActions: "play none none reverse",
+  //       },
+  //       ease: "power1.out",
+  //     }
+  //   );
+  // }, []);
+  // useGSAP(() => {
+  //   gsap.fromTo(
+  //     "#calendar",
+  //     { opacity: 0 },
+  //     {
+  //       opacity: 1,
 
-        duration: 5,
-        delay: 1,
-        scrollTrigger: {
-          trigger: introRef.current,
-          start: "top 300vh",
-          end: "bottom 30vh",
-          scrub: true,
-          // toggleActions: "play none none reverse",
-        },
-        ease: "power1.out",
-      }
-    );
-  }, []);
+  //       duration: 5,
+  //       delay: 1,
+  //       scrollTrigger: {
+  //         trigger: introRef.current,
+  //         start: "top 300vh",
+  //         end: "bottom 30vh",
+  //         scrub: true,
+  //         // toggleActions: "play none none reverse",
+  //       },
+  //       ease: "power1.out",
+  //     }
+  //   );
+  // }, []);
   const showAlert = (message, type) => {
     setAlert({ message, type });
     setTimeout(() => setAlert(null), 5000);
