@@ -285,7 +285,7 @@ const ReservationCalendar = () => {
 
       <h1
         ref={introRef}
-        className="text-[90px] text-center text-primary dark:text-darkPrimary mt-[80px] font-bold mb-[80px]"
+        className="text-[90px] max-md:text-[60px] text-center text-primary dark:text-darkPrimary mt-[80px] font-bold mb-[80px]"
       >
         {t("book.1")}
       </h1>

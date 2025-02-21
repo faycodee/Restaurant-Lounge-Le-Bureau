@@ -38,7 +38,7 @@ const MenuSection = ({ title, items, price, isActive, onToggle }) => {
         className="w-full py-4 px-6 flex items-center justify-between transition-colors duration-300"
       >
         <div className="flex items-center gap-4">
-          <h2 className="text-xl font-mono font-bold text-primary">{title}</h2>
+          <h2 style={{textAlign:"left"}} className="text-xl font-mono  font-bold text-primary">{title}</h2>
           <span className="text-sm text-primary/40">{price}</span>
         </div>
         {isActive ? (

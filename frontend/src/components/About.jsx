@@ -32,7 +32,7 @@ export default function OverviewSection() {
         duration: 2,
         delay: 1,
         scrollTrigger: {
-          trigger: para.current,
+          trigger: introRef.current,
           start: "top 80%",
           end: "bottom 30%",
           scrub: true,
@@ -51,7 +51,7 @@ export default function OverviewSection() {
         ease: "power1.inOut",
         scrollTrigger: {
           trigger: para.current,
-          start: "top 80%",
+          start: "top 90%",
           end: "bottom 30%",
           scrub: true,
           // toggleActions: "play none none reverse",
@@ -80,7 +80,7 @@ export default function OverviewSection() {
   }, []);
 
   return (
-    <section id="about" className="py-16 px-8 bg-background dark:bg-darkBackground y  h-[100vh]">
+    <section id="about" className="py-16 px-8 bg-background dark:bg-darkBackground y  h-[100vh] max-md:h-[180vh]">
       <div
         ref={introRef}
         className="text-center mb-12 text-primary dark:text-darkPrimary"

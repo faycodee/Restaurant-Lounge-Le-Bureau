@@ -129,11 +129,11 @@ const navigate =useNavigate()
         <div
           key={item.id}
           ref={el => sectionsRef.current[index] = el}
-          className="min-h-screen relative flex items-center justify-center"
+          className="min-h-screen relative flex items-center justify-center "
         >
           {item.type === 'side' ? (
-            <div className="flex w-full h-screen">
-              <div className="side-image relative overflow-hidden">
+            <div className="flex w-full h-screen ">
+              <div className="side-image  relative overflow-hidden">
                 <img
                   src={item.src}
                   alt={item.title}
@@ -142,9 +142,9 @@ const navigate =useNavigate()
                 <div className="overlay absolute inset-0 bg-black/30" />
               </div>
 
-              <div className="w-1/2 flex items-center justify-center px-16">
-                <div className="text-content">
-                  <h2 className="animate-text text-2xl font-light text-darkBackground dark:text-background tracking-[0.3em] mb-4"
+              <div className="w-1/2 flex items-center justify-center px-16 max-md:w-[5px] max-md:text-sm">
+                <div className="text-content max-md:text-sm">
+                  <h2 className="animate-text text-2xl max-md:text-sm font-light text-darkBackground dark:text-background tracking-[0.3em] mb-4"
                       style={{ fontFamily: 'Didot, serif' }}>
                     {item.title}
                   </h2>
