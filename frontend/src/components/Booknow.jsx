@@ -6,6 +6,10 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import { useTranslation } from "react-i18next";
 import gsap from "gsap";
 import { v4 as uuidv4 } from "uuid";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Alert = ({ message, type, onClose }) => {
   const alertColors = {
@@ -90,6 +94,8 @@ const ReservationCalendar = () => {
 
     initializeUser();
     fetchReservations();
+  }, []);
+  useGSAP(() => {
     gsap.fromTo(
       introRef.current,
       { opacity: 0, y: 10 },
@@ -100,8 +106,9 @@ const ReservationCalendar = () => {
         delay: 1,
         scrollTrigger: {
           trigger: introRef.current,
-          start: "top 40%",
-          end: "bottom 30%",
+          start: "top 400vh",
+          end: "bottom 30vh",
+          // markers:1 ,
           scrub: true,
           // toggleActions: "play none none reverse",
         },
@@ -109,7 +116,26 @@ const ReservationCalendar = () => {
       }
     );
   }, []);
+  useGSAP(() => {
+    gsap.fromTo(
+      "#calendar",
+      { opacity: 0 },
+      {
+        opacity: 1,
 
+        duration: 5,
+        delay: 1,
+        scrollTrigger: {
+          trigger: introRef.current,
+          start: "top 300vh",
+          end: "bottom 30vh",
+          scrub: true,
+          // toggleActions: "play none none reverse",
+        },
+        ease: "power1.out",
+      }
+    );
+  }, []);
   const showAlert = (message, type) => {
     setAlert({ message, type });
     setTimeout(() => setAlert(null), 5000);
@@ -264,7 +290,7 @@ const ReservationCalendar = () => {
         {t("book.1")}
       </h1>
 
-      <div className="w-[80vw] bg-gray-100 p-5 rounded-2xl">
+      <div id="calendar" className="w-[80vw] bg-gray-100 p-5 rounded-2xl">
         <Calendar
           localizer={localizer}
           events={reservations}

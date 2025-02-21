@@ -235,7 +235,25 @@
 } ,
 "book":{
   "1":"Reservations Calendar"
+},
+"foot": {
+  "1": "CONTACT US",
+  "2": "OPENING HOURS",
+  "3": "ADDRESS",
+  "4": "ABOUT",
+  "5": "Our History",
+  "6": "Menu",
+  "7": "DISCOVER",
+  "8": "Events",
+  "9": "Gallery",
+  "10": "INFORMATION",
+  "11": "Reservations",
+  "12": "Contact",
+  "13": "LEGAL NOTICE",
+  "14": "PRIVACY POLICY",
+  "15": "COOKIE MANAGEMENT"
 }
+
   
 }
 

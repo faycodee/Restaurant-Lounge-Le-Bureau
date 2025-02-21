@@ -45,6 +45,7 @@ const Navbar = () => {
       <div className="flex justify-start items-center">
         <img
           src={images.logo}
+          onClick={()=>window.location.href="#home"}
           alt="app logo"
           className="h-auto w-[50px] max-md:w-[50px] "
         />

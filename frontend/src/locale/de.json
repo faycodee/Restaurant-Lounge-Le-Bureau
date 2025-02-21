@@ -235,5 +235,23 @@
   },
   "book": {
     "1": "Buchungskalender"
-  }
+  },
+  "foot": {
+  "1": "KONTAKTIEREN SIE UNS",
+  "2": "ÖFFNUNGSZEITEN",
+  "3": "ADRESSE",
+  "4": "ÜBER UNS",
+  "5": "Unsere Geschichte",
+  "6": "Menü",
+  "7": "ENTDECKEN",
+  "8": "Veranstaltungen",
+  "9": "Galerie",
+  "10": "INFORMATIONEN",
+  "11": "Reservierungen",
+  "12": "Kontakt",
+  "13": "IMPRESSUM",
+  "14": "DATENSCHUTZRICHTLINIE",
+  "15": "COOKIE-VERWALTUNG"
+}
+
 }

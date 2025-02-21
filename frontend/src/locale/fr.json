@@ -234,6 +234,24 @@
   }
   ,"book":{
   "1":"Calendrier réservation"
+} ,
+"foot":{
+  "1":"CONTACTEZ-NOUS" ,
+  "2":"HEURES D'OUVERTURE" ,
+  "3":"ADRESSE" ,
+  "4":"À PROPOS" ,
+  "5":"Notre Histoire" ,
+  "6":"Menu" ,
+  "7":"DÉCOUVRIR" ,
+  "8":"Évènements" ,
+  "9":"Galerie" ,
+  "10":"INFORMATION" ,
+  "11":"Réservations" ,
+  "12":"Contact" ,
+  "13":"MENTIONS LÉGALES" ,
+  "14":"POLITIQUE DE CONFIDENTIALITÉ" ,
+  "15":"GESTION DES COOKIES" 
+
 }
   
 }

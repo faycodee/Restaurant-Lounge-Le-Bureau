@@ -5,7 +5,6 @@ import { useTranslation } from "react-i18next";
 import { ChevronRight, ChevronDown } from "lucide-react";
 gsap.registerPlugin(ScrollTrigger);
 
-
 const MenuSection = ({ title, items, price, isActive, onToggle }) => {
   const sectionRef = useRef(null);
   const contentRef = useRef(null);
@@ -30,7 +29,10 @@ const MenuSection = ({ title, items, price, isActive, onToggle }) => {
   }, [isActive]);
 
   return (
-    <div ref={sectionRef} className="border-b border-darkBackground dark:border-background">
+    <div
+      ref={sectionRef}
+      className="border-b border-darkBackground dark:border-background"
+    >
       <button
         onClick={onToggle}
         className="w-full py-4 px-6 flex items-center justify-between transition-colors duration-300"
@@ -79,25 +81,24 @@ const RestaurantMenu = () => {
   const [activeSection, setActiveSection] = useState("starters");
 
   useEffect(() => {
-
     gsap.fromTo(
-        containerRef.current,
-        { opacity: 0, y: 10 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 2,
-          delay: 1,
-          scrollTrigger: {
-            trigger: introRef.current,
-            start: "top 80%",
-            end: "bottom 30%",
-            scrub: true,
-            // toggleActions: "play none none reverse",
-          },
-          ease: "power1.out",
-        }
-      );
+      containerRef.current,
+      { opacity: 0, y: 10 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 2,
+        delay: 1,
+        scrollTrigger: {
+          trigger: introRef.current,
+          start: "top 80%",
+          end: "bottom 30%",
+          scrub: true,
+          // toggleActions: "play none none reverse",
+        },
+        ease: "power1.out",
+      }
+    );
     gsap.from(containerRef.current, {
       opacity: 0,
       y: 30,

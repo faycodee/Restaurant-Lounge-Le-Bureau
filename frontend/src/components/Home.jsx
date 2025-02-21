@@ -221,13 +221,14 @@ const Home = () => {
       )}
 
       <div
+        id="home"
         style={{
           backgroundImage: `url(${
             Mode === "light" ? images.welc : images.darkwelc
           })`,
           overflowX: "hidden",
-          backgroundRepeat:"no-repeat",
-          backgroundPosition:"center"
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
         }}
         className="relative h-[100vh] w-[100vw] overflow-y-auto"
       >
