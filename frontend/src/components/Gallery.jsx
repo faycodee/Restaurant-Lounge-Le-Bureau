@@ -28,7 +28,7 @@ const navigate =useNavigate()
       subtitle: t("gallery.2s"),
       highlight:t("gallery.2h"),
       description: t("gallery.2d"),
-      src: images.g7,
+      src: images.g5,
       type: "side"
     },
     {
@@ -36,7 +36,7 @@ const navigate =useNavigate()
       title: t("gallery.3t"),
       subtitle: t("gallery.3s"),
       description: t("gallery.3d"),
-      src: images.g4,
+      src: images.g7,
       type: "center",
       buttonText:t("gallery.3b")
     }

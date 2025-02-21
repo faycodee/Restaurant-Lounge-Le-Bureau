@@ -103,7 +103,7 @@ const ReservationCalendar = () => {
           start: "top 40%",
           end: "bottom 30%",
           scrub: true,
-          toggleActions: "play none none reverse",
+          // toggleActions: "play none none reverse",
         },
         ease: "power1.out",
       }

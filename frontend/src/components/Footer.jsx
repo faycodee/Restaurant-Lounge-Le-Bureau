@@ -14,7 +14,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
  const [src,setSrc]=useState(images.ta1)
   return (
-    <footer id="contact" className="bg-black text-white py-12 px-8">
+    <footer id="contact" className="bg-black text-white pt-[130px] py-12 px-8">
       <div className="max-w-7xl mx-auto">
         {/* Contact Info & Map Section */}
         <div className="grid md:grid-cols-2 gap-8 mb-16">

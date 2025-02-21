@@ -119,7 +119,7 @@ const Navbar = () => {
             />
             <ul className="list-none mt-4 p-6">
               <li className="font-CormorantUpright m-4 cursor-pointer p-1 text-golden text-4xl text-center hover:text-white">
-                <a href="/about" onClick={() => setToggleMenu(false)}>
+                <a href="#about" onClick={() => setToggleMenu(false)}>
                   About
                 </a>
                 <img
@@ -129,7 +129,7 @@ const Navbar = () => {
                 />
               </li>
               <li className="font-CormorantUpright m-4 cursor-pointer p-1 text-golden text-4xl text-center hover:text-white">
-                <a href="/menu" onClick={() => setToggleMenu(false)}>
+                <a href="#menu" onClick={() => setToggleMenu(false)}>
                   Menu
                 </a>
                 <img
@@ -139,7 +139,7 @@ const Navbar = () => {
                 />
               </li>
               <li className="font-CormorantUpright m-4 cursor-pointer p-1 text-golden text-4xl text-center hover:text-white">
-                <a href="/dinnershow" onClick={() => setToggleMenu(false)}>
+                <a href="#dinnershow" onClick={() => setToggleMenu(false)}>
                   Dinner Show
                 </a>
                 <img
@@ -149,7 +149,7 @@ const Navbar = () => {
                 />
               </li>
               <li className="font-CormorantUpright m-4 cursor-pointer p-1 text-golden text-4xl text-center hover:text-white">
-                <a href="/gallery" onClick={() => setToggleMenu(false)}>
+                <a href="#gallery" onClick={() => setToggleMenu(false)}>
                   Gallery
                 </a>
                 <img
@@ -159,7 +159,7 @@ const Navbar = () => {
                 />
               </li>
               <li className="font-CormorantUpright m-4 cursor-pointer p-1 text-golden text-4xl text-center hover:text-white">
-                <a href="/contact" onClick={() => setToggleMenu(false)}>
+                <a href="#contact" onClick={() => setToggleMenu(false)}>
                   Contact
                 </a>
                 <img

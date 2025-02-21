@@ -226,6 +226,8 @@ const Home = () => {
             Mode === "light" ? images.welc : images.darkwelc
           })`,
           overflowX: "hidden",
+          backgroundRepeat:"no-repeat",
+          backgroundPosition:"center"
         }}
         className="relative h-[100vh] w-[100vw] overflow-y-auto"
       >

@@ -79,24 +79,7 @@ const RestaurantMenu = () => {
   const [activeSection, setActiveSection] = useState("starters");
 
   useEffect(() => {
-    gsap.fromTo(
-        introRef.current,
-        { opacity: 0, y: 10 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 2,
-          delay: 1,
-          scrollTrigger: {
-            trigger: introRef.current,
-            start: "top 80%",
-            end: "bottom 30%",
-            scrub: true,
-            // toggleActions: "play none none reverse",
-          },
-          ease: "power1.out",
-        }
-      );
+
     gsap.fromTo(
         containerRef.current,
         { opacity: 0, y: 10 },
