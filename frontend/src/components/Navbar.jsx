@@ -40,12 +40,13 @@ const Navbar = () => {
   return (
     <nav
       style={{ position: "fixed", zIndex: 100 }}
-      className="z-nav fixed w-full flex justify-between my-3 items-center text-white h-[50px] bg-transparent backdrop-blur-2xl sm:px-8 sm:py-4 p-4"
+      className="z-nav fixed w-full flex justify-between my-3 items-center
+       text-white h-[50px] bg-transparent backdrop-blur-2xl sm:px-8 sm:py-4 p-4"
     >
       <div className="flex justify-start items-center">
         <img
           src={images.logo}
-          onClick={()=>window.location.href="#home"}
+          onClick={() => (window.location.href = "#home")}
           alt="app logo"
           className="h-auto w-[50px] max-md:w-[50px] "
         />
@@ -85,8 +86,8 @@ const Navbar = () => {
             hover:text-slate-700"
             href="#book"
           >
-            BookTable
-            {/* {t("nav.6")} */}
+            {/* BookTable */}
+            {t("nav.6")}
           </a>
         </li>
         <li className="">
@@ -106,22 +107,29 @@ const Navbar = () => {
 
       <div className="flex lg:hidden">
         <GiHamburgerMenu
-          color="#fff"
+          className="text-background"
           fontSize={27}
           onClick={() => setToggleMenu(true)}
         />
         {toggleMenu && (
-          <div className="slide-bottom fixed top-0 left-0 w-full h-[400px] bg-black duration-500 flex flex-col z-10">
+          <div
+            className="slide-bottom fixed top-0 left-0 w-full h-[600px]
+           duration-500 flex flex-col z-10 text-background 
+            dark:text-darkBackground 
+            bg-darkBackground dark:bg-background backdrop-blur-2xl"
+          >
             <MdOutlineRestaurantMenu
-              className="text-2xl text-golden absolute top-5 right-5 cursor-pointer p-1"
-              color="#fff"
+              className="text-2xl  text-background
+              dark:text-darkBackground
+              absolute top-5 right-5 cursor-pointer p-1"
+              
               fontSize={27}
               onClick={() => setToggleMenu(false)}
             />
             <ul className="list-none mt-4 p-6">
-              <li className="font-CormorantUpright m-4 cursor-pointer p-1 text-golden text-4xl text-center hover:text-white">
+              <li className="font-mono m-4 hover:text-background/30 dark:hover:text-darkBackground/30 cursor-pointer p-1 text-golden text-4xl text-center hover:text-white">
                 <a href="#about" onClick={() => setToggleMenu(false)}>
-                  About
+                  {t("nav.1")}
                 </a>
                 <img
                   src={images.spoon}
@@ -129,29 +137,9 @@ const Navbar = () => {
                   className="h-[10px] w-24 mx-auto"
                 />
               </li>
-              <li className="font-CormorantUpright m-4 cursor-pointer p-1 text-golden text-4xl text-center hover:text-white">
-                <a href="#menu" onClick={() => setToggleMenu(false)}>
-                  Menu
-                </a>
-                <img
-                  src={images.spoon}
-                  alt="spoon underline"
-                  className="h-[10px] w-24 mx-auto"
-                />
-              </li>
-              <li className="font-CormorantUpright m-4 cursor-pointer p-1 text-golden text-4xl text-center hover:text-white">
-                <a href="#dinnershow" onClick={() => setToggleMenu(false)}>
-                  Dinner Show
-                </a>
-                <img
-                  src={images.spoon}
-                  alt="spoon underline"
-                  className="h-[10px] w-24 mx-auto"
-                />
-              </li>
-              <li className="font-CormorantUpright m-4 cursor-pointer p-1 text-golden text-4xl text-center hover:text-white">
+              <li className="font-mono m-4 hover:text-background/30 dark:hover:text-darkBackground/30 cursor-pointer p-1 text-golden text-4xl text-center hover:text-white">
                 <a href="#gallery" onClick={() => setToggleMenu(false)}>
-                  Gallery
+                  {t("nav.4")}
                 </a>
                 <img
                   src={images.spoon}
@@ -159,9 +147,29 @@ const Navbar = () => {
                   className="h-[10px] w-24 mx-auto"
                 />
               </li>
-              <li className="font-CormorantUpright m-4 cursor-pointer p-1 text-golden text-4xl text-center hover:text-white">
+              <li className="font-mono m-4 hover:text-background/30 dark:hover:text-darkBackground/30 cursor-pointer p-1 text-golden text-4xl text-center hover:text-white">
+                <a href="#menu" onClick={() => setToggleMenu(false)}>
+                  {t("nav.2")}
+                </a>
+                <img
+                  src={images.spoon}
+                  alt="spoon underline"
+                  className="h-[10px] w-24 mx-auto"
+                />
+              </li>
+              <li className="font-mono m-4 hover:text-background/30 dark:hover:text-darkBackground/30 cursor-pointer p-1 text-golden text-4xl text-center hover:text-white">
+                <a href="#book" onClick={() => setToggleMenu(false)}>
+                  {t("nav.6")}
+                </a>
+                <img
+                  src={images.spoon}
+                  alt="spoon underline"
+                  className="h-[10px] w-24 mx-auto"
+                />
+              </li>
+              <li className="font-mono m-4 hover:text-background/30 dark:hover:text-darkBackground/30 cursor-pointer p-1 text-golden text-4xl text-center hover:text-white">
                 <a href="#contact" onClick={() => setToggleMenu(false)}>
-                  Contact
+                  {t("nav.5")}
                 </a>
                 <img
                   src={images.spoon}
@@ -170,6 +178,10 @@ const Navbar = () => {
                 />
               </li>
             </ul>
+            <div className="flex justify-center">
+              <LanguageSwitcher />
+              {/* <AudioPlayer /> */}
+            </div>{" "}
           </div>
         )}
       </div>

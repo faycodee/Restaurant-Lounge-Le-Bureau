@@ -4,7 +4,8 @@
     "2": "Menu",
     "3": "SpectacleDîner",
     "4": "Galerie",
-    "5": "Contact"
+    "5": "Contact",
+    "6": "TableLivre"
   },
   "header": {
     "t1": "Bienvenue dans notre restaurant !",
@@ -231,27 +232,25 @@
       "meatAndPoultry": "À partir de 110 DH",
       "fish": "À partir de 180 DH"
     }
+  },
+  "book": {
+    "1": "Calendrier réservation"
+  },
+  "foot": {
+    "1": "CONTACTEZ-NOUS",
+    "2": "HEURES D'OUVERTURE",
+    "3": "ADRESSE",
+    "4": "À PROPOS",
+    "5": "Notre Histoire",
+    "6": "Menu",
+    "7": "DÉCOUVRIR",
+    "8": "Évènements",
+    "9": "Galerie",
+    "10": "INFORMATION",
+    "11": "Réservations",
+    "12": "Contact",
+    "13": "MENTIONS LÉGALES",
+    "14": "POLITIQUE DE CONFIDENTIALITÉ",
+    "15": "GESTION DES COOKIES"
   }
-  ,"book":{
-  "1":"Calendrier réservation"
-} ,
-"foot":{
-  "1":"CONTACTEZ-NOUS" ,
-  "2":"HEURES D'OUVERTURE" ,
-  "3":"ADRESSE" ,
-  "4":"À PROPOS" ,
-  "5":"Notre Histoire" ,
-  "6":"Menu" ,
-  "7":"DÉCOUVRIR" ,
-  "8":"Évènements" ,
-  "9":"Galerie" ,
-  "10":"INFORMATION" ,
-  "11":"Réservations" ,
-  "12":"Contact" ,
-  "13":"MENTIONS LÉGALES" ,
-  "14":"POLITIQUE DE CONFIDENTIALITÉ" ,
-  "15":"GESTION DES COOKIES" 
-
-}
-  
 }

@@ -64,19 +64,20 @@ const Footer = () => {
             {/* Social Media */}
             <div className="flex gap-4">
               <a
-                href="#"
+                href="https://web.facebook.com/bureau.restau/"
                 className="w-10 h-10 rounded-full border border-white flex items-center justify-center hover:bg-white hover:text-black transition-colors"
               >
                 <Facebook size={20} />
               </a>
               <a
-                href="#"
+                href="https://www.instagram.com/restaurant.lounge.lebureau/"
                 className="w-10 h-10 rounded-full border border-white flex items-center justify-center hover:bg-white hover:text-black transition-colors"
               >
                 <Instagram size={20} />
               </a>
               <a
-                href="#"
+                href="https://www.tripadvisor.fr/Restaurant_Review-g293733-d23697060-Reviews-Restaurant_Lounge_Le_Bureau-Fez_Fez_Meknes.html"
+
                 onMouseEnter={() => setSrc(images.ta2)}
                 onMouseLeave={() => setSrc(images.ta1)}
                 className="group w-10 h-10 rounded-full border border-white flex items-center justify-center hover:bg-white transition-colors"

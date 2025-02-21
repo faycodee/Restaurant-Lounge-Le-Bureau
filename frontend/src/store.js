@@ -3,6 +3,13 @@ import { configureStore } from "@reduxjs/toolkit";
 
 const initialState = {
   mode: "light",
+  screensize:{
+    width: window.innerWidth,
+    isMobile: window.innerWidth < 768,
+    isTablet: window.innerWidth >= 768 && window.innerWidth < 1024,
+    isLaptop: window.innerWidth >= 1024 && window.innerWidth < 1440,
+    isDesktop: window.innerWidth >= 1440
+  }
 };
 
 const Slice = createSlice({

@@ -1,6 +1,8 @@
 import bg from "../assets/bg/bg.png";
 import welc from "../assets/bg/wel2.jpg";
 import darkwelc from "../assets/bg/darkwel2.jpg";
+import darkwelcp from "../assets/bg/darkwel2p.png";
+import welcp from "../assets/bg/wel2p.png";
 import chef from "../assets/chef.png";
 import knife from "../assets/icons/knife.png";
 import menu from "../assets/menu.png";
@@ -38,6 +40,8 @@ import ta1 from "../assets/icons/tripadvisor.png";
 export default {
   ta1,
   ta2,
+  darkwelcp ,
+  welcp ,
   g1,
   g2,
   g3,

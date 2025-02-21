@@ -12,6 +12,7 @@ const totalVideos = 3;
 
 const Home = () => {
   const Mode = useSelector((state) => state.lightdark.mode);
+  const Screensize = useSelector((state) => state.lightdark.screensize);
   const buttonRef = useRef(null);
   const [t] = useTranslation();
 
@@ -224,7 +225,13 @@ const Home = () => {
         id="home"
         style={{
           backgroundImage: `url(${
-            Mode === "light" ? images.welc : images.darkwelc
+            Screensize.isMobile
+              ? Mode === "light"
+                ? images.welcp
+                : images.darkwelcp
+              : Mode === "light"
+              ? images.welc
+              : images.darkwelc
           })`,
           overflowX: "hidden",
           backgroundRepeat: "no-repeat",
@@ -270,19 +277,43 @@ const Home = () => {
             className="absolute left-0 top-0 size-full object-cover object-center"
           />
 
-          <div className="absolute-center absolute z-40">
+          <div className="absolute left-[30vw] z-40 max-md:top-[310px] ">
             <img src={images.mause} width="200px" alt="Mouse" />
           </div>
 
           <h1
             id="textt"
-            className="headtext__cormorant_header font-bold sticky z-40 top-[200px] left-7 max-md:text-[100px]"
+            className="headtext__cormorant_header text-[100px] font-bold sticky z-40 top-[200px]  left-7 max-md:text-[70px]"
           >
             {t("header.6")}
           </h1>
-
-          <div className="wrapper">
-            <div className="words mb-4 absolute top-[330px] h-[60px] w-full overflow-hidden left-7 z-40 flex">
+          <button
+            id="btnn"
+            ref={buttonRef}
+            className="ml-8 md:hidden"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            onClick={() => (location.href = "#book")}
+            style={{
+              backgroundColor: "#FF6347",
+              zIndex: 1000,
+              position: "absolute",
+              bottom: "110px",
+              color: "#fff",
+              height: "30px",
+              border: "2px solid #333",
+              padding: "0px 7px",
+              fontSize: "10px",
+              cursor: "pointer",
+              borderRadius: "5px",
+              fontFamily: "cursive",
+              transition: "all 0.3s ease",
+            }}
+          >
+            {t("header.5")}
+          </button>
+          <div className="wrapper  ">
+            <div className="words mb-4 absolute top-[330px] max-md:top-[480px]  h-[60px] w-full overflow-hidden left-7 z-40 flex">
               {curHeaderText.split("").map((letter, index) => (
                 <Letter key={index} letter={letter} />
               ))}
@@ -290,9 +321,10 @@ const Home = () => {
               <button
                 id="btnn"
                 ref={buttonRef}
-                className="ml-8"
+                className="ml-8 max-md:hidden"
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
+                onClick={() => (location.href = "#book")}
                 style={{
                   backgroundColor: "#FF6347",
                   zIndex: 1000,
@@ -320,10 +352,9 @@ const Home = () => {
 
 const Letter = React.memo(({ letter }) => (
   <div
-    className="text font-mono"
+    className="text font-mono text-[20px] max-md:text-[13px] "
     style={{
       color: "#E0E0E0",
-      fontSize: 20,
     }}
   >
     {letter === " " ? "\u00A0" : letter}

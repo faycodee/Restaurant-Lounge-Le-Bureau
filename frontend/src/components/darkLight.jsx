@@ -3,6 +3,7 @@ import { FaMoon, FaSun } from "react-icons/fa";
 import { gsap } from "gsap";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleLightDark } from "../store";
+import { Sun , Moon } from "lucide-react";
 export default function DarkLightToggle() {
   const lightdark = useSelector((state) => state.lightdark);
   const dispatch = useDispatch();
@@ -19,9 +20,11 @@ export default function DarkLightToggle() {
         className="p-2 rounded-full shadow-md transition-transform transform hover:scale-110"
       >
         {lightdark.mode === "dark" ? (
-          <FaSun className="text-yellow-400 w-6 h-6" />
+    
+          <Sun className="text-yellow-400 w-6 h-6" />
+        
         ) : (
-          <FaMoon className="text-gray-800 w-6 h-6" />
+          <Moon className="text-gray-800 w-6 h-6" />
         )}
       </button>
     </div>
