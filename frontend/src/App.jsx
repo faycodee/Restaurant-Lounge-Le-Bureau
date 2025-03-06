@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route , Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 // import './i18n';
 import "./App.css";
 import { Home, Navbar, About } from "./components";
@@ -12,6 +12,8 @@ import MoreGallery from "./components/moreGallery";
 import RestaurantMenu from "./components/Menu";
 import ReservationCalendar from "./components/Booknow";
 import Footer from "./components/Footer";
+import Login from "./admin/Login";
+import Dashboard from "./admin/dashboard";
 
 const App = () => (
   <BrowserRouter>
@@ -25,7 +27,7 @@ const App = () => (
             <>
               <Navbar />
               <Home />
-              <MarqueeComponent r={"-2deg"}  />
+              <MarqueeComponent r={"-2deg"} />
               <About />
               <GalleryWelcome />
               <LuxuryGallery />
@@ -36,6 +38,8 @@ const App = () => (
           }
         />
         <Route path="/gallery/moreGallery" element={<MoreGallery />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="login/dashboard/:iduser" element={<Dashboard />} />
       </Routes>
     </div>
   </BrowserRouter>

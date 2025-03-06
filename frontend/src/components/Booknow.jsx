@@ -58,8 +58,8 @@ const ConfirmationModal = ({ onConfirm, onCancel, message }) => (
 );
 
 const ReservationCalendar = () => {
-  // const api = "http://localhost:5000/api/reservations";
-  const api = import.meta.env.VITE_API;
+  const api = "http://localhost:5000/api/reservations";
+  // const api = import.meta.env.VITE_API;
 
   const introRef = useRef(null);
   const [reservations, setReservations] = useState([]);

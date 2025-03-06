@@ -8,7 +8,7 @@ const router = express.Router();
 const SECRET_KEY = process.env.SECRET_KEY; // استبدالها بمفتاح سري قوي
 
 // 📌 تسجيل الدخول للأدمن
-router.post("/login", async (req, res) => {
+router.post("/login" , async (req, res) => {
   try {
     const { email, password } = req.body;
     // البحث عن المستخدم في قاعدة البيانات
@@ -21,7 +21,7 @@ router.post("/login", async (req, res) => {
     if (!isMatch)
       return res.status(401).json({ message: "كلمة المرور غير صحيحة" });
 
-    // التحقق من إذا كان المستخدم هو أدمن
+
     if (user.role !== "admin") {
       return res.status(403).json({ message: "أنت لست أدمن" });
     }
@@ -44,7 +44,7 @@ router.post("/login", async (req, res) => {
     res.status(500).json({ message: "خطأ في تسجيل الدخول", error });
   }
 });
-router.get("/reservations", verifyAdmin, async (req, res) => {
+router.get("/reservations",verifyAdmin , async (req, res) => {
   try {
     const reservations = await Reservation.find();
     res.json(reservations);
@@ -53,7 +53,7 @@ router.get("/reservations", verifyAdmin, async (req, res) => {
   }
 });
 // 📌 3️⃣ Get a single reservation by ID
-router.get("/reservations/:id",verifyAdmin, async (req, res) => {
+router.get("/reservations/:id", verifyAdmin , async (req, res) => {
   try {
     const reservation = await Reservation.findById(req.params.id);
     if (!reservation) return res.status(404).json({ message: "Reservation not found" });
@@ -63,7 +63,7 @@ router.get("/reservations/:id",verifyAdmin, async (req, res) => {
   }
 });
 // 📌 إضافة حجز جديد (فقط للأدمن)
-router.post("/reservations", verifyAdmin, async (req, res) => {
+router.post("/reservations",  verifyAdmin , async (req, res) => {
   try {
     const {
       customer_name,
@@ -90,7 +90,7 @@ router.post("/reservations", verifyAdmin, async (req, res) => {
   }
 });
 
-router.put("/reservations/:id", verifyAdmin, async (req, res) => {
+router.put("/reservations/:id",  verifyAdmin , async (req, res) => {
   try {
     const updatedReservation = await Reservation.findByIdAndUpdate(req.params.id, req.body, { new: true });
     res.json(updatedReservation);
@@ -100,7 +100,7 @@ router.put("/reservations/:id", verifyAdmin, async (req, res) => {
 });
 
 
-router.delete("/reservations/:id", verifyAdmin, async (req, res) => {
+router.delete("/reservations/:id",  verifyAdmin , async (req, res) => {
   try {
     await Reservation.findByIdAndDelete(req.params.id);
     res.json({ message: "تم حذف الحجز بنجاح" });
