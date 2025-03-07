@@ -14,6 +14,10 @@ import ReservationCalendar from "./components/Booknow";
 import Footer from "./components/Footer";
 import Login from "./admin/Login";
 import Dashboard from "./admin/dashboard";
+import Edit from "./admin/Edit";
+import Add from "./admin/Add";
+import Manag from "./admin/Manag";
+
 
 const App = () => (
   <BrowserRouter>
@@ -39,7 +43,10 @@ const App = () => (
         />
         <Route path="/gallery/moreGallery" element={<MoreGallery />} />
         <Route path="/login" element={<Login />} />
-        <Route path="login/dashboard/:iduser" element={<Dashboard />} />
+        <Route path="login/dashboard" element={<Dashboard />} />
+        <Route path="login/dashboard/add" element={<Add />} />
+        <Route path="login/dashboard/manag" element={<Manag />} />
+        <Route path="login/dashboard/manag/edit/:id" element={<Edit />}  />
       </Routes>
     </div>
   </BrowserRouter>

@@ -4,7 +4,7 @@ const reservationSchema = new mongoose.Schema({
   user_id: { type: String, required: true },
   customer_name: { type: String, required: true },
   customer_phone: { type: String, required: true },
-  email: { type: String }, // Optional field
+  email: { type: String }, 
   reservation_date: { type: String, required: true },
   reservation_time: { type: String, required: true },
   guests: { type: Number, required: true },
