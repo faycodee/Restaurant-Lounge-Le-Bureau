@@ -39,7 +39,7 @@ router.post("/", async (req, res) => {
 
     try {
       await client.messages.create({
-        contentSid: "HXd7d5d4e29958e6b67ba00f06c6b232a1",
+        contentSid: "HXb5bef39ba2ded763c3a95da1dc226bb3",
         contentVariables: JSON.stringify({
           1: req.body.customer_name,
           2: req.body.reservation_date,
