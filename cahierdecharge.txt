@@ -1,0 +1,114 @@
+# Cahier des Charges
+
+## Projet: Lounge Le Bureau
+
+### 1. Introduction
+Le projet "Lounge Le Bureau" est une application web composée d'un frontend et d'un backend.
+ L'objectif de cette application est de gérer les réservations et les utilisateurs pour un espace de travail partagé.
+
+### 2. Objectifs
+- Permettre aux utilisateurs de faire des réservations en ligne.
+- Gérer les utilisateurs et leurs rôles.
+- Fournir une interface d'administration pour gérer les réservations et les utilisateurs.
+- Intégrer des fonctionnalités de filtrage, de recherche et de pagination pour une meilleure gestion des données.
+- Assurer la sécurité des données et des accès.
+
+### 3. Structure du Projet
+
+#### Backend
+- **Technologies utilisées**: Node.js, Express, Mongoose, JWT, bcryptjs, dotenv, cors, lodash, twilio.
+- **Structure des dossiers**:
+  - `middleware/`: Contient les middlewares pour l'authentification.
+  - `models/`: Contient les modèles Mongoose pour les réservations et les utilisateurs.
+  - `routes/`: Contient les routes pour les réservations et les utilisateurs.
+  - `server.js`: Point d'entrée principal du serveur.
+  - `createCryptedModpass.js`: Script pour créer des mots de passe cryptés.
+  - `.env`: Fichier de configuration des variables d'environnement.
+
+#### Frontend
+- **Technologies utilisées**: React, Redux, React Router, Axios, Chart.js, i18next, GSAP, Swiper, Tailwind CSS.
+- **Structure des dossiers**:
+  - `src/`: Contient le code source de l'application.
+    - `admin/`: Contient les composants et pages d'administration.
+    - `assets/`: Contient les ressources statiques (images, vidéos, etc.).
+    - `components/`: Contient les composants réutilisables.
+    - `constants/`: Contient les constantes utilisées dans l'application.
+    - `i18n.js`: Configuration pour la localisation.
+  - `public/`: Contient les fichiers publics accessibles directement.
+  - `index.html`: Fichier HTML principal.
+  - `package.json`: Fichier de configuration des dépendances et scripts.
+  - `tailwind.config.js`: Configuration de Tailwind CSS.
+  - `vite.config.js`: Configuration de Vite.
+
+### 4. Fonctionnalités
+
+#### Backend
+- **Authentification**:
+  - Utilisation de JWT pour sécuriser les routes.
+  - Middleware d'authentification pour protéger les routes sensibles.
+- **Gestion des utilisateurs**:
+  - Création, modification et suppression des utilisateurs.
+  - Gestion des rôles et des permissions.
+- **Gestion des réservations**:
+  - Création, modification et suppression des réservations.
+  - Filtrage et recherche des réservations.
+  - Pagination des résultats.
+
+#### Frontend
+- **Interface utilisateur**:
+  - Pages de connexion et d'inscription.
+  - Tableau de bord pour les utilisateurs et les administrateurs.
+  - Formulaires pour créer et modifier les réservations.
+  - Composants pour afficher les statistiques (Chart.js).
+  - Intégration de Swiper pour les galeries d'images.
+  - Gestion des thèmes (clair/sombre) avec Redux.
+- **Fonctionnalités avancées**:
+  - Préchargement des vidéos pour une meilleure performance.
+  - Animation des éléments avec GSAP.
+  - Localisation avec i18next.
+  - Filtrage et recherche des réservations.
+  - Pagination des résultats.
+
+### 5. Sécurité
+- Utilisation de bcryptjs pour le hachage des mots de passe.
+- Utilisation de JWT pour l'authentification et la gestion des sessions.
+- Protection des routes sensibles avec des middlewares d'authentification.
+
+### 6. Déploiement
+- **Backend**: Déploiement sur un serveur Node.js.
+- **Frontend**: Déploiement avec Vite et configuration de Tailwind CSS.
+- **Configuration**: Utilisation de fichiers `.env` pour la configuration des variables d'environnement.
+
+### 7. Tests
+- Mise en place de tests unitaires et d'intégration pour le backend.
+- Tests de bout en bout pour le frontend.
+
+### 8. Documentation
+- Documentation du code et des API.
+- Guide d'installation et de configuration.
+- Guide d'utilisation pour les administrateurs et les utilisateurs.
+
+### 9. Conclusion
+Le projet "Lounge Le Bureau" vise à fournir une solution complète pour la gestion des réservations et des utilisateurs dans un espace de travail partagé. En utilisant des technologies modernes et des pratiques de développement sécurisées, ce projet offre une interface utilisateur intuitive et des fonctionnalités avancées pour répondre aux besoins des utilisateurs et des administrateurs.
+
+---------------------------------------------
+
+
+| Tâche Name                     | Durée (jours) | Tâche                                                        | Précédente           | Suivante              |
+|--------------------------------|--------------|--------------------------------------------------------------|----------------------|----------------------|
+| Planification                 | 2            | Définir les objectifs et fonctionnalités                     | -                    | Analyse des besoins |
+| Analyse des besoins           | 3            | Rédiger les spécifications techniques et fonctionnelles      | Planification        | Configuration        |
+| Configuration                 | 2            | Configurer les outils (Git, Vite, Tailwind, Express, etc.)   | Analyse des besoins  | Base Backend        |
+| Base Backend                  | 4            | Mettre en place Express, Mongoose, JWT, dotenv               | Configuration        | Auth Backend        |
+| Auth Backend                  | 3            | Implémenter l’authentification avec JWT et bcryptjs          | Base Backend         | Gestion Utilisateurs |
+| Gestion Utilisateurs Backend  | 4            | CRUD des utilisateurs et gestion des rôles                   | Auth Backend         | Gestion Réservations |
+| Gestion Réservations Backend  | 4            | CRUD des réservations avec pagination et filtrage           | Gestion Utilisateurs | Tests Backend       |
+| Tests Backend                 | 3            | Tests unitaires et d'intégration                             | Gestion Réservations | Base Frontend       |
+| Base Frontend                 | 3            | Configurer React, Redux, React Router, Axios                 | Tests Backend        | Auth Frontend       |
+| Auth Frontend                 | 3            | Intégrer l’authentification côté frontend                    | Base Frontend        | UI Gestion Utilisateurs |
+| UI Gestion Utilisateurs       | 3            | Création des interfaces de gestion des utilisateurs          | Auth Frontend        | UI Gestion Réservations |
+| UI Gestion Réservations       | 3            | Création des interfaces de gestion des réservations         | UI Gestion Utilisateurs | Fonctionnalités Avancées |
+| Fonctionnalités Avancées      | 4            | Intégration des animations GSAP, charts, mode sombre        | UI Gestion Réservations | Tests Frontend      |
+| Tests Frontend                | 3            | Tests et corrections UI                                      | Fonctionnalités Avancées | Déploiement       |
+| Déploiement                   | 3            | Hébergement du backend et frontend                          | Tests Frontend        | Fin                  |
+

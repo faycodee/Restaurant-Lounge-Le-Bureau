@@ -104,7 +104,7 @@ const Home = () => {
   useEffect(() => {
     setHeaderText(t("header.t1"));
     if (isLoading) {
-      // document.body.style.overflow = "hidden";
+      document.body.style.overflow = "hidden";
     }
   }, [t("header.t1"), isLoading]);
 
@@ -214,12 +214,12 @@ const Home = () => {
 
   return (
     <>
-      {/* {isLoading && (
+      {isLoading && (
         <RestaurantLoader
           actualProgress={loadingProgress}
           onLoadingComplete={handleLoadingComplete}
         />
-      )} */}
+      )}
 
       <div
         id="home"
@@ -253,6 +253,7 @@ const Home = () => {
                 src={getSrc(nextIndex)}
                 loop
                 muted
+                loading="lazy"
                 id="current-video"
                 className="size-64 origin-center scale-150 object-cover object-center"
               />
@@ -264,6 +265,7 @@ const Home = () => {
             src={getSrc(curIndex)}
             loop
             muted
+            loading="lazy"
             id="next-video"
             className="absolute-center invisible absolute size-64 z-20 object-cover object-center"
           />
@@ -273,12 +275,13 @@ const Home = () => {
             loop
             autoPlay
             muted
+            loading="lazy"
             id="next-video-bg"
             className="absolute left-0 top-0 size-full object-cover object-center"
           />
 
-          <div className="absolute left-[30vw] z-40 max-md:top-[310px] ">
-            <img src={images.mause} width="200px" alt="Mouse" />
+          <div className="absolute left-[40vw] top-[40vh] z-40 max-md:top-[310px] ">
+            <img src={images.mause} width="200px" alt="Mouse" loading="lazy" />
           </div>
 
           <h1
@@ -309,6 +312,7 @@ const Home = () => {
               fontFamily: "cursive",
               transition: "all 0.3s ease",
             }}
+            aria-label="Book Now"
           >
             {t("header.5")}
           </button>
@@ -339,6 +343,7 @@ const Home = () => {
                   fontFamily: "cursive",
                   transition: "all 0.3s ease",
                 }}
+                aria-label="Book Now"
               >
                 {t("header.5")}
               </button>

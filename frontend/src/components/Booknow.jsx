@@ -11,7 +11,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const Alert = ({ message, type, onClose }) => {
+const Alert = React.memo(({ message, type, onClose }) => {
   const alertColors = {
     success: "bg-green-100 border-green-400 text-green-700",
     error: "bg-red-100 border-red-400 text-red-700",
@@ -22,22 +22,24 @@ const Alert = ({ message, type, onClose }) => {
     <div className="fixed top-20 z-50 left-1/2 transform -translate-x-1/2">
       <div
         className={`border-l-4 p-4 ${alertColors[type]} rounded-lg shadow-lg min-w-64`}
+        role="alert"
+        aria-live="assertive"
       >
         <div className="flex justify-between items-center">
           <span className="text-sm">{message}</span>
-          <button onClick={onClose} className="text-2xl leading-none">
+          <button onClick={onClose} className="text-2xl leading-none" aria-label="Close alert">
             &times;
           </button>
         </div>
       </div>
     </div>
   );
-};
+});
 
-const ConfirmationModal = ({ onConfirm, onCancel, message }) => (
+const ConfirmationModal = React.memo(({ onConfirm, onCancel, message }) => (
   <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-30">
-    <div className="bg-white p-6 rounded-lg w-96">
-      <h3 className="text-lg font-bold mb-4">Confirm Action</h3>
+    <div className="bg-white p-6 rounded-lg w-96" role="dialog" aria-modal="true" aria-labelledby="confirm-title">
+      <h3 id="confirm-title" className="text-lg font-bold mb-4">Confirm Action</h3>
       <p className="mb-6">{message}</p>
       <div className="flex justify-end gap-2">
         <button
@@ -55,11 +57,11 @@ const ConfirmationModal = ({ onConfirm, onCancel, message }) => (
       </div>
     </div>
   </div>
-);
+));
 
 const ReservationCalendar = () => {
-  const api = "http://localhost:5000/api/reservations";
-  // const api = import.meta.env.VITE_API;
+  // const api = "http://localhost:5000/api/reservations";
+  const api = import.meta.env.VITE_API;
 
   const introRef = useRef(null);
   const [reservations, setReservations] = useState([]);
@@ -95,47 +97,7 @@ const ReservationCalendar = () => {
     initializeUser();
     fetchReservations();
   }, []);
-  // useGSAP(() => {
-  //   gsap.fromTo(
-  //     introRef.current,
-  //     { opacity: 0, y: 10 },
-  //     {
-  //       opacity: 1,
-  //       y: 0,
-  //       duration: 2,
-  //       delay: 1,
-  //       scrollTrigger: {
-  //         trigger: introRef.current,
-  //         start: "top 400vh",
-  //         end: "bottom 30vh",
-  //         // markers:1 ,
-  //         scrub: true,
-  //         // toggleActions: "play none none reverse",
-  //       },
-  //       ease: "power1.out",
-  //     }
-  //   );
-  // }, []);
-  // useGSAP(() => {
-  //   gsap.fromTo(
-  //     "#calendar",
-  //     { opacity: 0 },
-  //     {
-  //       opacity: 1,
 
-  //       duration: 5,
-  //       delay: 1,
-  //       scrollTrigger: {
-  //         trigger: introRef.current,
-  //         start: "top 300vh",
-  //         end: "bottom 30vh",
-  //         scrub: true,
-  //         // toggleActions: "play none none reverse",
-  //       },
-  //       ease: "power1.out",
-  //     }
-  //   );
-  // }, []);
   const showAlert = (message, type) => {
     setAlert({ message, type });
     setTimeout(() => setAlert(null), 5000);
@@ -277,208 +239,214 @@ const ReservationCalendar = () => {
   };
 
   return (
-    <div
-      id="book"
-      className="p-4 flex justify-center flex-col items-center mb-10"
-    >
-      {alert && <Alert {...alert} onClose={() => setAlert(null)} />}
-
-      <h1
-        ref={introRef}
-        className="text-[90px] max-md:text-[60px] text-center text-primary dark:text-darkPrimary mt-[80px] font-bold mb-[80px]"
+    <main>
+      <div
+        id="book"
+        className="p-4 flex justify-center flex-col items-center mb-10"
       >
-        {t("book.1")}
-      </h1>
+        {alert && <Alert {...alert} onClose={() => setAlert(null)} />}
 
-      <div id="calendar" className="w-[80vw] bg-gray-100 p-5 rounded-2xl">
-        <Calendar
-          localizer={localizer}
-          events={reservations}
-          startAccessor="start"
-          endAccessor="end"
-          titleAccessor="title"
-          eventPropGetter={eventStyleGetter}
-          style={{ height: 450 }}
-          selectable
-          onSelectSlot={handleSelectSlot}
-          onSelectEvent={handleSelectEvent}
-        />
+        <h1
+          ref={introRef}
+          className="text-[90px] max-md:text-[60px] text-center text-primary dark:text-darkPrimary mt-[80px] font-bold mb-[80px]"
+        >
+          {t("book.1")}
+        </h1>
 
-        {showModal && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-20">
-            <div className="bg-white p-6 rounded-lg w-96">
-              <h2 className="text-xl font-bold mb-4">
-                {selectedEvent ? "Reservation Details" : "New Reservation"}
-              </h2>
-              <p className="text-sm text-gray-600 mb-4">
-                {moment(selectedSlot).format("MMMM D, YYYY")}
-              </p>
+        <div id="calendar" className="w-[80vw] bg-gray-100 p-5 rounded-2xl">
+          <Calendar
+            localizer={localizer}
+            events={reservations}
+            startAccessor="start"
+            endAccessor="end"
+            titleAccessor="title"
+            eventPropGetter={eventStyleGetter}
+            style={{ height: 450 }}
+            selectable
+            onSelectSlot={handleSelectSlot}
+            onSelectEvent={handleSelectEvent}
+          />
 
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    name="customer_name"
-                    value={
-                      selectedEvent
-                        ? selectedEvent.resource.customer_name
-                        : formData.customer_name
-                    }
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        customer_name: e.target.value,
-                      })
-                    }
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                    disabled={!!selectedEvent}
-                  />
-                  {formErrors.customer_name && (
-                    <p className="text-red-500 text-sm">
-                      {formErrors.customer_name}
-                    </p>
-                  )}
-                </div>
+          {showModal && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-20">
+              <div className="bg-white p-6 rounded-lg w-96">
+                <h2 className="text-xl font-bold mb-4">
+                  {selectedEvent ? "Reservation Details" : "New Reservation"}
+                </h2>
+                <p className="text-sm text-gray-600 mb-4">
+                  {moment(selectedSlot).format("MMMM D, YYYY")}
+                </p>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    Phone
-                  </label>
-                  <input
-                    type="tel"
-                    name="customer_phone"
-                    value={
-                      selectedEvent
-                        ? selectedEvent.resource.customer_phone
-                        : formData.customer_phone
-                    }
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        customer_phone: e.target.value,
-                      })
-                    }
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                    disabled={!!selectedEvent}
-                  />
-                  {formErrors.customer_phone && (
-                    <p className="text-red-500 text-sm">
-                      {formErrors.customer_phone}
-                    </p>
-                  )}
-                </div>
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Name
+                    </label>
+                    <input
+                      type="text"
+                      name="customer_name"
+                      value={
+                        selectedEvent
+                          ? selectedEvent.resource.customer_name
+                          : formData.customer_name
+                      }
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          customer_name: e.target.value,
+                        })
+                      }
+                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                      disabled={!!selectedEvent}
+                      aria-required="true"
+                    />
+                    {formErrors.customer_name && (
+                      <p className="text-red-500 text-sm">
+                        {formErrors.customer_name}
+                      </p>
+                    )}
+                  </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    Email (optional)
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={
-                      selectedEvent
-                        ? selectedEvent.resource.email
-                        : formData.email
-                    }
-                    onChange={(e) =>
-                      setFormData({ ...formData, email: e.target.value })
-                    }
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                    disabled={!!selectedEvent}
-                  />
-                </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Phone
+                    </label>
+                    <input
+                      type="tel"
+                      name="customer_phone"
+                      value={
+                        selectedEvent
+                          ? selectedEvent.resource.customer_phone
+                          : formData.customer_phone
+                      }
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          customer_phone: e.target.value,
+                        })
+                      }
+                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                      disabled={!!selectedEvent}
+                      aria-required="true"
+                    />
+                    {formErrors.customer_phone && (
+                      <p className="text-red-500 text-sm">
+                        {formErrors.customer_phone}
+                      </p>
+                    )}
+                  </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    Time
-                  </label>
-                  <input
-                    type="time"
-                    name="time"
-                    value={
-                      selectedEvent
-                        ? moment(selectedEvent.start).format("HH:mm")
-                        : formData.time
-                    }
-                    onChange={(e) =>
-                      setFormData({ ...formData, time: e.target.value })
-                    }
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                    disabled={!!selectedEvent}
-                  />
-                  {formErrors.time && (
-                    <p className="text-red-500 text-sm">{formErrors.time}</p>
-                  )}
-                </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Email (optional)
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={
+                        selectedEvent
+                          ? selectedEvent.resource.email
+                          : formData.email
+                      }
+                      onChange={(e) =>
+                        setFormData({ ...formData, email: e.target.value })
+                      }
+                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                      disabled={!!selectedEvent}
+                    />
+                  </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    Guests
-                  </label>
-                  <input
-                    type="number"
-                    min="1"
-                    name="guests"
-                    value={
-                      selectedEvent
-                        ? selectedEvent.resource.guests
-                        : formData.guests
-                    }
-                    onChange={(e) =>
-                      setFormData({ ...formData, guests: e.target.value })
-                    }
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                    disabled={!!selectedEvent}
-                  />
-                  {formErrors.guests && (
-                    <p className="text-red-500 text-sm">{formErrors.guests}</p>
-                  )}
-                </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Time
+                    </label>
+                    <input
+                      type="time"
+                      name="time"
+                      value={
+                        selectedEvent
+                          ? moment(selectedEvent.start).format("HH:mm")
+                          : formData.time
+                      }
+                      onChange={(e) =>
+                        setFormData({ ...formData, time: e.target.value })
+                      }
+                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                      disabled={!!selectedEvent}
+                      aria-required="true"
+                    />
+                    {formErrors.time && (
+                      <p className="text-red-500 text-sm">{formErrors.time}</p>
+                    )}
+                  </div>
 
-                <div className="flex justify-end gap-2 mt-6">
-                  <button
-                    onClick={() => {
-                      setShowModal(false);
-                      setSelectedEvent(null);
-                    }}
-                    className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
-                  >
-                    Close
-                  </button>
-                  {selectedEvent && (
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Guests
+                    </label>
+                    <input
+                      type="number"
+                      min="1"
+                      name="guests"
+                      value={
+                        selectedEvent
+                          ? selectedEvent.resource.guests
+                          : formData.guests
+                      }
+                      onChange={(e) =>
+                        setFormData({ ...formData, guests: e.target.value })
+                      }
+                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                      disabled={!!selectedEvent}
+                      aria-required="true"
+                    />
+                    {formErrors.guests && (
+                      <p className="text-red-500 text-sm">{formErrors.guests}</p>
+                    )}
+                  </div>
+
+                  <div className="flex justify-end gap-2 mt-6">
                     <button
-                      onClick={() => setShowDeleteConfirm(true)}
-                      className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                      onClick={() => {
+                        setShowModal(false);
+                        setSelectedEvent(null);
+                      }}
+                      className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
                     >
-                      Delete
+                      Close
                     </button>
-                  )}
-                  {!selectedEvent && (
-                    <button
-                      onClick={handleFormSubmit}
-                      className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-                    >
-                      Confirm
-                    </button>
-                  )}
+                    {selectedEvent && (
+                      <button
+                        onClick={() => setShowDeleteConfirm(true)}
+                        className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                      >
+                        Delete
+                      </button>
+                    )}
+                    {!selectedEvent && (
+                      <button
+                        onClick={handleFormSubmit}
+                        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                      >
+                        Confirm
+                      </button>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        )}
+          )}
 
-        {showDeleteConfirm && (
-          <ConfirmationModal
-            onConfirm={handleDelete}
-            onCancel={() => setShowDeleteConfirm(false)}
-            message="Are you sure you want to delete this reservation?"
-          />
-        )}
+          {showDeleteConfirm && (
+            <ConfirmationModal
+              onConfirm={handleDelete}
+              onCancel={() => setShowDeleteConfirm(false)}
+              message="Are you sure you want to delete this reservation?"
+            />
+          )}
+        </div>
       </div>
-    </div>
+    </main>
   );
 };
 

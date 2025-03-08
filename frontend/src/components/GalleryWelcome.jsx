@@ -7,10 +7,12 @@ import { useTranslation } from "react-i18next";
 import LuxuryGallery from "./Gallery";
 
 gsap.registerPlugin(ScrollTrigger);
+
 const GalleryWelcome = () => {
-  const introRef =useRef(null)
+  const introRef = useRef(null);
   const [t, i18n] = useTranslation();
   const [categoryy, setCategory] = useState("Steak");
+
   useGSAP(() => {
     gsap.fromTo(
       introRef.current,
@@ -25,7 +27,6 @@ const GalleryWelcome = () => {
           start: "top 80%",
           end: "bottom 30%",
           scrub: true,
-          // toggleActions: "play none none reverse",
         },
         ease: "power1.out",
       }
@@ -46,39 +47,44 @@ const GalleryWelcome = () => {
       borderRadius: 0,
     });
   }, []);
+
   const [loadedImgs, setLoadedImgs] = useState(0);
 
   const handelLoadedImgs = () => {
     setLoadedImgs((prev) => prev + 1);
   };
+
   return (
-    <>
+    <main>
       <div
-        className="flex-col  bg-background dark:bg-darkBackground  flex__center pt-8 px-9  min-h-screen w-screen"
+        className="flex-col bg-background dark:bg-darkBackground flex__center pt-8 px-9 min-h-screen w-screen"
         id="gallery"
       >
-        <div className="mb-8 m-auto flex flex-col mt-10  justify-center items-center">
-          {/* <SubHeading title="Menu that fits your palatte" /> */}
-          <h1  ref={introRef} className="text-[90px] font-bold mb-[80px]  text-primary dark:text-darkPrimary" style={{ fontFamily:"Impact, Haettenschweiler"}}>
+        <div className="mb-8 m-auto flex flex-col mt-10 justify-center items-center">
+          <h1
+            ref={introRef}
+            className="text-[90px] font-bold mb-[80px] text-primary dark:text-darkPrimary"
+            style={{ fontFamily: "Impact, Haettenschweiler" }}
+          >
             {t("gallery.1")}.&apos;
           </h1>
         </div>
         <div id="clip" className="h-dvh w-screen">
-          <div className="mask-clip-path about-video relative ">
+          <div className="mask-clip-path about-video relative">
             <video
               src="./videos/Place decor.mp4"
               muted
               autoPlay
               loop
+              loading="lazy"
               className="absolute left-0 top-0 z-50 size-full object-cover"
-              alt="Video"
+              alt="Video of Place Decor"
             ></video>
           </div>
         </div>
       </div>
-   
-    </>
+    </main>
   );
 };
 
-export default GalleryWelcome;
+export default React.memo(GalleryWelcome);
