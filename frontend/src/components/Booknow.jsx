@@ -19,7 +19,7 @@ const Alert = React.memo(({ message, type, onClose }) => {
   };
 
   return (
-    <div className="fixed top-20 z-50 left-1/2 transform -translate-x-1/2">
+    <div className="fixed top-20 z-50 left-1/2 transform -translate-x-1/2 ">
       <div
         className={`border-l-4 p-4 ${alertColors[type]} rounded-lg shadow-lg min-w-64`}
         role="alert"
