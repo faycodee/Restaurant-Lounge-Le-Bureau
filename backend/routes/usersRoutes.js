@@ -1,32 +1,32 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const Users = require("../models/Users"); // استخدام نموذج الـ Users
+const Users = require("../models/Users"); // Import Users model
+const Reservation = require("../models/Reservation"); // Import Reservation model
 const { verifyAdmin } = require("../middleware/authMiddleware");
-const Reservation = require("../models/Reservation");
 const router = express.Router();
-const SECRET_KEY = process.env.SECRET_KEY; // استبدالها بمفتاح سري قوي
+const SECRET_KEY = process.env.SECRET_KEY; // Replace with a strong secret key
 
-// 📌 تسجيل الدخول للأدمن
-router.post("/login" , async (req, res) => {
+// 📌 Admin Login
+router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
-    // البحث عن المستخدم في قاعدة البيانات
-    const user = await Users.findOne({ email }); // هنا بحثنا في مجموعة users
+
+    // Find the user in the database
+    const user = await Users.findOne({ email });
     if (!user)
-      return res.status(401).json({ message: "البريد الإلكتروني غير صحيح" });
+      return res.status(401).json({ message: "Invalid email address" });
 
-    // التحقق من كلمة المرور
+    // Verify the password
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch)
-      return res.status(401).json({ message: "كلمة المرور غير صحيحة" });
+    if (!isMatch) return res.status(401).json({ message: "Invalid password" });
 
-
+    // Check if the user is an admin
     if (user.role !== "admin") {
-      return res.status(403).json({ message: "أنت لست أدمن" });
+      return res.status(403).json({ message: "Access denied. Admins only." });
     }
 
-    // إنشاء توكن JWT
+    // Generate a JWT token
     const token = jwt.sign({ id: user._id, role: user.role }, SECRET_KEY, {
       expiresIn: "2h",
     });
@@ -38,74 +38,102 @@ router.post("/login" , async (req, res) => {
         name: user.name,
         email: user.email,
         role: user.role,
+        loyaltyPoints: user.loyaltyPoints, // Include loyalty points
       },
     });
   } catch (error) {
-    res.status(500).json({ message: "خطأ في تسجيل الدخول", error });
+    res.status(500).json({ message: "Login error", error });
   }
 });
-router.get("/reservations",verifyAdmin , async (req, res) => {
+
+// 📌 Get All Reservations (Admin Only)
+router.get("/reservations", verifyAdmin, async (req, res) => {
   try {
     const reservations = await Reservation.find();
     res.json(reservations);
   } catch (error) {
-    res.status(500).json({ message: "خطأ في جلب الحجوزات" });
+    res.status(500).json({ message: "Error fetching reservations", error });
   }
 });
-// 📌 3️⃣ Get a single reservation by ID
-router.get("/reservations/:id", verifyAdmin , async (req, res) => {
+
+// 📌 Get a Single Reservation by ID (Admin Only)
+router.get("/reservations/:id", verifyAdmin, async (req, res) => {
   try {
     const reservation = await Reservation.findById(req.params.id);
-    if (!reservation) return res.status(404).json({ message: "Reservation not found" });
+    if (!reservation)
+      return res.status(404).json({ message: "Reservation not found" });
     res.json(reservation);
   } catch (error) {
     res.status(500).json({ message: "Error fetching reservation", error });
   }
 });
-// 📌 إضافة حجز جديد (فقط للأدمن)
-router.post("/reservations",  verifyAdmin , async (req, res) => {
+
+// 📌 Add a New Reservation (Admin Only)
+router.post("/reservations", verifyAdmin, async (req, res) => {
   try {
     const {
+      user_id,
       customer_name,
       customer_phone,
+      email,
       reservation_date,
       reservation_time,
       guests,
-      table,
     } = req.body;
 
     const newReservation = new Reservation({
+      user_id,
       customer_name,
       customer_phone,
+      email,
       reservation_date,
       reservation_time,
       guests,
-      table,
     });
 
-    await newReservation.save();
-    res.status(201).json(newReservation);
+    const savedReservation = await newReservation.save();
+
+    // Update loyalty points for the user
+    if (user_id) {
+      const user = await Users.findById(user_id);
+      if (user) {
+        user.loyaltyPoints += 10; // Add 10 loyalty points for each reservation
+        await user.save();
+      }
+    }
+
+    res.status(201).json(savedReservation);
   } catch (error) {
-    res.status(400).json({ message: "خطأ في إضافة الحجز" });
+    res.status(400).json({ message: "Error adding reservation", error });
   }
 });
 
-router.put("/reservations/:id",  verifyAdmin , async (req, res) => {
+// 📌 Update a Reservation (Admin Only)
+router.put("/reservations/:id", verifyAdmin, async (req, res) => {
   try {
-    const updatedReservation = await Reservation.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const updatedReservation = await Reservation.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
     res.json(updatedReservation);
   } catch (error) {
-    res.status(400).json({ message: "خطأ في تعديل الحجز" });
+    res.status(400).json({ message: "Error updating reservation", error });
   }
 });
 
-
-router.delete("/reservations/:id",  verifyAdmin , async (req, res) => {
+// 📌 Delete a Reservation (Admin Only)
+router.delete("/reservations/:id", verifyAdmin, async (req, res) => {
   try {
-    await Reservation.findByIdAndDelete(req.params.id);
-    res.json({ message: "تم حذف الحجز بنجاح" });
+    const deletedReservation = await Reservation.findByIdAndDelete(
+      req.params.id
+    );
+    if (!deletedReservation)
+      return res.status(404).json({ message: "Reservation not found" });
+
+    res.json({ message: "Reservation deleted successfully" });
   } catch (error) {
-    res.status(400).json({ message: "خطأ في حذف الحجز" });
+    res.status(400).json({ message: "Error deleting reservation", error });
   }
 });
 
