@@ -1,10 +1,9 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { MdOutlineRestaurantMenu } from "react-icons/md";
 import { gsap } from "gsap";
 import images from "../constants/images";
 import AudioPlayer from "./audio";
-
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useTranslation } from "react-i18next";
 
@@ -12,6 +11,21 @@ const Navbar = () => {
   const [t, i18n] = useTranslation();
   const buttonRef = useRef(null);
   const [toggleMenu, setToggleMenu] = useState(false);
+  const [user, setUser] = useState(null); // State to store user info
+
+  useEffect(() => {
+    // Check if the user is logged in by checking localStorage
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    if (storedUser) {
+      setUser(storedUser);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    // Clear user data from localStorage and state
+    localStorage.removeItem("user");
+    setUser(null);
+  };
 
   const handleMouseEnter = () => {
     gsap.to(buttonRef.current, {
@@ -52,7 +66,7 @@ const Navbar = () => {
         />
       </div>
       <ul className="lg:flex hidden justify-center items-center flex-1 duration-300 gap-2">
-        <li className="">
+        <li>
           <a
             className="text-darkBackground dark:text-background my-0 mx-1 duration-150 cursor-pointer p-1 font-mono hover:outline-dashed  
             hover:text-slate-700"
@@ -61,8 +75,7 @@ const Navbar = () => {
             {t("nav.1")}
           </a>
         </li>
-
-        <li className="">
+        <li>
           <a
             className="text-darkBackground dark:text-background my-0 mx-1 duration-150 cursor-pointer p-1 font-mono hover:outline-dashed  
             hover:text-slate-700"
@@ -71,7 +84,7 @@ const Navbar = () => {
             {t("nav.4")}
           </a>
         </li>
-        <li className="">
+        <li>
           <a
             className="text-darkBackground dark:text-background my-0 mx-1 duration-150 cursor-pointer p-1 font-mono hover:outline-dashed  
             hover:text-slate-700"
@@ -80,17 +93,16 @@ const Navbar = () => {
             {t("nav.2")}
           </a>
         </li>
-        <li className="">
+        <li>
           <a
             className="text-darkBackground dark:text-background my-0 mx-1 duration-150 cursor-pointer p-1 font-mono hover:outline-dashed  
             hover:text-slate-700"
             href="#book"
           >
-            {/* BookTable */}
             {t("nav.6")}
           </a>
         </li>
-        <li className="">
+        <li>
           <a
             className="text-darkBackground dark:text-background my-0 mx-1 duration-150 cursor-pointer p-1 font-mono hover:outline-dashed  
             hover:text-slate-700"
@@ -103,6 +115,34 @@ const Navbar = () => {
       <div className="sm:flex hidden justify-end items-center">
         <AudioPlayer />
         <LanguageSwitcher />
+        {user ? (
+          <div className="flex items-center gap-4">
+            <span className="text-darkBackground dark:text-background font-mono">
+              {t("nav.welcome")}, {user.name}
+            </span>
+            <button
+              onClick={handleLogout}
+              className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+            >
+              {t("nav.logout")}
+            </button>
+          </div>
+        ) : (
+          <div className="flex gap-4">
+            <button
+              onClick={() => (window.location.href = "/login")}
+              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+            >
+              {t("nav.login")}
+            </button>
+            <button
+              onClick={() => (window.location.href = "/signup")}
+              className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+            >
+              {t("nav.signup")}
+            </button>
+          </div>
+        )}
       </div>
 
       <div className="flex lg:hidden">
@@ -122,7 +162,6 @@ const Navbar = () => {
               className="text-2xl  text-background
               dark:text-darkBackground
               absolute top-5 right-5 cursor-pointer p-1"
-              
               fontSize={27}
               onClick={() => setToggleMenu(false)}
             />
@@ -180,8 +219,7 @@ const Navbar = () => {
             </ul>
             <div className="flex justify-center">
               <LanguageSwitcher />
-              {/* <AudioPlayer /> */}
-            </div>{" "}
+            </div>
           </div>
         )}
       </div>

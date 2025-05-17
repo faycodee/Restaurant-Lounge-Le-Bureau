@@ -214,12 +214,12 @@ const Home = () => {
 
   return (
     <>
-      {isLoading && (
+      {/* {isLoading && (
         <RestaurantLoader
           actualProgress={loadingProgress}
           onLoadingComplete={handleLoadingComplete}
         />
-      )}
+      )} */}
 
       <div
         id="home"
