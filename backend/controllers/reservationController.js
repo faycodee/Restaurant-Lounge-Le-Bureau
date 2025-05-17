@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const Reservation = require("../models/Reservation");
 const Users = require("../models/Users");
 
@@ -63,6 +64,18 @@ exports.createReservation = async (req, res) => {
 
 exports.updateReservation = async (req, res) => {
   try {
+    const reservation = await Reservation.findById(req.params.id);
+    if (!reservation) {
+      return res.status(404).json({ message: "Reservation not found" });
+    }
+
+    // Check if user owns this reservation
+    if (reservation.user_id.toString() !== req.user.id) {
+      return res
+        .status(403)
+        .json({ message: "Not authorized to update this reservation" });
+    }
+
     const updatedReservation = await Reservation.findByIdAndUpdate(
       req.params.id,
       req.body,
@@ -76,11 +89,19 @@ exports.updateReservation = async (req, res) => {
 
 exports.deleteReservation = async (req, res) => {
   try {
-    const deletedReservation = await Reservation.findByIdAndDelete(
-      req.params.id
-    );
-    if (!deletedReservation)
+    const reservation = await Reservation.findById(req.params.id);
+    if (!reservation) {
       return res.status(404).json({ message: "Reservation not found" });
+    }
+
+    // Check if user owns this reservation
+    if (reservation.user_id.toString() !== req.user.id) {
+      return res
+        .status(403)
+        .json({ message: "Not authorized to delete this reservation" });
+    }
+
+    await Reservation.findByIdAndDelete(req.params.id);
     res.json({ message: "Reservation deleted successfully" });
   } catch (error) {
     res.status(500).json({ message: "Error deleting reservation", error });
