@@ -15,6 +15,7 @@ import MoreGallery from "./components/moreGallery";
 import RestaurantMenu from "./components/Menu";
 import ReservationCalendar from "./components/Booknow";
 
+
 // Auth Components
 import Login from "./components/Login";
 import Signup from "./components/Signup";
@@ -24,12 +25,15 @@ import Dashboard from "./admin/dashboard";
 import Edit from "./admin/Edit";
 import Add from "./admin/Add";
 import Manag from "./admin/Manag";
+import Chatbot from "./components/chatbot";
 
 const App = () => {
   return (
     <BrowserRouter>
       <CustomCursor />
       <DarkLightToggle />
+      < Chatbot />
+    
       <div className="bg-background dark:bg-darkBackground">
         <Routes>
           {/* Main Layout Route */}
