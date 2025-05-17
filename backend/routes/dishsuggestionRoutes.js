@@ -1,22 +1,7 @@
-const express = require("express");
-const { verifyAdmin } = require("../middleware/authMiddleware");
-const {
-  createDishSuggestion,
-  getAllDishSuggestions,
-  getDishSuggestionById,
-  updateDishSuggestion,
-  deleteDishSuggestion,
-} = require("../controllers/dishSuggestionController");
-
+const express = require('express');
 const router = express.Router();
+const { suggestDish } = require('../controllers/dishSuggestionController');
 
-// Admin-only routes
-router.post("/", verifyAdmin, createDishSuggestion);
-router.put("/:id", verifyAdmin, updateDishSuggestion);
-router.delete("/:id", verifyAdmin, deleteDishSuggestion);
-
-// Public routes
-router.get("/", getAllDishSuggestions);
-router.get("/:id", getDishSuggestionById);
+router.post('/suggest', suggestDish);
 
 module.exports = router;

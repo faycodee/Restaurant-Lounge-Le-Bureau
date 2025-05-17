@@ -397,3 +397,56 @@ a {
   border-radius: 50%;
   cursor: pointer;
 }
+
+.markdown-content {
+  @apply text-sm leading-relaxed;
+}
+
+.markdown-content p {
+  @apply mb-2;
+}
+
+.markdown-content code {
+  @apply font-mono text-sm;
+}
+
+.markdown-content pre {
+  @apply overflow-x-auto;
+}
+
+.markdown-content blockquote {
+  @apply border-l-4 border-gray-300 dark:border-gray-600 pl-4 italic my-2;
+}
+
+.markdown-content table {
+  @apply w-full border-collapse my-2;
+}
+
+.markdown-content th,
+.markdown-content td {
+  @apply border border-gray-300 dark:border-gray-600 p-2;
+}
+
+.markdown-content th {
+  @apply bg-gray-100 dark:bg-gray-700;
+}
+/* Add these styles to your CSS */
+.chatbot-transition {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Optional: Add some animations */
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.zoom-animation {
+  animation: zoomIn 0.3s ease-out;
+}

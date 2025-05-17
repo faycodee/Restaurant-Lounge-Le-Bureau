@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const path = require("path");
 require("dotenv").config({ path: path.join(__dirname, ".env") });
+const chatbotRoutes = require('./routes/dishSuggestionRoutes');
 
 // Verify required environment variables
 const requiredEnvVars = ["MONGO_URI", "SECRET_KEY", "PORT"];
@@ -41,6 +42,7 @@ app.use("/api/reservations", reservationRoutes);
 app.use("/api/users", usersRoutes);
 app.use("/api/coupons", couponRoutes);
 app.use("/api/dish-suggestions", dishSuggestionRoutes);
+app.use('/api/chatbot', chatbotRoutes);
 
 // Start the server
 const PORT = process.env.PORT || 5000;
