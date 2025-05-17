@@ -5,7 +5,14 @@
     "3": "DinnerShow",
     "4": "Gallery",
     "5": "Contact",
-    "6": "BookTable"
+    "6": "BookTable",
+    "points": "points",
+    "profile": "profile",
+    "getcoupon": "get coupon",
+    "logout": "logout",
+    "login": "login",
+    "signup": "sign up"
+
   },
   "header": {
     "t1": "Welcome to our restaurant!",

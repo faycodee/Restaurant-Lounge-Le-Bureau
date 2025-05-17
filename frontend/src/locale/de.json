@@ -5,7 +5,13 @@
     "3": "Abendshow",
     "4": "Galerie",
     "5": "Kontakt",
-    "6":"BuchTisch"
+    "6":"BuchTisch",
+    "points": "Punkte",
+    "profile": "Profil",
+    "getcoupon": "Gutschein erhalten",
+    "logout": "Abmelden",
+    "login": "Anmelden",
+    "signup": "Registrieren"
   },
   "header": {
     "t1": "Willkommen in unserem Restaurant!",

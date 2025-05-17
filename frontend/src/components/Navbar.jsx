@@ -151,17 +151,17 @@ const Navbar = () => {
                 </div>
 
                 <a
-                  href="#profile"
+                  href="/profile"
                   className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
                 >
                   {t("nav.profile")}
                 </a>
 
                 <a
-                  href="#settings"
+                  href="/getcoupon"
                   className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
                 >
-                  {t("nav.settings")}
+                  {t("nav.getcoupon")}
                 </a>
 
                 <button
@@ -181,8 +181,8 @@ const Navbar = () => {
             <button
               onClick={() => navigate("/login")}
               className="sm:flex hidden justify-end items-center  px-4 py-2  text-darkBackground bg-slate-400 rounded-full
-     hover:bg-slate-400/5 transition-all duration-200 dark:text-darkBackground dark:bg-background 
-     dark:hover:bg-background/50"
+     hover:bg-slate-400/5 hover:text-white transition-all duration-200 dark:text-darkBackground dark:bg-background 
+     dark:hover:bg-background/50 font-mono"
             >
         
               {t("nav.login")}
@@ -190,8 +190,8 @@ const Navbar = () => {
             <button
               onClick={() => navigate("/signup")}
               className="sm:flex hidden justify-end items-center  px-4 py-2  text-darkBackground bg-background rounded-full
-     hover:bg-background/5 transition-all duration-200 dark:text-darkBackground dark:bg-background 
-     dark:hover:bg-background/50"
+     hover:bg-background/5 hover:text-white transition-all duration-200 dark:text-darkBackground dark:bg-background 
+     dark:hover:bg-background/50 font-mono"
             >
         
               {t("nav.signup")}

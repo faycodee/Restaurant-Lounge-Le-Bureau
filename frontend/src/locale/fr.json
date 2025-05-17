@@ -5,7 +5,14 @@
     "3": "SpectacleDîner",
     "4": "Galerie",
     "5": "Contact",
-    "6": "TableLivre"
+    "6": "TableLivre",
+    "points": "points",
+    "profile": "profil",
+    "getcoupon": "obtenir un coupon",
+    "logout": "déconnexion",
+    "login": "connexion",
+    "signup": "inscription"
+    
   },
   "header": {
     "t1": "Bienvenue dans notre restaurant !",

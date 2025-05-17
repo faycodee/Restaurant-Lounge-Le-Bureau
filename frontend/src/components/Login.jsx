@@ -92,7 +92,7 @@ const Login = () => {
           ref={titleRef}
           className="text-3xl font-bold text-center mb-8 text-[#FF4500]"
         >
-          Dashboard Login
+           Login
         </h1>
 
         <form onSubmit={handleLogin} className="space-y-6">
@@ -136,6 +136,16 @@ const Login = () => {
           >
             Sign In
           </button>
+          <p className="text-center text-gray-600">
+            you dont have an account?{" "}
+            <button
+              type="button"
+              onClick={() => navigate("/signup")}
+              className="text-[#FF4500] hover:underline"
+            >
+              Sign Up
+            </button>
+          </p>
         </form>
       </div>
     </div>

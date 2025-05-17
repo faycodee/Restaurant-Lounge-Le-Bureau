@@ -26,46 +26,85 @@ const Home = () => {
   const videoRefs = useRef(new Map());
   const nextIndex = (curIndex % totalVideos) + 1;
 
-  // Preload all videos on mount
+  const updateProgress = (videoIndex, progress) => {
+    setLoadedVideos((prev) => new Map(prev).set(videoIndex, progress));
+  };
+
+  const handleLoadingComplete = useCallback(() => {
+    setIsLoading(false);
+    document.body.style.overflow = "auto";
+    document.body.style.overflowX = "hidden";
+  }, []);
+
+  // Improved video preloading
   useEffect(() => {
     const preloadVideos = async () => {
-      const videoPromises = [];
+      try {
+        const videoPromises = [];
 
-      for (let i = 1; i <= totalVideos; i++) {
-        const video = document.createElement("video");
-        video.src = getSrc(i);
-        video.muted = true;
+        for (let i = 1; i <= totalVideos; i++) {
+          const video = document.createElement("video");
+          video.src = getSrc(i);
+          video.muted = true;
+          video.preload = "auto"; // Force preloading
 
-        const promise = new Promise((resolve) => {
-          let progress = 0;
+          const promise = new Promise((resolve, reject) => {
+            let progress = 0;
+            let timeoutId;
 
-          video.addEventListener("loadedmetadata", () => {
-            progress = 20;
-            updateProgress(i, progress);
+            // Add timeout to prevent infinite loading
+            timeoutId = setTimeout(() => {
+              reject(new Error(`Timeout loading video ${i}`));
+            }, 30000); // 30 seconds timeout
+
+            video.addEventListener("loadedmetadata", () => {
+              progress = 20;
+              updateProgress(i, progress);
+            });
+
+            video.addEventListener("canplay", () => {
+              progress = 60;
+              updateProgress(i, progress);
+            });
+
+            video.addEventListener("canplaythrough", () => {
+              clearTimeout(timeoutId);
+              progress = 100;
+              updateProgress(i, progress);
+              resolve();
+            });
+
+            video.addEventListener("error", (error) => {
+              clearTimeout(timeoutId);
+              console.error(`Error loading video ${i}:`, error);
+              reject(error);
+            });
           });
 
-          video.addEventListener("canplay", () => {
-            progress = 60;
-            updateProgress(i, progress);
-          });
+          videoPromises.push(promise);
+          videoRefs.current.set(i, video);
+        }
 
-          video.addEventListener("canplaythrough", () => {
-            progress = 100;
-            updateProgress(i, progress);
-            resolve();
-          });
+        await Promise.all(
+          videoPromises.map((p) =>
+            p.catch((err) => {
+              console.warn("Video loading error:", err);
+              return null; // Continue loading even if one video fails
+            })
+          )
+        );
 
-          video.addEventListener("error", () => {
-            console.error(`Error loading video ${i}`);
-            resolve();
-          });
-        });
-
-        videoPromises.push(promise);
-        videoRefs.current.set(i, video);
+        // Force completion after all videos are attempted
+        setLoadingProgress(100);
+        handleLoadingComplete();
+      } catch (error) {
+        console.error("Video preloading error:", error);
+        // Force completion after 5 seconds if loading fails
+        setTimeout(() => {
+          setLoadingProgress(100);
+          handleLoadingComplete();
+        }, 5000);
       }
-
-      await Promise.all(videoPromises);
     };
 
     preloadVideos();
@@ -75,29 +114,40 @@ const Home = () => {
         video.remove();
       });
     };
-  }, []);
+  }, [handleLoadingComplete]);
 
-  const updateProgress = (videoIndex, progress) => {
-    setLoadedVideos((prev) => new Map(prev).set(videoIndex, progress));
-  };
-
-  // Calculate total loading progress
+  // Improved progress calculation
   useEffect(() => {
     if (loadedVideos.size > 0) {
       const totalProgress = Array.from(loadedVideos.values()).reduce(
         (sum, progress) => sum + progress,
         0
       );
-      const averageProgress = (totalProgress / (totalVideos * 100)) * 100;
-      setLoadingProgress(averageProgress);
-    }
-  }, [loadedVideos]);
+      const averageProgress = Math.min(
+        (totalProgress / (totalVideos * 100)) * 100,
+        100
+      );
+      setLoadingProgress(Math.floor(averageProgress));
 
-  const handleLoadingComplete = useCallback(() => {
-    setIsLoading(false);
-    document.body.style.overflow = "auto";
-    document.body.style.overflowX = "hidden";
-  }, []);
+      // Auto-complete loading if progress is stuck
+      if (averageProgress > 90 && !isLoading) {
+        handleLoadingComplete();
+      }
+    }
+  }, [loadedVideos, isLoading, handleLoadingComplete]);
+
+  // Add fallback timer
+  useEffect(() => {
+    const fallbackTimer = setTimeout(() => {
+      if (isLoading) {
+        console.warn("Loading timeout reached, forcing completion");
+        setLoadingProgress(100);
+        handleLoadingComplete();
+      }
+    }, 10000); // 10 seconds fallback
+
+    return () => clearTimeout(fallbackTimer);
+  }, [isLoading, handleLoadingComplete]);
 
   const [curHeaderText, setHeaderText] = useState(t("header.t1"));
 
@@ -214,12 +264,12 @@ const Home = () => {
 
   return (
     <>
-      {/* {isLoading && (
+      {isLoading && (
         <RestaurantLoader
           actualProgress={loadingProgress}
           onLoadingComplete={handleLoadingComplete}
         />
-      )} */}
+      )}
 
       <div
         id="home"
