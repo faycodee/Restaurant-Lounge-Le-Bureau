@@ -6,23 +6,37 @@ import images from "../constants/images";
 import AudioPlayer from "./audio";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useTranslation } from "react-i18next";
+import { FaUserCircle, FaSignOutAlt } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [t, i18n] = useTranslation();
   const buttonRef = useRef(null);
   const [toggleMenu, setToggleMenu] = useState(false);
-  const [user, setUser] = useState(null); // State to store user info
+  const [user, setUser] = useState(null);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Check if the user is logged in by checking localStorage
     const storedUser = JSON.parse(localStorage.getItem("user"));
     if (storedUser) {
       setUser(storedUser);
     }
   }, []);
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   const handleLogout = () => {
-    // Clear user data from localStorage and state
     localStorage.removeItem("user");
     setUser(null);
   };
@@ -116,29 +130,70 @@ const Navbar = () => {
         <AudioPlayer />
         <LanguageSwitcher />
         {user ? (
-          <div className="flex items-center gap-4">
-            <span className="text-darkBackground dark:text-background font-mono">
-              {t("nav.welcome")}, {user.name}
-            </span>
+          <div className="relative ml-4" ref={dropdownRef}>
             <button
-              onClick={handleLogout}
-              className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              className="flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
             >
-              {t("nav.logout")}
+              <FaUserCircle className="text-2xl text-darkBackground dark:text-background" />
+              <span className="text-darkBackground dark:text-background font-mono">
+                {user.name}
+              </span>
             </button>
+
+            {isDropdownOpen && (
+              <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5">
+                <div className="px-4 py-2 text-sm text-gray-700 dark:text-gray-200 border-b dark:border-gray-700">
+                  <p className="font-medium">{user.email}</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">
+                    {t("nav.points")}: {user.loyaltyPoints || 0}
+                  </p>
+                </div>
+
+                <a
+                  href="#profile"
+                  className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                >
+                  {t("nav.profile")}
+                </a>
+
+                <a
+                  href="#settings"
+                  className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                >
+                  {t("nav.settings")}
+                </a>
+
+                <button
+                  onClick={handleLogout}
+                  className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 font-medium"
+                >
+                  <div className="flex items-center gap-2">
+                    <FaSignOutAlt />
+                    {t("nav.logout")}
+                  </div>
+                </button>
+              </div>
+            )}
           </div>
         ) : (
-          <div className="flex gap-4">
+          <div className="flex gap-2 ml-4">
             <button
-              onClick={() => (window.location.href = "/login")}
-              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+              onClick={() => navigate("/login")}
+              className="sm:flex hidden justify-end items-center  px-4 py-2  text-darkBackground bg-slate-400 rounded-full
+     hover:bg-slate-400/5 transition-all duration-200 dark:text-darkBackground dark:bg-background 
+     dark:hover:bg-background/50"
             >
+        
               {t("nav.login")}
             </button>
             <button
-              onClick={() => (window.location.href = "/signup")}
-              className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+              onClick={() => navigate("/signup")}
+              className="sm:flex hidden justify-end items-center  px-4 py-2  text-darkBackground bg-background rounded-full
+     hover:bg-background/5 transition-all duration-200 dark:text-darkBackground dark:bg-background 
+     dark:hover:bg-background/50"
             >
+        
               {t("nav.signup")}
             </button>
           </div>
@@ -153,10 +208,9 @@ const Navbar = () => {
         />
         {toggleMenu && (
           <div
-            className="slide-bottom fixed top-0 left-0 w-full h-[600px]
-           duration-500 flex flex-col z-10 text-background 
-            dark:text-darkBackground 
-            bg-darkBackground dark:bg-background backdrop-blur-2xl"
+            className="sm:flex hidden justify-end items-center  px-4 py-2  text-background bg-darkBackground rounded-full
+     hover:bg-darkBackground/50 transition-all duration-200 dark:text-darkBackground dark:bg-background 
+     dark:hover:bg-background/50"
           >
             <MdOutlineRestaurantMenu
               className="text-2xl  text-background

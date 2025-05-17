@@ -1,55 +1,81 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-// import './i18n';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
-import { Home, Navbar, About } from "./components";
+
+// Layout Components
+import { Navbar, Footer, Home, About } from "./components";
 import DarkLightToggle from "./components/darkLight";
-import MarqueeComponent from "./components/Marquee";
 import CustomCursor from "./components/cursor";
+
+// Page Components
+import MarqueeComponent from "./components/Marquee";
 import GalleryWelcome from "./components/GalleryWelcome";
 import LuxuryGallery from "./components/Gallery";
 import MoreGallery from "./components/moreGallery";
 import RestaurantMenu from "./components/Menu";
 import ReservationCalendar from "./components/Booknow";
-import Footer from "./components/Footer";
-import Login from "./admin/Login";
+
+// Auth Components
+import Login from "./components/Login";
+import Signup from "./components/Signup";
+
+// Admin Components
 import Dashboard from "./admin/dashboard";
 import Edit from "./admin/Edit";
 import Add from "./admin/Add";
 import Manag from "./admin/Manag";
 
+const App = () => {
+  return (
+    <BrowserRouter>
+      <CustomCursor />
+      <DarkLightToggle />
+      <div className="bg-background dark:bg-darkBackground">
+        <Routes>
+          {/* Main Layout Route */}
+          <Route
+            path="/"
+            element={
+              <>
+                <Navbar />
+                <Home />
+                <MarqueeComponent r={"-2deg"} />
+                <About />
+                <GalleryWelcome />
+                <LuxuryGallery />
+                <RestaurantMenu />
+                <ReservationCalendar />
+                <Footer />
+              </>
+            }
+          />
 
-const App = () => (
-  <BrowserRouter>
-    <CustomCursor />
-    <DarkLightToggle />
-    <div className="bg-background dark:bg-darkBackground ">
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <Navbar />
-              <Home />
-              <MarqueeComponent r={"-2deg"} />
-              <About />
-              <GalleryWelcome />
-              <LuxuryGallery />
-              <RestaurantMenu />
-              <ReservationCalendar />
-              <Footer />
-            </>
-          }
-        />
-        <Route path="/gallery/moreGallery" element={<MoreGallery />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="login/dashboard" element={<Dashboard />} />
-        <Route path="login/dashboard/add" element={<Add />} />
-        <Route path="login/dashboard/manag" element={<Manag />} />
-        <Route path="login/dashboard/manag/edit/:id" element={<Edit />}  />
-      </Routes>
-    </div>
-  </BrowserRouter>
-);
+          {/* Authentication Routes */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+
+          {/* Gallery Route */}
+          <Route path="/gallery/moreGallery" element={<MoreGallery />} />
+
+          {/* Admin Dashboard Routes */}
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard/add" element={<Add />} />
+          <Route path="/dashboard/manage" element={<Manag />} />
+          <Route path="/dashboard/manage/edit/:id" element={<Edit />} />
+
+          {/* 404 Route - Add this last */}
+          <Route
+            path="*"
+            element={
+              <div className="flex items-center justify-center min-h-screen">
+                <h1 className="text-2xl text-red-500">404 - Page Not Found</h1>
+              </div>
+            }
+          />
+        </Routes>
+      </div>
+    </BrowserRouter>
+  );
+};
 
 export default App;

@@ -9,12 +9,12 @@ const Login = () => {
   const [error, setError] = useState("");
   const randUrl = Math.random().toString(36).substr(2, 9);
   const navigate = useNavigate();
-  
+
   // Refs for GSAP animations
   const formRef = useRef(null);
   const titleRef = useRef(null);
   const errorRef = useRef(null);
-  
+
   // Initialize animations on component mount
   useEffect(() => {
     // Fade in and slide up the form
@@ -22,18 +22,18 @@ const Login = () => {
       y: 50,
       opacity: 0,
       duration: 1,
-      ease: "power3.out"
+      ease: "power3.out",
     });
-    
+
     // Animate title with a slight bounce
     gsap.from(titleRef.current, {
       y: -30,
       opacity: 0,
       duration: 1.2,
       ease: "elastic.out(1, 0.5)",
-      delay: 0.3
+      delay: 0.3,
     });
-    
+
     // Stagger the form fields appearance
     gsap.from(".form-field", {
       opacity: 0,
@@ -41,10 +41,10 @@ const Login = () => {
       stagger: 0.2,
       duration: 0.8,
       delay: 0.5,
-      ease: "power2.out"
+      ease: "power2.out",
     });
   }, []);
-  
+
   // Animation for error message
   useEffect(() => {
     if (error && errorRef.current) {
@@ -55,43 +55,46 @@ const Login = () => {
       );
     }
   }, [error]);
-  
+
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/admin/login",
+        "http://localhost:5000/api/users/login", // Updated API endpoint
         { email, password }
       );
-      
+
+      // Store user data and token
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+      localStorage.setItem("token", response.data.token);
+
       // Animate form on successful login
       gsap.to(formRef.current, {
         scale: 0.95,
         opacity: 0,
         duration: 0.5,
         onComplete: () => {
-          localStorage.setItem("token", response.data.token);
-          navigate(`dashboard`);
-        }
+          navigate("/"); // Navigate to home page after login
+        },
       });
     } catch (error) {
-      setError("Invalid email or password");
+      setError(error.response?.data?.message || "Invalid email or password");
     }
   };
-  
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-[#F5F5F5] p-4">
-      <div 
+      <div
         ref={formRef}
         className="w-full max-w-md p-8 rounded-lg shadow-lg bg-white"
       >
-        <h1 
+        <h1
           ref={titleRef}
           className="text-3xl font-bold text-center mb-8 text-[#FF4500]"
         >
           Dashboard Login
         </h1>
-        
+
         <form onSubmit={handleLogin} className="space-y-6">
           <div className="form-field">
             <label className="block text-[#B0B0B0] text-sm font-medium mb-2">
@@ -106,7 +109,7 @@ const Login = () => {
               placeholder="your@email.com"
             />
           </div>
-          
+
           <div className="form-field">
             <label className="block text-[#B0B0B0] text-sm font-medium mb-2">
               Password
@@ -120,24 +123,19 @@ const Login = () => {
               placeholder="••••••••"
             />
           </div>
-          
+
           {error && (
-            <p 
-              ref={errorRef}
-              className="text-red-500 text-center font-medium"
-            >
+            <p ref={errorRef} className="text-red-500 text-center font-medium">
               {error}
             </p>
           )}
-          
-          <button 
+
+          <button
             type="submit"
             className="form-field w-full py-3 px-4 bg-[#FF4500] text-white font-medium rounded-md hover:bg-[#E03E00] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#FF4500] focus:ring-opacity-50 transform hover:scale-105 active:scale-95"
           >
             Sign In
           </button>
-          
-         
         </form>
       </div>
     </div>
