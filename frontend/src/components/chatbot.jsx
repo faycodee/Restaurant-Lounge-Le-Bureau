@@ -74,44 +74,7 @@ const Chatbot = () => {
     if (message.isMarkdown) {
       return (
         <div className="prose prose-sm dark:prose-invert max-w-none">
-          <ReactMarkdown
-            children={message.text}
-            components={{
-              p: ({ children }) => <p className="mb-1">{children}</p>,
-              strong: ({ children }) => (
-                <span className="font-bold text-primary">{children}</span>
-              ),
-              em: ({ children }) => (
-                <span className="italic text-gray-600 dark:text-gray-300">
-                  {children}
-                </span>
-              ),
-              code: ({ inline, children }) =>
-                inline ? (
-                  <span className="bg-gray-200 dark:bg-gray-600 px-1 rounded text-sm font-mono">
-                    {children}
-                  </span>
-                ) : (
-                  <pre className="bg-gray-200 dark:bg-gray-600 p-2 rounded">
-                    {children}
-                  </pre>
-                ),
-              ul: ({ children }) => (
-                <ul className="list-disc pl-4 space-y-1">{children}</ul>
-              ),
-              ol: ({ children }) => (
-                <ol className="list-decimal pl-4 space-y-1">{children}</ol>
-              ),
-              li: ({ children }) => <li className="mb-1">{children}</li>,
-              b: ({ children }) => <b className="mb-1">{children}</b>,
-              h3: ({ children }) => (
-                <h3 className="font-bold text-lg mt-3 mb-2">{children}</h3>
-              ),
-              hr: () => (
-                <hr className="my-2 border-gray-300 dark:border-gray-600" />
-              ),
-            }}
-          />
+         {message.text}
         </div>
       );
     }
@@ -140,7 +103,7 @@ const Chatbot = () => {
           className={`fixed bg-white dark:bg-gray-800 rounded-2xl shadow-2xl flex flex-col z-50 transition-all duration-300 ${
             isZoomed
               ? "top-20 right-24 left-20 bottom-20 "
-              : "bottom-24 right-24 w-86 h-[600px]"
+              : "bottom-24 right-24  w-[400px] h-[480px]"
           }`}
         >
           {/* Header */}
@@ -198,14 +161,11 @@ const Chatbot = () => {
               </div>
             ))}
             {isLoading && (
-              <div className="flex justify-start">
-                <div className="max-w-[80%] p-3 rounded-2xl bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-white rounded-tl-none">
-                  <div className="flex space-x-2">
-                    <div className="animate-bounce">⋅</div>
-                    <div className="animate-bounce delay-100">⋅</div>
-                    <div className="animate-bounce delay-200">⋅</div>
+              <div className="flex justify-start" >
+                  <div className="flex space-x-2" >
+                   <img src="./loading.gif" alt="" srcset="" width="60px" height="20px" />
                   </div>
-                </div>
+           
               </div>
             )}
             <div ref={messagesEndRef} />

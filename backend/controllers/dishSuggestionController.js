@@ -221,53 +221,31 @@ const suggestDish = async (req, res) => {
     const response = await axios.post(
       "https://openrouter.ai/api/v1/chat/completions",
       {
-        model: "mistralai/mistral-7b-instruct",
+        model: "qwen/qwen3-4b:free",
         messages: [
           {
             role: "system",
-            content: `You are a helpful restaurant assistant for ${SITE_NAME}. 
-            Format your responses using the following Markdown structure:
-
-            ### Category Name
+            content: `
+            You are a friendly and efficient restaurant assistant for **${SITE_NAME}** .
             
-            **Dish Name** - *Price DH*
-            > Description of the dish
-            \`dietary-tag\` \`cuisine-type\`
-
-            Additional formatting rules:
-            - Use ### for category headers
-            - Use **bold** for dish names
-            - Use *italic* for prices
-            - Use > for dish descriptions
-            - Use \`code\` for tags
-            - Use --- to separate sections
-            - Use • for bullet points
+            Begin with small intro based on question and Follow this format in your responses(answer under 30 words):
             
-            Example response:
-            ### Seafood Specialties
+      
+                  
+            Dish Name : Price DH n/
+             - Short description of the dish.
+
+             then give her a question
             
-            **Seafood Pizza** - *70 DH*
-            > Tomato sauce, mozzarella, shrimp, squid, mussels
-            \`contains-seafood\` \`italian-cuisine\`
-
-            **Spaghetti Delmare** - *90 DH*
-            > Squid, Shrimp, Mussels with fresh herbs
-            \`contains-seafood\` \`pasta-dish\`
-
-            ---
-
-            ### Traditional Dishes
-            
-            **Moroccan Tagine** - *180 DH*
-            > Fresh catch of the day in traditional style
-            \`moroccan-cuisine\` \`chef-special\``,
-          },
-          {
+            Formatting rules:
+            - Keep answers brief and helpful
+            - under 20 words
+                `,
+              },  {
             role: "system",
-            content: `Current menu items available: ${JSON.stringify(
-              MENU_DATA
-            )}`,
+            content: `Menu data: ${JSON.stringify(MENU_DATA)}`,
           },
+          
           { role: "user", content: message },
         ],
       },
@@ -285,26 +263,20 @@ const suggestDish = async (req, res) => {
       throw new Error("Invalid response from OpenRouter API");
     }
 
-    // Format the response for better visual hierarchy
-    const reply = response.data.choices[0].message.content;
-
     res.json({
       success: true,
-      suggestion: reply,
+      suggestion: response.data.choices[0].message.content,
       formatted: true,
     });
   } catch (error) {
     console.error("Chatbot Error:", {
       message: error.message,
-      details: error.response?.data,
       timestamp: new Date().toISOString(),
     });
 
     res.status(500).json({
       success: false,
-      error: "Failed to fetch dish suggestion",
-      message:
-        process.env.NODE_ENV === "development" ? error.message : undefined,
+      error: "Failed to get suggestion",
     });
   }
 };

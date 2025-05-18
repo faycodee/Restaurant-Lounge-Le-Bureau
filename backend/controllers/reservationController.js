@@ -69,11 +69,14 @@ exports.updateReservation = async (req, res) => {
       return res.status(404).json({ message: "Reservation not found" });
     }
 
-    // Check if user owns this reservation
-    if (reservation.user_id.toString() !== req.user.id) {
-      return res
-        .status(403)
-        .json({ message: "Not authorized to update this reservation" });
+    // Check if user_id from request body matches the reservation's user_id
+    if (req.body.user_id && reservation.user_id) {
+      if (reservation.user_id.toString() !== req.body.user_id.toString()) {
+        return res.status(403).json({
+          success: false,
+          message: "Not authorized to update this reservation",
+        });
+      }
     }
 
     const updatedReservation = await Reservation.findByIdAndUpdate(
@@ -81,9 +84,19 @@ exports.updateReservation = async (req, res) => {
       req.body,
       { new: true }
     );
-    res.json(updatedReservation);
+
+    res.json({
+      success: true,
+      message: "Reservation updated successfully",
+      data: updatedReservation,
+    });
   } catch (error) {
-    res.status(500).json({ message: "Error updating reservation", error });
+    console.error("Update error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Error updating reservation",
+      error: error.message,
+    });
   }
 };
 
@@ -94,16 +107,27 @@ exports.deleteReservation = async (req, res) => {
       return res.status(404).json({ message: "Reservation not found" });
     }
 
-    // Check if user owns this reservation
-    if (reservation.user_id.toString() !== req.user.id) {
-      return res
-        .status(403)
-        .json({ message: "Not authorized to delete this reservation" });
+    // Check if user_id from request body matches the reservation's user_id
+    if (req.body.user_id && reservation.user_id) {
+      if (reservation.user_id.toString() !== req.body.user_id.toString()) {
+        return res.status(403).json({
+          success: false,
+          message: "Not authorized to delete this reservation",
+        });
+      }
     }
 
     await Reservation.findByIdAndDelete(req.params.id);
-    res.json({ message: "Reservation deleted successfully" });
+    res.json({
+      success: true,
+      message: "Reservation deleted successfully",
+    });
   } catch (error) {
-    res.status(500).json({ message: "Error deleting reservation", error });
+    console.error("Delete error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Error deleting reservation",
+      error: error.message,
+    });
   }
 };
