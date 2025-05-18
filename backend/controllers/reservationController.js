@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Reservation = require("../models/Reservation");
 const Users = require("../models/Users");
+const { sendWhatsAppNotification } = require("../utils/twilioService");
 
 console.log("SECRET_KEY:", SECRET_KEY);
 exports.getAllReservations = async (req, res) => {
@@ -47,6 +48,14 @@ exports.createReservation = async (req, res) => {
       }
     }
 
+    // Send WhatsApp notification
+    try {
+      await sendWhatsAppNotification("create", savedReservation);
+      console.log("WhatsApp notification sent for new reservation");
+    } catch (notificationError) {
+      console.error("WhatsApp notification failed:", notificationError);
+    }
+
     res.status(201).json({
       success: true,
       message: "Reservation created successfully",
@@ -85,6 +94,14 @@ exports.updateReservation = async (req, res) => {
       { new: true }
     );
 
+    // Send WhatsApp notification
+    try {
+      await sendWhatsAppNotification("update", updatedReservation);
+      console.log("WhatsApp notification sent for updated reservation");
+    } catch (notificationError) {
+      console.error("WhatsApp notification failed:", notificationError);
+    }
+
     res.json({
       success: true,
       message: "Reservation updated successfully",
@@ -115,6 +132,14 @@ exports.deleteReservation = async (req, res) => {
           message: "Not authorized to delete this reservation",
         });
       }
+    }
+
+    // Send WhatsApp notification before deletion
+    try {
+      await sendWhatsAppNotification("delete", reservation);
+      console.log("WhatsApp notification sent for deleted reservation");
+    } catch (notificationError) {
+      console.error("WhatsApp notification failed:", notificationError);
     }
 
     await Reservation.findByIdAndDelete(req.params.id);

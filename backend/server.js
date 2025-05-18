@@ -43,7 +43,10 @@ app.use("/api/users", usersRoutes);
 app.use("/api/coupons", couponRoutes);
 app.use("/api/dish-suggestions", dishSuggestionRoutes);
 app.use('/api/chatbot', chatbotRoutes);
-
+app.post("/api/reservations/twilio-webhook", async (req, res) => {
+  const success = await handleWebhook(req.body.ButtonPayload, req.body.From);
+  res.sendStatus(success ? 200 : 400);
+});
 // Start the server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
