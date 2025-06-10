@@ -1,8 +1,12 @@
-const axios = require("axios");
+const OpenAI = require("openai");
 require("dotenv").config();
 
-// OpenRouter API configuration
-const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
+// OpenAI configuration
+const client = new OpenAI({
+  baseURL: "https://openrouter.ai/api/v1",
+  apiKey: process.env.OPENROUTER_API_KEY,
+});
+
 const SITE_URL = process.env.SITE_URL || "http://localhost:3000";
 const SITE_NAME = process.env.SITE_NAME || "Lounge Le Bureau";
 
@@ -218,54 +222,41 @@ const suggestDish = async (req, res) => {
   }
 
   try {
-    const response = await axios.post(
-      "https://openrouter.ai/api/v1/chat/completions",
-      {
-        model: "qwen/qwen3-4b:free",
-        messages: [
-          {
-            role: "system",
-            content: `
-            You are a friendly and efficient restaurant assistant for **${SITE_NAME}** .
-            
-            Begin with small intro based on question and Follow this format in your responses(answer under 30 words):
-            
-      
-                  
-            Dish Name : Price DH n/
-             - Short description of the dish.
-
-             then give her a question
-            
-            Formatting rules:
-            - Keep answers brief and helpful
-            - under 20 words
-                `,
-              },  {
-            role: "system",
-            content: `Menu data: ${JSON.stringify(MENU_DATA)}`,
-          },
-          
-          { role: "user", content: message },
-        ],
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${OPENROUTER_API_KEY}`,
-          "HTTP-Referer": SITE_URL,
-          "X-Title": SITE_NAME,
-          "Content-Type": "application/json",
+    const completion = await client.chat.completions.create({
+      model: "google/gemma-3-4b-it:free", // Changed model to Gemma 3
+      messages: [
+        {
+          role: "system",
+          content: `
+        You are a friendly and helpful restaurant  assistant chatbot. 🎉  
+        Your job is to welcome users warmly, suggest dishes with structured formatting and emojis, and guide them through the menu like a human waiter. 🍽️✨
+        
+        Whenever someone asks for food or recommendations, do the following:
+        - Greet the user by name if they gave it.
+        - Suggest dishes from the menu using bullet points, categories, and emojis.
+        - Use short, warm sentences.
+        - Offer actions like "Dine in 🍽️", "Takeaway 📦", or "Delivery 🚚"
+        - Ask follow-up questions, like if they want sides or drinks.
+        Keep the tone warm, cheerful, and polite – like a 5-star waiter with a smile! 😄
+        `,
         },
-      }
-    );
-
-    if (!response.data?.choices?.[0]?.message?.content) {
-      throw new Error("Invalid response from OpenRouter API");
-    }
+        {
+          role: "system",
+          content: `Menu data: ${JSON.stringify(MENU_DATA)}`,
+        },
+        { role: "user", content: message },
+      ],
+      headers: {
+        Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
+        "HTTP-Referer": SITE_URL,
+        "X-Title": SITE_NAME,
+        "Content-Type": "application/json",
+      },
+    });
 
     res.json({
       success: true,
-      suggestion: response.data.choices[0].message.content,
+      suggestion: completion.choices[0].message.content,
       formatted: true,
     });
   } catch (error) {

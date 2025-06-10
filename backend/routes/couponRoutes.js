@@ -1,5 +1,5 @@
 const express = require("express");
-const { verifyAdmin } = require("../middleware/authMiddleware");
+const { verifyToken, verifyAdmin } = require("../middleware/authMiddleware");
 const {
   createCoupon,
   getAllCoupons,
@@ -11,10 +11,13 @@ const {
 
 const router = express.Router();
 
+// Allow authenticated users to create coupons
+router.post("/convert", verifyToken, createCoupon);
+
 // Admin-only routes
-router.post("/", verifyAdmin, createCoupon);
-router.put("/:id", verifyAdmin, updateCoupon);
-router.delete("/:id", verifyAdmin, deleteCoupon);
+router.post("/", createCoupon);
+router.put("/:id", updateCoupon);
+router.delete("/:id", deleteCoupon);
 
 // Public routes
 router.get("/", getAllCoupons);

@@ -4,6 +4,11 @@ const jwt = require("jsonwebtoken");
 const SECRET_KEY = process.env.SECRET_KEY;
 
 // Signup function
+
+
+// Add these new functions to userController.js
+
+
 exports.signup = async (req, res) => {
   try {
     const { name, email, password, role } = req.body;

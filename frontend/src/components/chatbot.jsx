@@ -35,7 +35,7 @@ const Chatbot = () => {
 
       try {
         const response = await axios.post(
-          "http://localhost:5000/api/chatbot/suggest",
+          "http://localhost:5000/api/dish-suggestions/suggest",
           {
             message: userMessage,
           }
@@ -74,7 +74,26 @@ const Chatbot = () => {
     if (message.isMarkdown) {
       return (
         <div className="prose prose-sm dark:prose-invert max-w-none">
-         {message.text}
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            rehypePlugins={[rehypeRaw]}
+            components={{
+              h3: ({ node, ...props }) => (
+                <h3 className="text-lg font-bold my-2" {...props} />
+              ),
+              ul: ({ node, ...props }) => (
+                <ul className="list-disc pl-4 my-2" {...props} />
+              ),
+              li: ({ node, ...props }) => <li className="my-1" {...props} />,
+              p: ({ node, ...props }) => <p className="my-2" {...props} />,
+              strong: ({ node, ...props }) => (
+                <strong className="font-bold" {...props} />
+              ),
+              em: ({ node, ...props }) => <em className="italic" {...props} />,
+            }}
+          >
+            {message.text}
+          </ReactMarkdown>
         </div>
       );
     }
@@ -161,11 +180,16 @@ const Chatbot = () => {
               </div>
             ))}
             {isLoading && (
-              <div className="flex justify-start" >
-                  <div className="flex space-x-2" >
-                   <img src="./loading.gif" alt="" srcset="" width="60px" height="20px" />
-                  </div>
-           
+              <div className="flex justify-start">
+                <div className="flex space-x-2">
+                  <img
+                    src="./loading.gif"
+                    alt=""
+                    srcset=""
+                    width="60px"
+                    height="20px"
+                  />
+                </div>
               </div>
             )}
             <div ref={messagesEndRef} />

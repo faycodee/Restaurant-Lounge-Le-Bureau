@@ -15,7 +15,6 @@ import MoreGallery from "./components/moreGallery";
 import RestaurantMenu from "./components/Menu";
 import ReservationCalendar from "./components/Booknow";
 
-
 // Auth Components
 import Login from "./components/Login";
 import Signup from "./components/Signup";
@@ -26,14 +25,15 @@ import Edit from "./admin/Edit";
 import Add from "./admin/Add";
 import Manag from "./admin/Manag";
 import Chatbot from "./components/chatbot";
+import Getcoupon from "./components/Getcoupon";
 
 const App = () => {
   return (
     <BrowserRouter>
       <CustomCursor />
       <DarkLightToggle />
-      < Chatbot />
-    
+      <Chatbot />
+
       <div className="bg-background dark:bg-darkBackground">
         <Routes>
           {/* Main Layout Route */}
@@ -49,6 +49,7 @@ const App = () => {
                 <LuxuryGallery />
                 <RestaurantMenu />
                 <ReservationCalendar />
+            
                 <Footer />
               </>
             }
@@ -63,9 +64,13 @@ const App = () => {
 
           {/* Admin Dashboard Routes */}
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/getcoupon" element={ <Getcoupon />} />
           <Route path="/dashboard/add" element={<Add />} />
           <Route path="/dashboard/manage" element={<Manag />} />
           <Route path="/dashboard/manage/edit/:id" element={<Edit />} />
+
+          {/* Profile Route */}
+
 
           {/* 404 Route - Add this last */}
           <Route
