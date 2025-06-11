@@ -15,13 +15,18 @@ const Navbar = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
   const [user, setUser] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [error, setError] = useState("");
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
-    if (storedUser) {
-      setUser(storedUser);
+    const token = localStorage.getItem("token");
+    if (storedUser && token) {
+      setUser({
+        ...storedUser,
+        role: storedUser.role ,
+      });
     }
   }, []);
 
@@ -63,6 +68,17 @@ const Navbar = () => {
       duration: 0.3,
       ease: "power2.out",
     });
+  };
+
+  const handleDashboardClick = (e) => {
+    e.preventDefault();
+    const token = localStorage.getItem("token");
+    if (token && user?.role === "admin") {
+      navigate("/dashboard");
+    } else {
+      setError("Unauthorized access");
+      setIsDropdownOpen(false);
+    }
   };
 
   return (
@@ -150,7 +166,29 @@ const Navbar = () => {
                   </p>
                 </div>
 
-                
+                {user?.role === "admin" && (
+                  <button
+                    onClick={handleDashboardClick}
+                    className="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                  >
+                    <div className="flex items-center gap-2">
+                      <svg
+                        className="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
+                        />
+                      </svg>
+                      Dashboard
+                    </div>
+                  </button>
+                )}
 
                 <a
                   href="/getcoupon"
@@ -179,7 +217,6 @@ const Navbar = () => {
      hover:bg-slate-400/5 hover:text-white transition-all duration-200 dark:text-darkBackground dark:bg-background 
      dark:hover:bg-background/50 font-mono"
             >
-        
               {t("nav.login")}
             </button>
             <button
@@ -188,7 +225,6 @@ const Navbar = () => {
      hover:bg-background/5 hover:text-white transition-all duration-200 dark:text-darkBackground dark:bg-background 
      dark:hover:bg-background/50 font-mono"
             >
-        
               {t("nav.signup")}
             </button>
           </div>

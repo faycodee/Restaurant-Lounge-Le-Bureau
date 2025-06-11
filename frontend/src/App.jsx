@@ -1,5 +1,5 @@
-import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import "./App.css";
 
 // Layout Components
@@ -24,8 +24,28 @@ import Dashboard from "./admin/dashboard";
 import Edit from "./admin/Edit";
 import Add from "./admin/Add";
 import Manag from "./admin/Manag";
+import CheackQR from "./admin/CheackQR";
 import Chatbot from "./components/chatbot";
 import Getcoupon from "./components/Getcoupon";
+
+// Add a protected route component
+const ProtectedRoute = ({ children }) => {
+  const navigate = useNavigate();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (!token || user?.role !== "admin") {
+      navigate("/login");
+    } else {
+      setIsAuthenticated(true);
+    }
+  }, [navigate]);
+
+  return isAuthenticated ? children : null;
+};
 
 const App = () => {
   return (
@@ -49,7 +69,7 @@ const App = () => {
                 <LuxuryGallery />
                 <RestaurantMenu />
                 <ReservationCalendar />
-            
+
                 <Footer />
               </>
             }
@@ -63,14 +83,21 @@ const App = () => {
           <Route path="/gallery/moreGallery" element={<MoreGallery />} />
 
           {/* Admin Dashboard Routes */}
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/getcoupon" element={ <Getcoupon />} />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/getcoupon" element={<Getcoupon />} />
           <Route path="/dashboard/add" element={<Add />} />
-          <Route path="/dashboard/manage" element={<Manag />} />
-          <Route path="/dashboard/manage/edit/:id" element={<Edit />} />
+          <Route path="/dashboard/cheackQR" element={<CheackQR />} />
+          <Route path="/dashboard/manag" element={<Manag />} />
+          <Route path="/dashboard/manag/edit/:id" element={<Edit />} />
 
           {/* Profile Route */}
-
 
           {/* 404 Route - Add this last */}
           <Route

@@ -49,7 +49,7 @@ const Manage = () => {
     const fetchReservations = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get('http://localhost:5000/api/admin/reservations', {
+        const response = await axios.get('http://localhost:5000/api/reservations', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -91,7 +91,7 @@ const Manage = () => {
     if (window.confirm('Are you sure you want to delete this reservation?')) {
       try {
         const token = localStorage.getItem('token');
-        await axios.delete(`http://localhost:5000/api/admin/reservations/${id}`, {
+        await axios.delete(`http://localhost:5000/api/reservations/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -111,7 +111,7 @@ const Manage = () => {
         const token = localStorage.getItem('token');
         await Promise.all(
           selectedReservations.map((id) =>
-            axios.delete(`http://localhost:5000/api/admin/reservations/${id}`, {
+            axios.delete(`http://localhost:5000/api/reservations/${id}`, {
               headers: {
                 Authorization: `Bearer ${token}`,
               },

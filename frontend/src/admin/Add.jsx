@@ -30,7 +30,7 @@ const Add = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      await axios.post('http://localhost:5000/api/admin/reservations', reservation, {
+      await axios.post('http://localhost:5000/api/reservations', reservation, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

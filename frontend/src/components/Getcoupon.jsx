@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { QRCodeSVG } from "qrcode.react";
+import html2pdf from "html2pdf.js";
 import Alert from "./Alert";
 import { FaMedal, FaTrophy, FaCrown } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const Getcoupon = () => {
   const [userPoints, setUserPoints] = useState(0);
@@ -12,6 +15,7 @@ const Getcoupon = () => {
     discountPercentage: "",
     expiryDate: "",
   });
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUserPoints = async () => {
@@ -66,7 +70,17 @@ const Getcoupon = () => {
     };
     fetchCoupons();
   }, []);
-
+  const downloadCouponAsPDF = (coupon) => {
+    const element = document.getElementById(`coupon-${coupon.id}`);
+    const opt = {
+      margin: 0.5,
+      filename: `lounge-bureau-coupon-${coupon.code}.pdf`,
+      image: { type: "jpeg", quality: 1 },
+      html2canvas: { scale: 4, useCORS: true },
+      jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
+    };
+    html2pdf().set(opt).from(element).save();
+  };
   const convertToCoupon = async (pointsRequired, discountPercentage) => {
     try {
       const user = JSON.parse(localStorage.getItem("user"));
@@ -201,6 +215,26 @@ const Getcoupon = () => {
 
   return (
     <section className="py-16 px-8 bg-background dark:bg-darkBackground min-h-screen">
+      {/* Back to Home Button */}
+      <button
+        onClick={() => navigate("/")}
+        className="fixed top-4 left-4 z-50 flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors shadow-md"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-5 w-5"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+        >
+          <path
+            fillRule="evenodd"
+            d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z"
+            clipRule="evenodd"
+          />
+        </svg>
+        Back to Home
+      </button>
+
       {alert.show && (
         <Alert
           message={alert.message}
@@ -340,31 +374,75 @@ const Getcoupon = () => {
               {userCoupons.map((coupon, index) => (
                 <div
                   key={index}
-                  className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 border border-gray-200 dark:border-gray-600"
+                  id={`coupon-${coupon.id}`}
+                  className="relative bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-600"
                 >
-                  <div className="flex justify-between items-start mb-3">
-                    <div className="px-3 py-1 bg-primary text-white text-sm rounded-full">
-                      {coupon.discount_percentage}% OFF
+                  {/* Restaurant Ticket Design */}
+                  <div className="p-6 relative">
+                    {/* Header */}
+                    <div className="text-center mb-4">
+                      <h3 className="text-2xl font-bold text-primary mb-1">
+                        Lounge Le Bureau
+                      </h3>
+                      <p className="text-sm text-gray-500">
+                        Restaurant & Lounge
+                      </p>
                     </div>
-                    <span className="text-xs text-gray-500 dark:text-gray-400">
-                      Created:{" "}
-                      {new Date(coupon.created_at).toLocaleDateString()}
-                    </span>
-                  </div>
 
-                  <div className="bg-white dark:bg-gray-800 rounded p-3 mb-3 text-center">
-                    <span className="font-mono text-lg font-bold text-primary break-all">
-                      {coupon.code}
-                    </span>
-                  </div>
+                    {/* Divider with circular edges */}
+                    <div className="relative py-4">
+                      <div className="absolute left-[-24px] top-1/2 transform -translate-y-1/2 w-6 h-6 bg-background dark:bg-darkBackground rounded-full"></div>
+                      <div className="absolute right-[-24px] top-1/2 transform -translate-y-1/2 w-6 h-6 bg-background dark:bg-darkBackground rounded-full"></div>
+                      <div className="border-dashed border-2 border-gray-300 w-full"></div>
+                    </div>
 
-                  <div className="flex justify-between items-center text-sm">
-                    <span className="text-gray-600 dark:text-gray-300">
-                      Expires:
-                    </span>
-                    <span className="text-red-500 font-medium">
-                      {new Date(coupon.expiry_date).toLocaleDateString()}
-                    </span>
+                    {/* Coupon Details */}
+                    <div className="text-center mb-4">
+                      <div className="text-3xl font-bold text-primary mb-2">
+                        {coupon.discount_percentage}% OFF
+                      </div>
+                      <div className="flex justify-center mb-4">
+                        <QRCodeSVG
+                          value={coupon.code}
+                          size={120}
+                          level="H"
+                          includeMargin={true}
+                        />
+                      </div>
+                      <div className="font-mono text-lg font-bold text-gray-700 dark:text-gray-300 mb-2">
+                        {coupon.code}
+                      </div>
+                    </div>
+
+                    {/* Footer */}
+                    <div className="text-center text-sm text-gray-500">
+                      <p>
+                        Valid until:{" "}
+                        {new Date(coupon.expiry_date).toLocaleDateString()}
+                      </p>
+                      <p className="text-xs mt-1">
+                        *Terms and conditions apply
+                      </p>
+                    </div>
+
+                    {/* Download Button */}
+                    <button
+                      onClick={() => downloadCouponAsPDF(coupon)}
+                      className="absolute top-2 right-2 p-2 text-primary hover:text-primary/80 transition-colors"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </button>
                   </div>
                 </div>
               ))}

@@ -51,7 +51,7 @@ const Edit = () => {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          `http://localhost:5000/api/admin/reservations/${id}`,
+          `http://localhost:5000/api/reservations/${id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -76,7 +76,7 @@ const Edit = () => {
     try {
       const token = localStorage.getItem("token");
       await axios.put(
-        `http://localhost:5000/api/admin/reservations/${id}`,
+        `http://localhost:5000/api/reservations/${id}`,
         reservation,
         {
           headers: {
@@ -86,7 +86,7 @@ const Edit = () => {
       );
       setAlert({ message: "Reservation updated successfully", type: "success" });
       setTimeout(() => {
-        navigate("/login/dashboard/manag");
+        navigate("/dashboard/manag");
       }, 2000);
     } catch (error) {
       setError("Error updating reservation");

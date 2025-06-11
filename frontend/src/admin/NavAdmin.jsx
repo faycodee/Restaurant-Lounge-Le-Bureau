@@ -21,14 +21,17 @@ const NavAdmin = ({ isOpen, toggleSidebar }) => {
           <div>
         
             <div className="flex flex-col space-y-4 mt-[100px]">
-              <Link to="/login/dashboard/" className="nav-item hover:text-gray-300">
+              <Link to="/dashboard/" className="nav-item hover:text-gray-300">
                 Dashboard
               </Link>
-              <Link to="/login/dashboard/add" className="nav-item hover:text-gray-300">
+              <Link to="/dashboard/add" className="nav-item hover:text-gray-300">
                 Add Reservation
               </Link>
-              <Link to="/login/dashboard/manag" className="nav-item hover:text-gray-300">
+              <Link to="/dashboard/manag" className="nav-item hover:text-gray-300">
               Manage
+              </Link>
+              <Link to="/dashboard/cheackQR" className="nav-item hover:text-gray-300">
+              cheack QR
               </Link>
             </div>
           </div>

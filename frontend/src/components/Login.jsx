@@ -60,12 +60,14 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/users/login", // Updated API endpoint
+        "http://localhost:5000/api/users/login",
         { email, password }
       );
 
+      const userData = response.data.user; // ✅ Get user data from response
+
       // Store user data and token
-      localStorage.setItem("user", JSON.stringify(response.data.user));
+      localStorage.setItem("user", JSON.stringify(userData));
       localStorage.setItem("token", response.data.token);
 
       // Animate form on successful login
@@ -74,7 +76,13 @@ const Login = () => {
         opacity: 0,
         duration: 0.5,
         onComplete: () => {
-          navigate("/"); // Navigate to home page after login
+          // Check role instead of isAdmin
+          if (userData.role === "admin") {
+            // ✅
+            navigate("/");
+          } else {
+            navigate("/");
+          }
         },
       });
     } catch (error) {
@@ -92,7 +100,7 @@ const Login = () => {
           ref={titleRef}
           className="text-3xl font-bold text-center mb-8 text-[#FF4500]"
         >
-           Login
+          Login
         </h1>
 
         <form onSubmit={handleLogin} className="space-y-6">
