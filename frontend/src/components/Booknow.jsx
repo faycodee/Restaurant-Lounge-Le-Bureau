@@ -72,7 +72,7 @@ const ConfirmationModal = React.memo(({ onConfirm, onCancel, message }) => (
 ));
 
 const ReservationCalendar = () => {
-  const api = "http://localhost:5000/api/reservations";
+  const api = import.meta.env.VITE_API;
   const introRef = useRef(null);
   const [reservations, setReservations] = useState([]);
   const [selectedSlot, setSelectedSlot] = useState(null);
@@ -98,7 +98,8 @@ const ReservationCalendar = () => {
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
     if (storedUser) {
-      setUser(storedUser);}
+      setUser(storedUser);
+    }
     fetchReservations();
   }, []);
 
