@@ -58,7 +58,7 @@ const Chatbot = () => {
         setMessages((prev) => [
           ...prev,
           {
-            text: "Sorry, I couldn't process your request. Please try again.",
+            text: "Sorry, I couldn't process your request. Please try again.(API token not accepted)",
             isBot: true,
           },
         ]);
@@ -67,6 +67,7 @@ const Chatbot = () => {
       }
     }
   };
+
 
   const toggleZoom = () => setIsZoomed(!isZoomed);
 

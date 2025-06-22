@@ -114,12 +114,12 @@ const Login = () => {
               onChange={(e) => setEmail(e.target.value)}
               required
               className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#FF4500] focus:border-transparent transition-all duration-300"
-              placeholder="your@email.com"
+              placeholder="admin@email.com"
             />
           </div>
 
           <div className="form-field">
-            <label className="block text-[#B0B0B0] text-sm font-medium mb-2">
+            <label className="block pla text-[#B0B0B0] text-sm font-medium mb-2">
               Password
             </label>
             <input
@@ -128,7 +128,7 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
               required
               className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#FF4500] focus:border-transparent transition-all duration-300"
-              placeholder="••••••••"
+              placeholder="admin"
             />
           </div>
 
