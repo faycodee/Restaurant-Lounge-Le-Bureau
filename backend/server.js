@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const path = require("path");
 require("dotenv").config({ path: path.join(__dirname, ".env") });
-const chatbotRoutes = require('./routes/dishSuggestionRoutes');
+const chatbotRoutes = require('./routes/dishRoutes');
 
 // Verify required environment variables
 const requiredEnvVars = ["MONGO_URI", "SECRET_KEY", "PORT"];
@@ -21,7 +21,7 @@ const app = express();
 const reservationRoutes = require("./routes/reservationRoutes");
 const usersRoutes = require("./routes/usersRoutes");
 const couponRoutes = require("./routes/couponRoutes");
-// const dishSuggestionRoutes = require("./routes/dishSuggestionRoutes");
+const dishRoutes = require("./routes/dishRoutes");
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI, {
@@ -41,7 +41,7 @@ app.use(cors());
 app.use("/api/reservations", reservationRoutes);
 app.use("/api/users", usersRoutes);
 app.use("/api/coupons", couponRoutes);
-app.use("/api/dish-suggestions", dishSuggestionRoutes);
+app.use("/api/dish-suggestions", dishRoutes);
 app.use('/api/chatbot', chatbotRoutes);
 app.post("/api/reservations/twilio-webhook", async (req, res) => {
   const success = await handleWebhook(req.body.ButtonPayload, req.body.From);
