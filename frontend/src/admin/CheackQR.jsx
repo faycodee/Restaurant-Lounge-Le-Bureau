@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { QrReader } from "react-qr-reader";
+
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -97,13 +97,13 @@ function CheackQR() {
                 className="mb-6"
               >
                 <div className="relative rounded-xl overflow-hidden shadow-inner">
-                  <QrReader
+                  {/* <QrReader
                     onResult={handleScan}
                     onError={handleError}
                     constraints={{ facingMode: "environment" }}
                     className="w-full"
                     videoStyle={{ borderRadius: "0.75rem" }}
-                  />
+                  /> */}
                   {loading && (
                     <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
                       <div className="loading-spinner"></div>
