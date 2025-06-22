@@ -21,7 +21,7 @@ const app = express();
 const reservationRoutes = require("./routes/reservationRoutes");
 const usersRoutes = require("./routes/usersRoutes");
 const couponRoutes = require("./routes/couponRoutes");
-const dishSuggestionRoutes = require("./routes/dishSuggestionRoutes");
+// const dishSuggestionRoutes = require("./routes/dishSuggestionRoutes");
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI, {
