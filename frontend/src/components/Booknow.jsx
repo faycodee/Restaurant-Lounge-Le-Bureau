@@ -227,7 +227,7 @@ const ReservationCalendar = () => {
       };
 
       const token = localStorage.getItem("token");
-      await axios.post(api, reservationData, {
+      await axios.post(`${api}`, reservationData, {
         headers: { Authorization: `Bearer ${token}` },
       });
 

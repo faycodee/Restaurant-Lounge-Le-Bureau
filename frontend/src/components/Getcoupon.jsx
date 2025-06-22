@@ -7,6 +7,7 @@ import { FaMedal, FaTrophy, FaCrown } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 const Getcoupon = () => {
+ const api =import.meta.env.VITE_API_coupons;
   const [userPoints, setUserPoints] = useState(0);
   const [alert, setAlert] = useState({ show: false, message: "", type: "" });
   const [userCoupons, setUserCoupons] = useState([]);
@@ -50,7 +51,7 @@ const Getcoupon = () => {
         if (!user) return;
 
         const response = await axios.get(
-          `http://localhost:5000/api/coupons?userId=${user.id}`,
+          `${api}?userId=${user.id}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -115,7 +116,7 @@ const Getcoupon = () => {
       // Create new coupon with error handling
       try {
         const response = await axios.post(
-          "http://localhost:5000/api/coupons/convert",
+          `${api}/convert`,
           {
             code: couponCode,
             discountPercentage,
@@ -145,7 +146,7 @@ const Getcoupon = () => {
 
         // Refresh coupons list with updated port
         const couponsResponse = await axios.get(
-          `http://localhost:5000/api/coupons?userId=${user.id}`,
+          `${api}?userId=${user.id}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -190,7 +191,7 @@ const Getcoupon = () => {
   const handleAddCoupon = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:8000/api/coupons", {
+      await axios.post(api, {
         code: newCoupon.code,
         discountPercentage: newCoupon.discountPercentage,
         expiryDate: newCoupon.expiryDate,
@@ -202,7 +203,7 @@ const Getcoupon = () => {
       });
       setNewCoupon({ code: "", discountPercentage: "", expiryDate: "" });
       // Refresh coupons
-      const response = await axios.get("http://localhost:8000/api/coupons");
+      const response = await axios.get(api);
       setUserCoupons(response.data);
     } catch (error) {
       setAlert({

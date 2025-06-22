@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import NavAdmin from './NavAdmin';
 
 const Add = () => {
+  const api =import.meta.env.VITE_API;
   const navigate = useNavigate();
   const [reservation, setReservation] = useState({
     customer_name: '',
@@ -30,7 +31,7 @@ const Add = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      await axios.post('http://localhost:5000/api/reservations', reservation, {
+      await axios.post(api, reservation, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

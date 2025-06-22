@@ -29,6 +29,7 @@ const Alert = ({ message, type, onClose }) => {
 };
 
 const Manage = () => {
+  const api =import.meta.env.VITE_API
   const [reservations, setReservations] = useState([]);
   const [sortField, setSortField] = useState(null);
   const [sortOrder, setSortOrder] = useState('asc');
@@ -49,7 +50,7 @@ const Manage = () => {
     const fetchReservations = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get('http://localhost:5000/api/reservations', {
+        const response = await axios.get(api, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -91,7 +92,7 @@ const Manage = () => {
     if (window.confirm('Are you sure you want to delete this reservation?')) {
       try {
         const token = localStorage.getItem('token');
-        await axios.delete(`http://localhost:5000/api/reservations/${id}`, {
+        await axios.delete(`${api}/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -111,7 +112,7 @@ const Manage = () => {
         const token = localStorage.getItem('token');
         await Promise.all(
           selectedReservations.map((id) =>
-            axios.delete(`http://localhost:5000/api/reservations/${id}`, {
+            axios.delete(`${api}/${id}`, {
               headers: {
                 Authorization: `Bearer ${token}`,
               },

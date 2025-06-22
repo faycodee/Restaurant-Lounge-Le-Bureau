@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { gsap } from "gsap";
 
 const Login = () => {
+ const api =import.meta.env.VITE_API_USERS_login;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -60,7 +61,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/users/login",
+       api,
         { email, password }
       );
 

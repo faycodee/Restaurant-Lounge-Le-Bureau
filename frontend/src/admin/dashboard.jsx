@@ -12,6 +12,7 @@ ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, PointE
 const Dashboard = () => {
   const [reservations, setReservations] = useState([]);
   const [isOpen, setIsOpen] = useState(true);
+  const api =import.meta.env.VITE_API
   const navigate = useNavigate();
 
   const toggleSidebar = () => {
@@ -22,7 +23,7 @@ const Dashboard = () => {
     const fetchReservations = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get('http://localhost:5000/api/reservations', {
+        const response = await axios.get(api, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

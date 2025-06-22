@@ -27,6 +27,7 @@ const Alert = ({ message, type, onClose }) => {
 };
 
 const Edit = () => {
+  const api =import.meta.env.VITE_API
   const { id } = useParams();
   const navigate = useNavigate();
   const [reservation, setReservation] = useState({
@@ -51,7 +52,7 @@ const Edit = () => {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          `http://localhost:5000/api/reservations/${id}`,
+          `${api}/${id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -76,7 +77,7 @@ const Edit = () => {
     try {
       const token = localStorage.getItem("token");
       await axios.put(
-        `http://localhost:5000/api/reservations/${id}`,
+        `${api}/${id}`,
         reservation,
         {
           headers: {

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { gsap } from "gsap";
 
 const Signup = () => {
+  const api =import.meta.env.VITE_API_USERS_signup;
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -52,7 +53,7 @@ const Signup = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/users/signup",
+        api,
         {
           name: formData.name,
           email: formData.email,

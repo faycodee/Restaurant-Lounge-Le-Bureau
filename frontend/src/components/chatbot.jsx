@@ -6,6 +6,7 @@ import rehypeRaw from "rehype-raw";
 import axios from "axios";
 
 const Chatbot = () => {
+  const api =import.meta.env.VITE_API_dish;
   const [isOpen, setIsOpen] = useState(false);
   const [isZoomed, setIsZoomed] = useState(false);
   const [messages, setMessages] = useState([
@@ -35,7 +36,7 @@ const Chatbot = () => {
 
       try {
         const response = await axios.post(
-          "http://localhost:5000/api/dish-suggestions/suggest",
+          api,
           {
             message: userMessage,
           }
