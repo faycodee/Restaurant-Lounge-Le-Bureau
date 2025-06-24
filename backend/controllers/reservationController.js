@@ -43,7 +43,7 @@ exports.createReservation = async (req, res) => {
     if (req.body.user_id) {
       const user = await Users.findById(req.body.user_id);
       if (user) {
-        user.loyaltyPoints += 10;
+        user.loyaltyPoints += 50;
         await user.save();
       }
     }

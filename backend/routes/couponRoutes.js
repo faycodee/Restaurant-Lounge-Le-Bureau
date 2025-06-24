@@ -1,27 +1,20 @@
 const express = require("express");
 const { verifyToken, verifyAdmin } = require("../middleware/authMiddleware");
-const {
-  createCoupon,
-  getAllCoupons,
-  getCouponById,
-  updateCoupon,
-  deleteCoupon,
-  redeemCoupon,
-} = require("../controllers/couponController");
+const couponController = require("../controllers/couponController");
 
 const router = express.Router();
 
 // Allow authenticated users to create coupons
-router.post("/convert", verifyToken, createCoupon);
+router.post("/convert", couponController.createCoupon);
 
 // Admin-only routes
-router.post("/", createCoupon);
-router.put("/:id", updateCoupon);
-router.delete("/:id", deleteCoupon);
+router.post("/", couponController.createCoupon);
+router.put("/:id", couponController.updateCoupon);
+router.delete("/:id", couponController.deleteCoupon);
 
 // Public routes
-router.get("/", getAllCoupons);
-router.get("/:id", getCouponById);
-router.post("/redeem", redeemCoupon);
+router.get("/", couponController.getAllCoupons);
+router.get("/:id", couponController.getCouponById);
+router.post("/redeem", couponController.redeemCoupon);
 
 module.exports = router;

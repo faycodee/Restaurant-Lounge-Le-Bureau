@@ -1,4 +1,5 @@
 const Coupon = require("../models/Coupon");
+const Users = require("../models/Users");
 
 exports.createCoupon = async (req, res) => {
   try {
@@ -32,7 +33,7 @@ exports.createCoupon = async (req, res) => {
   } catch (error) {
     console.error("Coupon creation error:", error);
     res.status(500).json({
-      message: "Error creating coupon",
+      message: "Error creating coupon ",
       error: error.message,
     });
   }
@@ -40,7 +41,12 @@ exports.createCoupon = async (req, res) => {
 
 exports.getAllCoupons = async (req, res) => {
   try {
-    const coupons = await Coupon.find();
+    const { userId } = req.query;
+    let query = {};
+    if (userId) {
+      query.userId = userId;
+    }
+    const coupons = await Coupon.find(query);
     res.json(coupons);
   } catch (error) {
     res.status(500).json({ message: "Error fetching coupons", error });

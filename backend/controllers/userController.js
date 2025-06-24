@@ -5,9 +5,7 @@ const SECRET_KEY = process.env.SECRET_KEY;
 
 // Signup function
 
-
 // Add these new functions to userController.js
-
 
 exports.signup = async (req, res) => {
   try {
@@ -101,6 +99,8 @@ exports.login = async (req, res) => {
         name: user.name,
         email: user.email,
         role: user.role,
+        loyaltyPoints: user.loyaltyPoints, // Add loyaltyPoints
+        // Add any other fields you want to expose here
       },
     });
   } catch (error) {

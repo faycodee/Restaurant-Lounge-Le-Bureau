@@ -72,7 +72,7 @@ const ConfirmationModal = React.memo(({ onConfirm, onCancel, message }) => (
 ));
 
 const ReservationCalendar = () => {
-  const api = import.meta.env.VITE_API;
+  const api = import.meta.env.VITE_API ;
   const introRef = useRef(null);
   const [reservations, setReservations] = useState([]);
   const [selectedSlot, setSelectedSlot] = useState(null);

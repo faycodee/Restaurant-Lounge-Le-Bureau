@@ -7,7 +7,8 @@ import { FaMedal, FaTrophy, FaCrown } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 const Getcoupon = () => {
- const api =import.meta.env.VITE_API_coupons;
+  //  const api =import.meta.env.VITE_API_coupons;
+  const api = `http://localhost:5000/api/coupons`;
   const [userPoints, setUserPoints] = useState(0);
   const [alert, setAlert] = useState({ show: false, message: "", type: "" });
   const [userCoupons, setUserCoupons] = useState([]);
@@ -50,14 +51,11 @@ const Getcoupon = () => {
         const user = JSON.parse(localStorage.getItem("user"));
         if (!user) return;
 
-        const response = await axios.get(
-          `${api}?userId=${user.id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        );
+        const response = await axios.get(`${api}?userId=${user.id}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
         setUserCoupons(response.data);
       } catch (error) {
         console.error("Error fetching coupons:", error);
@@ -116,7 +114,7 @@ const Getcoupon = () => {
       // Create new coupon with error handling
       try {
         const response = await axios.post(
-          `${api}/convert`,
+          `${api}/convert`, // <-- This is /api/coupons/convert
           {
             code: couponCode,
             discountPercentage,
@@ -145,14 +143,11 @@ const Getcoupon = () => {
         });
 
         // Refresh coupons list with updated port
-        const couponsResponse = await axios.get(
-          `${api}?userId=${user.id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        );
+        const couponsResponse = await axios.get(`${api}?userId=${user.id}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
         setUserCoupons(couponsResponse.data);
       } catch (error) {
         if (error.response) {
@@ -376,75 +371,84 @@ const Getcoupon = () => {
                 <div
                   key={index}
                   id={`coupon-${coupon.id}`}
-                  className="relative bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-600"
+                  className="relative bg-red-600 text-white rounded-xl overflow-hidden shadow-lg border-4 border-dashed border-white flex flex-col justify-between min-h-[220px]"
+                  style={{
+                    background: "linear-gradient(90deg, #d32f2f 70%, #fff 30%)",
+                    borderRadius: "20px",
+                    borderWidth: "4px",
+                    borderStyle: "dashed",
+                    borderColor: "#fff",
+                    position: "relative",
+                  }}
                 >
-                  {/* Restaurant Ticket Design */}
-                  <div className="p-6 relative">
-                    {/* Header */}
-                    <div className="text-center mb-4">
-                      <h3 className="text-2xl font-bold text-primary mb-1">
-                        Lounge Le Bureau
+                  {/* Coupon Left Section */}
+                  <div className="p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                      <h3 className="text-2xl font-extrabold mb-2">
+                        FOOD COUPON
                       </h3>
-                      <p className="text-sm text-gray-500">
-                        Restaurant & Lounge
+                      <p className="text-sm mb-4 opacity-80">
+                        Get exclusive deals and promotions on dining with food
+                        coupons.
                       </p>
-                    </div>
-
-                    {/* Divider with circular edges */}
-                    <div className="relative py-4">
-                      <div className="absolute left-[-24px] top-1/2 transform -translate-y-1/2 w-6 h-6 bg-background dark:bg-darkBackground rounded-full"></div>
-                      <div className="absolute right-[-24px] top-1/2 transform -translate-y-1/2 w-6 h-6 bg-background dark:bg-darkBackground rounded-full"></div>
-                      <div className="border-dashed border-2 border-gray-300 w-full"></div>
-                    </div>
-
-                    {/* Coupon Details */}
-                    <div className="text-center mb-4">
-                      <div className="text-3xl font-bold text-primary mb-2">
-                        {coupon.discount_percentage}% OFF
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-3xl font-extrabold">
+                          UP TO {coupon.discountPercentage}%
+                        </span>
+                        <span className="bg-white text-red-600 px-3 py-1 rounded-full font-bold text-xs">
+                          {new Date(coupon.expiryDate).toLocaleDateString()}
+                        </span>
                       </div>
-                      <div className="flex justify-center mb-4">
-                        <QRCodeSVG
-                          value={coupon.code}
-                          size={120}
-                          level="H"
-                          includeMargin={true}
-                        />
-                      </div>
-                      <div className="font-mono text-lg font-bold text-gray-700 dark:text-gray-300 mb-2">
-                        {coupon.code}
+                      <div className="text-xs opacity-80 mb-2">
+                        www.loungelebureau.com
                       </div>
                     </div>
-
-                    {/* Footer */}
-                    <div className="text-center text-sm text-gray-500">
-                      <p>
-                        Valid until:{" "}
-                        {new Date(coupon.expiry_date).toLocaleDateString()}
-                      </p>
-                      <p className="text-xs mt-1">
+                    <div className="flex items-center justify-between mt-4">
+                      <span className="text-xs">
                         *Terms and conditions apply
-                      </p>
+                      </span>
+                      <span className="text-xs font-mono">{coupon.code}</span>
                     </div>
-
-                    {/* Download Button */}
-                    <button
-                      onClick={() => downloadCouponAsPDF(coupon)}
-                      className="absolute top-2 right-2 p-2 text-primary hover:text-primary/80 transition-colors"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </button>
                   </div>
+                  {/* Coupon Right Section (Barcode/QR) */}
+                  <div
+                    className="absolute right-0 top-0 h-full flex items-center justify-center bg-white px-4"
+                    style={{
+                      borderTopRightRadius: "16px",
+                      borderBottomRightRadius: "16px",
+                      borderLeft: "2px dashed #d32f2f",
+                      width: "110px",
+                    }}
+                  >
+                    <QRCodeSVG
+                      value={coupon.code}
+                      size={80}
+                      level="H"
+                      includeMargin={false}
+                      bgColor="#fff"
+                      fgColor="#d32f2f"
+                    />
+                  </div>
+                  {/* Download Button */}
+                  <button
+                    onClick={() => downloadCouponAsPDF(coupon)}
+                    className="absolute top-2 right-2 p-2 text-red-600 hover:text-red-800 transition-colors bg-white rounded-full shadow"
+                    style={{ zIndex: 10 }}
+                    title="Download Coupon"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </button>
                 </div>
               ))}
             </div>

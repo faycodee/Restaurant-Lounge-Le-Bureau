@@ -27,8 +27,10 @@ const Navbar = () => {
         ...storedUser,
         role: storedUser.role ,
       });
+
     }
   }, []);
+console.log(user);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -162,7 +164,7 @@ const Navbar = () => {
                 <div className="px-4 py-2 text-sm text-gray-700 dark:text-gray-200 border-b dark:border-gray-700">
                   <p className="font-medium">{user.email}</p>
                   <p className="text-xs text-gray-500 dark:text-gray-400">
-                    {t("nav.points")}: {user.loyaltyPoints || 0}
+                    {t("nav.points")}: {user.loyaltyPoints}
                   </p>
                 </div>
 
@@ -189,13 +191,17 @@ const Navbar = () => {
                     </div>
                   </button>
                 )}
-
+               
                 <a
                   href="/getcoupon"
                   className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
                 >
-                  {t("nav.getcoupon")}
+                <div className="flex ">
+                <img src="/voucher.png" alt="" className="w-5 h-4 mr-2" srcset="" />
+                { t("nav.getcoupon")}
+                </div>
                 </a>
+           
 
                 <button
                   onClick={handleLogout}
